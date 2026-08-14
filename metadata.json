@@ -1,0 +1,6 @@
+{
+  "name": "TiMUN 2027",
+  "description": "Official website for TiMUN 2027 featuring conference registration, committee study guides, rules of procedure, interactive resolution builder, country matrix, schedule, and Secretariat directory.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
