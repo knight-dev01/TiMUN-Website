@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Building2, 
-  Calendar, 
-  HelpCircle, 
-  MapPin, 
-  Menu, 
-  Users, 
-  X, 
-  Award, 
+import {
+  Building2,
+  Calendar,
+  HelpCircle,
+  MapPin,
+  Menu,
+  Users,
+  X,
+  Award,
   ChevronRight,
   PenTool,
   Lock,
-  ShieldCheck
+  ShieldCheck,
+  Newspaper
 } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 
@@ -49,6 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'toolkit', label: 'Toolkit', icon: PenTool },
     { id: 'secretariat', label: 'Secretariat', icon: Award },
     { id: 'venue', label: 'Venue', icon: MapPin },
+    { id: 'media', label: 'Media', icon: Newspaper },
     { id: 'faq', label: 'FAQs', icon: HelpCircle },
   ];
 

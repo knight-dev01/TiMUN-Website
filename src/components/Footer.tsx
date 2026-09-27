@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Globe, Mail, Phone, MapPin, Send, CheckCircle2, Shield, Heart } from 'lucide-react';
+import { Globe, Mail, Phone, MapPin, Send, CheckCircle2, Shield, Heart, Loader2 } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
+import { subscribeNewsletter } from '../lib/newsletter';
 
 interface FooterProps {
   onOpenRegister: () => void;
@@ -9,16 +10,25 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolutionBuilder, onOpenCms }) => {
-  const { conferenceInfo, isExecutive } = useConferenceData();
-  const [subscribed, setSubscribed] = useState(false);
+  const { conferenceInfo, isExecutive, refreshSubscribers } = useConferenceData();
   const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterState, setNewsletterState] = useState<'idle' | 'busy' | 'done' | 'duplicate' | 'invalid'>('idle');
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newsletterEmail) {
-      setSubscribed(true);
-      setTimeout(() => setSubscribed(false), 4000);
+    if (!newsletterEmail.trim()) return;
+    setNewsletterState('busy');
+    const res = await subscribeNewsletter(newsletterEmail, '', 'footer');
+    refreshSubscribers();
+    if (res.status === 'invalid') {
+      setNewsletterState('invalid');
+    } else if (res.status === 'duplicate') {
+      setNewsletterState('duplicate');
+    } else {
+      setNewsletterState('done');
+      setNewsletterEmail('');
     }
+    setTimeout(() => setNewsletterState(prev => (prev === 'busy' ? prev : 'idle')), 5000);
   };
 
   return (
@@ -72,6 +82,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
               <li><a href="#schedule" className="hover:text-amber-400 transition-colors">3-Day Itinerary</a></li>
               <li><a href="#secretariat" className="hover:text-amber-400 transition-colors">Secretariat Board</a></li>
               <li><a href="#venue" className="hover:text-amber-400 transition-colors">Campus Venue & Hotel</a></li>
+              <li><a href="#media" className="hover:text-amber-400 transition-colors">Insights & Media</a></li>
             </ul>
           </div>
 
@@ -116,7 +127,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
               Subscribe to receive study guide releases, country allocation notices, and gala updates.
             </p>
 
-            {!subscribed ? (
+            {newsletterState === 'done' ? (
+              <div className="p-3 bg-blue-900/80 rounded border border-amber-400/40 text-amber-300 text-center flex items-center justify-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span>Subscribed successfully!</span>
+              </div>
+            ) : (
               <form onSubmit={handleSubscribe} className="space-y-2">
                 <input
                   type="email"
@@ -128,17 +144,23 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
                 />
                 <button
                   type="submit"
-                  className="w-full py-2 rounded font-bold uppercase tracking-wider text-xs text-slate-950 bg-amber-400 hover:bg-amber-300 transition-colors flex items-center justify-center gap-1 cursor-pointer shadow-xs"
+                  disabled={newsletterState === 'busy'}
+                  className="w-full py-2 rounded font-bold uppercase tracking-wider text-xs text-slate-950 bg-amber-400 hover:bg-amber-300 transition-colors flex items-center justify-center gap-1 cursor-pointer shadow-xs disabled:opacity-60"
                 >
-                  <Send className="w-3 h-3 text-slate-950" />
-                  <span>Subscribe Bulletin</span>
+                  {newsletterState === 'busy' ? (
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                  ) : (
+                    <Send className="w-3 h-3 text-slate-950" />
+                  )}
+                  <span>{newsletterState === 'busy' ? 'Subscribing…' : 'Subscribe Bulletin'}</span>
                 </button>
+                {newsletterState === 'duplicate' && (
+                  <p className="text-[11px] text-amber-300">This email is already subscribed.</p>
+                )}
+                {newsletterState === 'invalid' && (
+                  <p className="text-[11px] text-rose-300">Please enter a valid email address.</p>
+                )}
               </form>
-            ) : (
-              <div className="p-3 bg-blue-900/80 rounded border border-amber-400/40 text-amber-300 text-center flex items-center justify-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Subscribed successfully!</span>
-              </div>
             )}
           </div>
 

@@ -2,14 +2,23 @@
 @import "tailwindcss";
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    background-color: #f8fafc;
+    background-color: #ffffff;
     color: #0f172a;
+    -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-serif {
     font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  img {
+    image-rendering: auto;
   }
 }
 

@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Committee, DaySchedule, FAQItem, SecretariatMember } from '../types';
+import { Committee, DaySchedule, FAQItem, SecretariatMember, RegistrationRecord, MediaPost, NewsletterSubscriber } from '../types';
 import { CONFERENCE_INFO, COMMITTEES, SECRETARIAT_TEAM, SCHEDULE, FAQS } from '../data/conferenceData';
+import { MEDIA_POSTS } from '../data/mediaData';
+import { readSubscribers, removeSubscriber as removeSubscriberFromStore } from '../lib/newsletter';
 
 export interface ConferenceInfoType {
   title: string;
@@ -55,9 +57,26 @@ interface ConferenceContextType {
   exportFullJson: () => string;
   clearAllDataToEmpty: () => void;
   resetToDefaults: () => void;
+  // Registrations & payments (executive dashboard source of truth)
+  registrations: RegistrationRecord[];
+  addRegistration: (reg: RegistrationRecord) => void;
+  updateRegistrationPayment: (id: string, patch: Partial<RegistrationRecord>) => void;
+  deleteRegistration: (id: string) => void;
+  clearRegistrations: () => void;
+  // Media hub (blog / updates / videos / photos)
+  mediaPosts: MediaPost[];
+  addMediaPost: (post: MediaPost) => void;
+  updateMediaPost: (id: string, patch: Partial<MediaPost>) => void;
+  deleteMediaPost: (id: string) => void;
+  // Newsletter subscribers (local-first; see src/lib/newsletter.ts)
+  subscribers: NewsletterSubscriber[];
+  refreshSubscribers: () => void;
+  removeSubscriber: (id: string) => void;
 }
 
 const STORAGE_KEY = 'timun_2027_site_data_v1';
+const REGISTRATIONS_KEY = 'timun_2027_registrations_v1';
+const MEDIA_KEY = 'timun_2027_media_v1';
 const AUTH_KEY = 'timun_executive_session';
 
 const ConferenceContext = createContext<ConferenceContextType | undefined>(undefined);
@@ -130,6 +149,99 @@ export const ConferenceDataProvider: React.FC<{ children: React.ReactNode }> = (
     }
     return FAQS;
   });
+
+  const [registrations, setRegistrations] = useState<RegistrationRecord[]>(() => {
+    try {
+      const saved = localStorage.getItem(REGISTRATIONS_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(REGISTRATIONS_KEY, JSON.stringify(registrations));
+    } catch (e) {
+      console.error('Failed to save registrations', e);
+    }
+  }, [registrations]);
+
+  const addRegistration = (reg: RegistrationRecord) => {
+    setRegistrations(prev => [reg, ...prev]);
+  };
+
+  const updateRegistrationPayment = (id: string, patch: Partial<RegistrationRecord>) => {
+    setRegistrations(prev => prev.map(r => (r.id === id ? { ...r, ...patch } : r)));
+  };
+
+  const deleteRegistration = (id: string) => {
+    setRegistrations(prev => prev.filter(r => r.id !== id));
+  };
+
+  const clearRegistrations = () => setRegistrations([]);
+
+  const [mediaPosts, setMediaPosts] = useState<MediaPost[]>(() => {
+    try {
+      const saved = localStorage.getItem(MEDIA_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return MEDIA_POSTS;
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(MEDIA_KEY, JSON.stringify(mediaPosts));
+    } catch (e) {
+      console.error('Failed to save media posts', e);
+    }
+  }, [mediaPosts]);
+
+  const addMediaPost = (post: MediaPost) => {
+    setMediaPosts(prev => [post, ...prev]);
+  };
+
+  const updateMediaPost = (id: string, patch: Partial<MediaPost>) => {
+    setMediaPosts(prev => prev.map(p => (p.id === id ? { ...p, ...patch } : p)));
+  };
+
+  const deleteMediaPost = (id: string) => {
+    setMediaPosts(prev => prev.filter(p => p.id !== id));
+  };
+
+  const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>(() => {
+    try {
+      return readSubscribers();
+    } catch {
+      return [];
+    }
+  });
+
+  const refreshSubscribers = () => {
+    try {
+      setSubscribers(readSubscribers());
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const removeSubscriber = (id: string) => {
+    try {
+      removeSubscriberFromStore(id);
+      setSubscribers(readSubscribers());
+    } catch {
+      setSubscribers(prev => prev.filter(s => s.id !== id));
+    }
+  };
 
   // Executive Authentication State
   const [isExecutive, setIsExecutive] = useState<boolean>(() => {
@@ -282,6 +394,8 @@ export const ConferenceDataProvider: React.FC<{ children: React.ReactNode }> = (
       if (Array.isArray(parsed.secretariatTeam)) setSecretariatTeam(parsed.secretariatTeam);
       if (Array.isArray(parsed.schedule)) setSchedule(parsed.schedule);
       if (Array.isArray(parsed.faqs)) setFaqs(parsed.faqs);
+      if (Array.isArray(parsed.registrations)) setRegistrations(parsed.registrations);
+      if (Array.isArray(parsed.mediaPosts)) setMediaPosts(parsed.mediaPosts);
       return true;
     } catch (e) {
       console.error("Invalid JSON import file", e);
@@ -295,7 +409,9 @@ export const ConferenceDataProvider: React.FC<{ children: React.ReactNode }> = (
       committees,
       secretariatTeam,
       schedule,
-      faqs
+      faqs,
+      registrations,
+      mediaPosts
     };
     return JSON.stringify(data, null, 2);
   };
@@ -370,7 +486,19 @@ export const ConferenceDataProvider: React.FC<{ children: React.ReactNode }> = (
         importFullJson,
         exportFullJson,
         clearAllDataToEmpty,
-        resetToDefaults
+        resetToDefaults,
+        registrations,
+        addRegistration,
+        updateRegistrationPayment,
+        deleteRegistration,
+        clearRegistrations,
+        mediaPosts,
+        addMediaPost,
+        updateMediaPost,
+        deleteMediaPost,
+        subscribers,
+        refreshSubscribers,
+        removeSubscriber
       }}
     >
       {children}

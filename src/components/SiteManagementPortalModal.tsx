@@ -1,15 +1,15 @@
 import React, { useState, useRef } from 'react';
-import { 
-  X, 
-  Upload, 
-  Download, 
-  Trash2, 
-  Plus, 
-  Edit3, 
-  Save, 
-  RotateCcw, 
-  FileText, 
-  CheckCircle2, 
+import {
+  X,
+  Upload,
+  Download,
+  Trash2,
+  Plus,
+  Edit3,
+  Save,
+  RotateCcw,
+  FileText,
+  CheckCircle2,
   AlertCircle,
   Users,
   Calendar,
@@ -22,10 +22,15 @@ import {
   Key,
   LogOut,
   UserCheck,
-  User
+  User,
+  LayoutDashboard,
+  CreditCard,
+  Newspaper
 } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { Committee, SecretariatMember, FAQItem } from '../types';
+import { ExecutiveOverview, RegistrationsManager } from './ExecutiveDashboard';
+import { MediaManager } from './MediaManager';
 
 interface SiteManagementPortalModalProps {
   isOpen: boolean;
@@ -58,7 +63,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
     resetToDefaults
   } = useConferenceData();
 
-  const [activeTab, setActiveTab] = useState<'info' | 'committees' | 'secretariat' | 'schedule' | 'faqs' | 'import-export'>('info');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'registrations' | 'media' | 'info' | 'committees' | 'secretariat' | 'schedule' | 'faqs' | 'import-export'>('dashboard');
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   // Executive Login State
@@ -477,6 +482,36 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
         {/* Tab Navigation */}
         <div className="flex border-b border-slate-700 bg-slate-900/80 overflow-x-auto shrink-0 px-4">
           <button
+            onClick={() => setActiveTab('dashboard')}
+            className={`px-4 py-3 text-xs font-bold uppercase tracking-wider border-b-2 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
+              activeTab === 'dashboard' ? 'border-amber-400 text-amber-300 bg-slate-800/50' : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <LayoutDashboard className="w-4 h-4" />
+            <span>Dashboard</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('registrations')}
+            className={`px-4 py-3 text-xs font-bold uppercase tracking-wider border-b-2 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
+              activeTab === 'registrations' ? 'border-amber-400 text-amber-300 bg-slate-800/50' : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <CreditCard className="w-4 h-4" />
+            <span>Registrations & Payments</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('media')}
+            className={`px-4 py-3 text-xs font-bold uppercase tracking-wider border-b-2 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
+              activeTab === 'media' ? 'border-amber-400 text-amber-300 bg-slate-800/50' : 'border-transparent text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Newspaper className="w-4 h-4" />
+            <span>Media & Newsletter</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('info')}
             className={`px-4 py-3 text-xs font-bold uppercase tracking-wider border-b-2 flex items-center gap-2 transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'info' ? 'border-amber-400 text-amber-300 bg-slate-800/50' : 'border-transparent text-slate-400 hover:text-slate-200'
@@ -539,7 +574,22 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
 
         {/* Tab Content Body */}
         <div className="p-6 overflow-y-auto space-y-6 flex-1 text-slate-200">
-          
+
+          {/* TAB: EXECUTIVE DASHBOARD (analytics + revenue overview) */}
+          {activeTab === 'dashboard' && (
+            <ExecutiveOverview />
+          )}
+
+          {/* TAB: REGISTRATIONS & PAYMENTS */}
+          {activeTab === 'registrations' && (
+            <RegistrationsManager notify={showNotify} />
+          )}
+
+          {/* TAB: MEDIA & NEWSLETTER */}
+          {activeTab === 'media' && (
+            <MediaManager notify={showNotify} />
+          )}
+
           {/* TAB 1: GENERAL INFO */}
           {activeTab === 'info' && (
             <form onSubmit={handleSaveInfo} className="space-y-6">

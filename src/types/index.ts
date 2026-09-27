@@ -112,3 +112,56 @@ export interface RegistrationFormData {
   notes?: string;
 }
 
+export type PaymentStatus = 'paid' | 'pending' | 'failed' | 'waived';
+export type PaymentCurrency = 'NGN' | 'USD';
+export type PaymentMethod = 'paystack' | 'manual-transfer' | 'none';
+
+export type MediaKind = 'article' | 'update' | 'video' | 'photo';
+
+export interface MediaPost {
+  id: string;
+  kind: MediaKind;
+  title: string;
+  excerpt: string;
+  body: string; // article/update long text (paragraphs separated by blank lines)
+  coverImage: string;
+  videoUrl: string; // YouTube watch/embed URL for kind === 'video'
+  gallery: string[]; // extra photos for kind === 'photo'
+  author: string;
+  authorRole: string;
+  date: string; // display string, e.g. "Sep 20, 2026"
+  createdAt: number;
+  tags: string[];
+  featured: boolean;
+}
+
+export interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  name: string;
+  createdAt: number;
+  source: string; // e.g. 'footer' | 'media' | 'cms-import'
+  synced: boolean; // true if forwarded to the email-service endpoint
+}
+
+export interface RegistrationRecord {
+  id: string; // e.g. TiMUN-2027-123456
+  createdAt: number;
+  type: 'individual' | 'delegation' | 'chair';
+  fullName: string;
+  email: string;
+  phone: string;
+  institution: string;
+  delegationSize: number;
+  firstChoiceCommittee: string;
+  secondChoiceCommittee: string;
+  preferredCountries: string;
+  experienceLevel: string;
+  feeUsd: number;
+  feeCharged: number;
+  feeCurrency: PaymentCurrency;
+  paymentStatus: PaymentStatus;
+  paymentMethod: PaymentMethod;
+  paymentReference: string;
+}
+

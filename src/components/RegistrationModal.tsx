@@ -1,6 +1,15 @@
-import React, { useState } from 'react';
-import { X, CheckCircle, ShieldCheck, ChevronRight, ChevronLeft, User, Users, Award, Mail, Phone, Building, FileText, Sparkles, Printer } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { X, CheckCircle, ShieldCheck, ChevronRight, ChevronLeft, User, Users, Award, Printer, CreditCard, Landmark, Loader2, AlertTriangle } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
+import { RegistrationRecord, PaymentCurrency } from '../types';
+import {
+  feeFor,
+  formatMoney,
+  payWithPaystack,
+  isPaystackConfigured,
+  manualPaymentDetails,
+} from '../lib/payments';
+import { trackEvent } from '../lib/analytics';
 
 interface RegistrationModalProps {
   isOpen: boolean;
@@ -15,12 +24,17 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   initialCommittee = '',
   initialCountry = ''
 }) => {
-  const { committees, conferenceInfo } = useConferenceData();
-  if (!isOpen) return null;
+  const { committees, addRegistration } = useConferenceData();
 
   const [step, setStep] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [registrationId, setRegistrationId] = useState<string>('');
+  const [savedPaymentStatus, setSavedPaymentStatus] = useState<string>('pending');
+  const [savedAmount, setSavedAmount] = useState<string>('');
+
+  const [currency, setCurrency] = useState<PaymentCurrency>('NGN');
+  const [paying, setPaying] = useState(false);
+  const [payError, setPayError] = useState('');
 
   const [formData, setFormData] = useState({
     type: 'individual' as 'individual' | 'delegation' | 'chair',
@@ -38,6 +52,28 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
     notes: ''
   });
 
+  // Sync incoming committee/country choices when the modal opens
+  useEffect(() => {
+    if (isOpen) {
+      setStep(1);
+      setSubmitted(false);
+      setPayError('');
+      if (initialCommittee) {
+        setFormData(prev => ({ ...prev, firstChoiceCommittee: initialCommittee }));
+      }
+      if (initialCountry) {
+        setFormData(prev => ({ ...prev, preferredCountries: initialCountry }));
+      }
+      trackEvent('registration_started', initialCommittee ? { committee: initialCommittee } : undefined);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  const fee = feeFor(formData.type, currency, Number(formData.delegationSize) || 5);
+  const paystackReady = isPaystackConfigured();
+  const manual = manualPaymentDetails();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -49,26 +85,107 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
     }
   };
 
+  const makeRecord = (
+    status: RegistrationRecord['paymentStatus'],
+    method: RegistrationRecord['paymentMethod'],
+    reference: string
+  ): RegistrationRecord => ({
+    id: reference,
+    createdAt: Date.now(),
+    type: formData.type,
+    fullName: formData.fullName,
+    email: formData.email,
+    phone: formData.phone,
+    institution: formData.institution,
+    delegationSize: formData.type === 'delegation' ? Number(formData.delegationSize) || 5 : 1,
+    firstChoiceCommittee: formData.firstChoiceCommittee,
+    secondChoiceCommittee: formData.secondChoiceCommittee,
+    preferredCountries: formData.preferredCountries,
+    experienceLevel: formData.experienceLevel,
+    feeUsd: fee.usd,
+    feeCharged: fee.amount,
+    feeCurrency: currency,
+    paymentStatus: status,
+    paymentMethod: method,
+    paymentReference: reference,
+  });
+
+  const finalize = (status: RegistrationRecord['paymentStatus'], method: RegistrationRecord['paymentMethod'], refOverride?: string) => {
+    const ref = refOverride || ('TiMUN-2027-' + Math.floor(100000 + Math.random() * 900000));
+    const record = makeRecord(status, method, ref);
+    addRegistration(record);
+    setRegistrationId(ref);
+    setSavedPaymentStatus(status);
+    setSavedAmount(`${formatMoney(fee.amount, currency)}${fee.usd > 0 ? ` (≈ $${fee.usd})` : ''}`);
+    setSubmitted(true);
+    trackEvent('registration_completed', {
+      type: formData.type,
+      committee: formData.firstChoiceCommittee,
+      currency,
+      amount: fee.amount,
+      payment_status: status,
+      payment_method: method,
+    });
+  };
+
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault();
-    if (step < 3) {
+    if (step < 4) {
       setStep(step + 1);
-    } else {
-      // Submit registration
-      const randomId = 'TiMUN-2027-' + Math.floor(100000 + Math.random() * 900000);
-      setRegistrationId(randomId);
-      setSubmitted(true);
     }
+  };
+
+  const handlePaystack = async () => {
+    if (!formData.email) {
+      setPayError('Enter your email address (step 2) before paying online.');
+      return;
+    }
+    setPayError('');
+    setPaying(true);
+    const ref = 'TiMUN-2027-' + Math.floor(100000 + Math.random() * 900000);
+    trackEvent('payment_initiated', { method: 'paystack', currency, amount: fee.amount, type: formData.type });
+    try {
+      const res = await payWithPaystack({
+        email: formData.email,
+        amount: fee.amount,
+        currency,
+        reference: ref,
+        metadata: {
+          fullName: formData.fullName,
+          type: formData.type,
+          committee: formData.firstChoiceCommittee,
+        },
+      });
+      trackEvent('payment_success', { method: 'paystack', reference: res.reference });
+      finalize('paid', 'paystack', res.reference || ref);
+    } catch (err: any) {
+      trackEvent('payment_failed', { method: 'paystack', error: String(err?.message || err).slice(0, 120) });
+      setPayError(err?.message || 'Payment did not complete. Try again or use bank transfer.');
+    } finally {
+      setPaying(false);
+    }
+  };
+
+  const handleManual = () => {
+    trackEvent('payment_initiated', { method: 'manual-transfer', currency, amount: fee.amount, type: formData.type });
+    finalize('pending', 'manual-transfer');
   };
 
   const handlePrint = () => {
     window.print();
   };
 
+  const steps = [
+    { s: 1, label: 'Role' },
+    { s: 2, label: 'Contact' },
+    { s: 3, label: 'Preferences' },
+    { s: 4, label: 'Payment' },
+  ];
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fadeIn">
       <div className="bg-white border border-slate-200 rounded max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-xl relative text-slate-900">
-        
+
         {/* Header */}
         <div className="p-6 bg-slate-50 border-b border-slate-200 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
@@ -80,7 +197,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 TiMUN 2027 Registration
               </h3>
               <p className="text-xs text-slate-600">
-                Official Delegate & School Portal
+                Official Delegate & School Portal • NGN + USD payments
               </p>
             </div>
           </div>
@@ -96,14 +213,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         {/* Form Body */}
         {!submitted ? (
           <form onSubmit={handleNext} className="p-6 space-y-6">
-            
+
             {/* Step Indicators */}
-            <div className="flex items-center justify-between max-w-xs mx-auto mb-6">
-              {[
-                { s: 1, label: 'Role' },
-                { s: 2, label: 'Contact' },
-                { s: 3, label: 'Preferences' }
-              ].map((st) => (
+            <div className="flex items-center justify-between max-w-md mx-auto mb-6">
+              {steps.map((st) => (
                 <div key={st.s} className="flex items-center gap-2">
                   <div className={`w-7 h-7 rounded text-xs font-bold flex items-center justify-center transition-colors ${
                     step === st.s
@@ -209,7 +322,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       type="tel"
                       name="phone"
                       required
-                      placeholder="+1 (210) 555-0199"
+                      placeholder="+234 ..."
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
@@ -349,41 +462,141 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     I agree to submit my 2-page Position Paper by October 31, 2026 to be eligible for conference awards.
                   </label>
                 </div>
+              </div>
+            )}
 
-                {/* Pricing Summary */}
-                <div className="p-4 bg-amber-50 rounded border border-amber-300 flex justify-between items-center text-sm">
-                  <div>
-                    <div className="font-bold text-blue-900">Calculated Fee:</div>
-                    <div className="text-xs text-slate-600">Invoice payment instructions will be emailed.</div>
+            {/* STEP 4: Payment */}
+            {step === 4 && (
+              <div className="space-y-4 animate-fadeIn">
+                <div className="p-4 bg-amber-50 rounded border border-amber-300">
+                  <div className="flex flex-wrap justify-between items-center gap-3">
+                    <div>
+                      <div className="font-bold text-blue-900">Total due:</div>
+                      <div className="text-xs text-slate-600">
+                        {formData.type === 'chair'
+                          ? 'Chair staff application — no payment required.'
+                          : `${formData.type === 'delegation' ? `Delegation of ${formData.delegationSize}` : 'Individual delegate'} • ≈ $${fee.usd} USD`}
+                      </div>
+                    </div>
+                    <div className="text-2xl font-extrabold text-amber-900">
+                      {formData.type === 'chair' ? '$0' : formatMoney(fee.amount, currency)}
+                    </div>
                   </div>
-                  <div className="text-xl font-extrabold text-amber-900">
-                    {formData.type === 'individual' ? '$65' : formData.type === 'delegation' ? `$${110 + (formData.delegationSize * 55)}` : '$0'}
-                  </div>
+                  {formData.type !== 'chair' && (
+                    <div className="mt-3 flex gap-2">
+                      {(['NGN', 'USD'] as PaymentCurrency[]).map(c => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setCurrency(c)}
+                          className={`px-4 py-1.5 rounded text-xs font-bold uppercase tracking-wider border cursor-pointer ${
+                            currency === c
+                              ? 'bg-blue-900 text-white border-blue-900'
+                              : 'bg-white text-slate-600 border-slate-300 hover:border-blue-900'
+                          }`}
+                        >
+                          Pay in {c === 'NGN' ? '₦ Naira' : '$ Dollar'}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
+
+                {payError && (
+                  <div className="p-3 rounded border border-rose-300 bg-rose-50 text-rose-900 text-xs flex gap-2">
+                    <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+                    <span>{payError}</span>
+                  </div>
+                )}
+
+                {formData.type === 'chair' ? (
+                  <button
+                    type="button"
+                    onClick={() => finalize('waived', 'none')}
+                    className="w-full px-6 py-3 rounded text-xs font-bold uppercase tracking-widest text-white bg-blue-900 hover:bg-blue-800 cursor-pointer"
+                  >
+                    Submit Chair Application (Free)
+                  </button>
+                ) : (
+                  <div className="space-y-3">
+                    <button
+                      type="button"
+                      disabled={paying || !paystackReady}
+                      onClick={handlePaystack}
+                      title={paystackReady ? 'Pay securely online' : 'Add VITE_PAYSTACK_PUBLIC_KEY to enable online payments'}
+                      className={`w-full px-6 py-3 rounded text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-colors ${
+                        paystackReady
+                          ? 'text-white bg-emerald-700 hover:bg-emerald-600 cursor-pointer'
+                          : 'text-slate-400 bg-slate-100 border border-slate-200 cursor-not-allowed'
+                      }`}
+                    >
+                      {paying ? <Loader2 className="w-4 h-4 animate-spin" /> : <CreditCard className="w-4 h-4" />}
+                      <span>{paying ? 'Opening secure checkout…' : `Pay ${formatMoney(fee.amount, currency)} online (${currency})`}</span>
+                    </button>
+                    {!paystackReady && (
+                      <p className="text-[11px] text-slate-500 leading-relaxed">
+                        Online checkout is in setup mode (no Paystack public key yet). Use bank transfer below —
+                        your registration is still saved and the Secretariat confirms payment manually.
+                      </p>
+                    )}
+
+                    <div className="p-4 bg-slate-50 rounded border border-slate-200 text-xs space-y-1.5">
+                      <div className="font-bold text-blue-900 uppercase tracking-wider flex items-center gap-1.5">
+                        <Landmark className="w-4 h-4" />
+                        <span>Or pay by bank transfer</span>
+                      </div>
+                      <div className="text-slate-600">Bank: <strong className="text-slate-900">{manual.bank}</strong></div>
+                      <div className="text-slate-600">Account: <strong className="text-slate-900">{manual.accountName} • {manual.accountNumber}</strong></div>
+                      <div className="text-slate-500 leading-relaxed">{manual.note}</div>
+                      <button
+                        type="button"
+                        onClick={handleManual}
+                        className="mt-2 px-4 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-white border border-slate-300 hover:border-blue-900 cursor-pointer"
+                      >
+                        I've transferred / will pay on arrival — save as pending
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
             {/* Form Footer Controls */}
-            <div className="pt-4 border-t border-slate-200 flex justify-between items-center">
-              {step > 1 ? (
+            {!(step === 4) && (
+              <div className="pt-4 border-t border-slate-200 flex justify-between items-center">
+                {step > 1 ? (
+                  <button
+                    type="button"
+                    onClick={() => setStep(step - 1)}
+                    className="px-4 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center gap-1 cursor-pointer"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span>Back</span>
+                  </button>
+                ) : <div />}
+
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-blue-900 hover:bg-blue-800 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+                >
+                  <span>{step === 3 ? 'Continue to Payment' : 'Next Step'}</span>
+                  <ChevronRight className="w-4 h-4 text-amber-400" />
+                </button>
+              </div>
+            )}
+            {step === 4 && (
+              <div className="pt-2 flex justify-between items-center">
                 <button
                   type="button"
-                  onClick={() => setStep(step - 1)}
+                  onClick={() => setStep(3)}
                   className="px-4 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 flex items-center gap-1 cursor-pointer"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   <span>Back</span>
                 </button>
-              ) : <div />}
-
-              <button
-                type="submit"
-                className="px-6 py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-blue-900 hover:bg-blue-800 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
-              >
-                <span>{step === 3 ? 'Complete & Submit Registration' : 'Next Step'}</span>
-                <ChevronRight className="w-4 h-4 text-amber-400" />
-              </button>
-            </div>
+                <span className="text-[11px] text-slate-400">256-bit encrypted checkout via Paystack</span>
+              </div>
+            )}
 
           </form>
         ) : (
@@ -401,8 +614,16 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 Registration Confirmed!
               </h3>
               <p className="text-slate-600 text-sm mt-1 max-w-md mx-auto leading-relaxed">
-                Thank you, <strong className="text-slate-900">{formData.fullName}</strong>. Your delegate application for <strong className="text-blue-900">{formData.institution}</strong> has been logged into the TiMUN 2027 database.
+                Thank you, <strong className="text-slate-900">{formData.fullName}</strong>. Your {formData.type} application for <strong className="text-blue-900">{formData.institution}</strong> has been saved.
               </p>
+              <p className="mt-2 inline-block px-3 py-1 rounded text-xs font-bold uppercase tracking-wider border bg-slate-50 border-slate-200 text-slate-700">
+                Payment: {savedPaymentStatus} • {savedAmount}
+              </p>
+              {savedPaymentStatus === 'pending' && (
+                <p className="text-xs text-slate-500 mt-2 max-w-md mx-auto">
+                  Show this reference when you transfer, or pay online later from your confirmation email. The Secretariat confirms manual payments in the executive dashboard.
+                </p>
+              )}
             </div>
 
             <div className="bg-slate-50 p-5 rounded border border-slate-200 text-left text-xs space-y-2 max-w-md mx-auto font-mono">
@@ -423,10 +644,6 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 <span className="text-slate-900">{formData.preferredCountries || 'General Selection'}</span>
               </div>
             </div>
-
-            <p className="text-xs text-slate-500">
-              A copy of your invoice and study guide login credentials have been sent to {formData.email}.
-            </p>
 
             <div className="flex justify-center gap-3 pt-2">
               <button

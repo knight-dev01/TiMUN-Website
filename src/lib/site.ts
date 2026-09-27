@@ -1,0 +1,36 @@
+/**
+ * Central site configuration for SEO, links, and integrations.
+ * All values can be overridden with Vite env vars (see .env.example).
+ * No domain is hard-required: SITE_URL falls back to a placeholder
+ * that executives can replace once DNS is live.
+ */
+
+export const SITE_URL =
+  (import.meta as any)?.env?.VITE_SITE_URL?.replace(/\/$/, '') ||
+  'https://timun.org';
+
+export const SITE_NAME = 'TiMUN — Trinity International Model United Nations';
+export const SITE_SHORT_NAME = 'TiMUN 2027';
+export const SITE_DESCRIPTION =
+  'TiMUN 2027 is the inaugural Trinity International Model United Nations conference: 500+ delegates, 8 committees (UNSC, AU-PSC, ECOWAS, NASS, DISEC, ECOSOC, UNHCR, WHO), study guides, rules of procedure, resolution builder, schedule and registration. Nov 12–14, 2027.';
+export const SITE_KEYWORDS = [
+  'Model United Nations',
+  'MUN Nigeria',
+  'MUN Africa',
+  'TiMUN',
+  'Trinity International Model United Nations',
+  'UNSC simulation',
+  'AU-PSC',
+  'ECOWAS youth',
+  'delegate registration',
+  'study guides',
+  'rules of procedure',
+  'resolution writing',
+].join(', ');
+
+export const SITE_THEME_COLOR = '#0a1a3c';
+export const SITE_LOCALE = 'en_US';
+export const SITE_TWITTER_HANDLE = '@timun_org';
+
+export const CONTACT_EMAIL =
+  (import.meta as any)?.env?.VITE_CONTACT_EMAIL || 'secretariat@timun.org';

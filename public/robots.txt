@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Replace timun.org with the production domain once DNS is live
+Sitemap: https://timun.org/sitemap.xml

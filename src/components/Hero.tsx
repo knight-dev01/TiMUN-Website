@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Calendar, MapPin, Users, Award, ChevronRight, Download, Sparkles, Shield, Clock } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
+import { SafeImage } from './SafeImage';
+import { NIGERIAN_PHOTOS } from '../data/mediaData';
+import heroBg from '../assets/images/tumun_hero_bg_1786354167438.jpg';
 
 interface HeroProps {
   onOpenRegister: () => void;
@@ -45,13 +48,7 @@ export const Hero: React.FC<HeroProps> = ({
   }, [targetDate]);
 
   return (
-    <section id="hero" className="relative pt-28 pb-16 bg-slate-50 text-slate-900 overflow-hidden border-b border-slate-200">
-      
-      {/* Background Subtle Gradient Grid */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-900/5 clip-path-diagonal" />
-      </div>
+    <section id="hero" className="relative pt-28 pb-16 bg-white text-slate-900 overflow-hidden border-b border-slate-100">
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -159,13 +156,12 @@ export const Hero: React.FC<HeroProps> = ({
 
           {/* Right Column - Campus Hero Visual & Key Metrics */}
           <div className="lg:col-span-5 relative">
-            <div className="bg-white p-3 rounded-lg border border-slate-300 shadow-xl relative overflow-hidden">
-              <div className="relative rounded overflow-hidden aspect-[4/3] bg-slate-900">
+            <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-lg relative overflow-hidden">
+              <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-slate-100">
                 <img
-                  src="/src/assets/images/tumun_hero_bg_1786354167438.jpg"
+                  src={heroBg}
                   alt="Trinity University Campus"
-                  className="w-full h-full object-cover opacity-85 hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/30 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 text-white">
@@ -193,37 +189,70 @@ export const Hero: React.FC<HeroProps> = ({
 
         </div>
 
-        {/* Featured Councils Banner Strip */}
-        <div className="mt-12 bg-blue-900 text-white rounded-lg p-6 sm:p-8 shadow-md border-t-2 border-amber-400">
+        {/* Nigeria in focus — photo strip */}
+        <div className="mt-12">
+          <div className="flex items-end justify-between mb-4">
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                Nigeria in focus
+              </h3>
+              <p className="text-xl font-serif font-bold text-slate-900">
+                From Lagos to Abuja
+              </p>
+            </div>
+            <a href="#media" className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors">
+              View all stories →
+            </a>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[NIGERIAN_PHOTOS.lagos, NIGERIAN_PHOTOS.abuja, NIGERIAN_PHOTOS.delegates].map((photo) => (
+              <div key={photo.caption} className="relative rounded-2xl overflow-hidden aspect-[16/10] bg-slate-100 group">
+                <SafeImage
+                  src={photo.src}
+                  alt={photo.caption}
+                  fallbackLabel="Nigeria"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-4 right-4 text-white text-xs font-semibold">
+                  {photo.caption}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Featured Councils — minimal */}
+        <div className="mt-10 rounded-2xl border border-slate-200 p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row justify-between sm:items-end mb-6 gap-2">
             <div>
-              <h3 className="text-amber-400 font-bold uppercase text-xs tracking-widest">
-                Featured Councils
+              <h3 className="text-slate-400 font-bold uppercase text-xs tracking-widest">
+                Featured councils
               </h3>
-              <p className="text-xl sm:text-2xl font-serif font-light italic text-slate-100">
+              <p className="text-xl sm:text-2xl font-serif font-bold text-slate-900">
                 Select your forum for diplomatic debate
               </p>
             </div>
-            <div className="text-amber-300 text-xs font-mono font-semibold uppercase tracking-wider">
+            <div className="text-slate-400 text-xs font-semibold uppercase tracking-wider">
               1st Annual Session
             </div>
           </div>
 
           {committees.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {committees.slice(0, 3).map((comm) => (
-                <div key={comm.id} className="bg-white/10 p-5 rounded border-l-2 border-amber-400 hover:bg-white/15 transition-all cursor-pointer">
-                  <h4 className="font-bold uppercase tracking-tight text-xs text-amber-300 mb-1">
+                <div key={comm.id} className="p-5 rounded-xl bg-slate-50 border border-slate-100 hover:border-slate-300 transition-all cursor-pointer">
+                  <h4 className="font-bold text-sm text-slate-900 mb-1">
                     {comm.name} ({comm.acronym})
                   </h4>
-                  <p className="text-slate-200 text-xs leading-relaxed line-clamp-2">
+                  <p className="text-slate-500 text-xs leading-relaxed line-clamp-2">
                     {comm.description}
                   </p>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-xs text-slate-300 italic">
+            <div className="text-xs text-slate-400 italic">
               No committees loaded yet. Use "Site Uploads" to add or import committees.
             </div>
           )}

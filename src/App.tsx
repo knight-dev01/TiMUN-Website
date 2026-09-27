@@ -3,8 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ConferenceDataProvider } from './context/ConferenceContext';
+import { SEO } from './components/SEO';
+import { trackPageView, trackEvent } from './lib/analytics';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { WelcomeSection } from './components/WelcomeSection';
@@ -13,6 +15,7 @@ import { DelegateToolkit } from './components/DelegateToolkit';
 import { ScheduleSection } from './components/ScheduleSection';
 import { SecretariatSection } from './components/SecretariatSection';
 import { VenueSection } from './components/VenueSection';
+import { MediaSection } from './components/MediaSection';
 import { FaqContactSection } from './components/FaqContactSection';
 import { Footer } from './components/Footer';
 import { RegistrationModal } from './components/RegistrationModal';
@@ -42,9 +45,22 @@ function AppContent() {
     }
   };
 
+  useEffect(() => {
+    trackPageView('landing');
+  }, []);
+
+  useEffect(() => {
+    if (resolutionBuilderOpen) trackEvent('resolution_builder_opened');
+  }, [resolutionBuilderOpen]);
+
+  useEffect(() => {
+    if (cmsModalOpen) trackEvent('executive_portal_opened');
+  }, [cmsModalOpen]);
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-amber-500 selection:text-slate-950">
-      
+    <div className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-amber-200 selection:text-slate-900">
+      <SEO />
+
       {/* Top Fixed Header Navbar */}
       <Navbar
         onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
@@ -86,6 +102,9 @@ function AppContent() {
 
         {/* Venue, Campus Map & Hotels */}
         <VenueSection />
+
+        {/* Insights & Media — articles, updates, videos, photo stories */}
+        <MediaSection />
 
         {/* FAQ & Secretariat Support */}
         <FaqContactSection />
