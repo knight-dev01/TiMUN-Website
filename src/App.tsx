@@ -15,28 +15,23 @@ import { MediaSection } from './components/MediaSection';
 import { FaqContactSection } from './components/FaqContactSection';
 import { ComingSoon } from './components/ComingSoon';
 import { VerdictCta } from './components/gallery/VerdictCta';
-import { FlagMarquee } from './components/gallery/FlagMarquee';
 import { PersistentBackdrop } from './components/gallery/PersistentBackdrop';
-import { BackToTop } from './components/gallery/BackToTop';
 import { Reveal } from './components/gallery/Reveal';
 import { Footer } from './components/Footer';
-import { RegistrationModal } from './components/RegistrationModal';
 import { ResolutionBuilderModal } from './components/ResolutionBuilderModal';
 import { SiteManagementPortalModal } from './components/SiteManagementPortalModal';
 
+// NOTE: Registration is parked until required. RegistrationModal.tsx stays
+// in the repo untouched — re-add its import, state and buttons to relaunch.
+
 function AppContent() {
   const [activeSection, setActiveSection] = useState('hero');
-  const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [resolutionBuilderOpen, setResolutionBuilderOpen] = useState(false);
   const [cmsModalOpen, setCmsModalOpen] = useState(false);
 
-  const [initialCommittee, setInitialCommittee] = useState('');
-  const [initialCountry, setInitialCountry] = useState('');
-
-  const handleOpenRegisterWithChoice = (committeeAcronym: string, countryName: string) => {
-    setInitialCommittee(committeeAcronym);
-    setInitialCountry(countryName);
-    setRegisterModalOpen(true);
+  const goBulletin = () => {
+    setActiveSection('bulletin');
+    document.getElementById('bulletin')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleExploreCommittees = () => {
@@ -62,7 +57,7 @@ function AppContent() {
       <PersistentBackdrop />
 
       <Navbar
-        onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
+        onJoinBulletin={goBulletin}
         onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
@@ -73,16 +68,13 @@ function AppContent() {
           remain in the repo and return by re-adding them here. */}
       <main>
         <Hero
-          onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
+          onJoinBulletin={goBulletin}
           onExploreCommittees={handleExploreCommittees}
           onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
         />
 
-        {/* Assembly of nations — member-state flags */}
-        <FlagMarquee />
-
         <Reveal>
-          <WelcomeSection onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
+          <WelcomeSection onJoinBulletin={goBulletin} />
         </Reveal>
 
         <Reveal>
@@ -96,22 +88,12 @@ function AppContent() {
         <ComingSoon />
 
         <FaqContactSection />
-        <VerdictCta onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
+        <VerdictCta onJoinBulletin={goBulletin} />
       </main>
 
-      <BackToTop />
-
       <Footer
-        onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
         onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
         onOpenCms={() => setCmsModalOpen(true)}
-      />
-
-      <RegistrationModal
-        isOpen={registerModalOpen}
-        onClose={() => setRegisterModalOpen(false)}
-        initialCommittee={initialCommittee}
-        initialCountry={initialCountry}
       />
 
       <ResolutionBuilderModal

@@ -59,8 +59,7 @@
 }
 
 /* ---- ONE button system for the whole site ----
-   Flat professional keys with a subtle press. Same radius, same
-   behavior, every variant — no game-like 3D edges. */
+   Flat professional keys. Same radius, same behavior, every variant. */
 .duo-btn {
   display: inline-flex;
   align-items: center;
@@ -74,18 +73,16 @@
   letter-spacing: 0.06em;
   border: 2px solid transparent;
   cursor: pointer;
-  transition: transform 0.08s ease, filter 0.15s ease, box-shadow 0.15s ease;
+  transition: filter 0.15s ease, background-color 0.15s ease;
   user-select: none;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
 }
 
 .duo-btn:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.07);
 }
 
 .duo-btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  filter: brightness(0.96);
 }
 
 .duo-btn:disabled {
@@ -180,26 +177,12 @@
   animation: fadeIn 0.3s ease-out forwards;
 }
 
-@keyframes hall-marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.hall-marquee-track {
-  animation: hall-marquee 36s linear infinite;
-}
-
-.hall-marquee:hover .hall-marquee-track {
-  animation-play-state: paused;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .animate-fadeIn,
-  .hall-marquee-track {
+  .animate-fadeIn {
     animation: none;
   }
 

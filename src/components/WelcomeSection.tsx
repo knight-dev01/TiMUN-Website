@@ -26,10 +26,10 @@ import {
 import { useConferenceData } from '../context/ConferenceContext';
 
 interface WelcomeSectionProps {
-  onOpenRegister: () => void;
+  onJoinBulletin: () => void;
 }
 
-export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }) => {
+export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }) => {
   const { conferenceInfo, secretariatTeam, committees } = useConferenceData();
   const sg = secretariatTeam.find(m => m.role.toLowerCase().includes('secretary-general') || m.department === 'Executive') || secretariatTeam[0] || {
     name: 'Catherine DeWitt',
@@ -152,7 +152,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
   ];
 
   return (
-    <section id="overview" className="py-20 vx-paper text-slate-900 border-b border-[#fdeecd] relative">
+    <section id="overview" className="py-12 sm:py-20 vx-paper text-slate-900 border-b border-[#fdeecd] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -253,10 +253,10 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
                   <div className="mt-4 pt-3 border-t-2 border-slate-100 flex justify-between items-center">
                     <span className="text-[11px] text-[#777777]">Ready to join our next session?</span>
                     <button
-                      onClick={onOpenRegister}
+                      onClick={onJoinBulletin}
                       className="duo-btn duo-btn-red !py-1.5 !px-3 !text-[11px]"
                     >
-                      Register Now
+                      Get Updates
                     </button>
                   </div>
                 </div>
@@ -352,7 +352,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
                 </div>
               </div>
               <button
-                onClick={onOpenRegister}
+                onClick={onJoinBulletin}
                 className="duo-btn duo-btn-gold shrink-0"
               >
                 Experience the Pillars
@@ -580,7 +580,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
                   <p className="text-xs text-slate-500 font-medium">{sg.role}, {conferenceInfo.acronym}</p>
                 </div>
                 <button
-                  onClick={onOpenRegister}
+                  onClick={onJoinBulletin}
                   className="px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
                 >
                   <span>Register Delegate</span>

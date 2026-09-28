@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from 'motion/react';
 import { HandArrow, HandCheck } from './HumanMarks';
 
 interface VerdictCtaProps {
-  onOpenRegister: () => void;
+  onJoinBulletin: () => void;
 }
 
 /** Hand-circled word: wobbly gold ellipse drawn around children. */
@@ -35,7 +35,7 @@ const Circled: React.FC<{ children: React.ReactNode }> = ({ children }) => (
  * Verdict band — solid TU navy, gold circled "verified",
  * single red 3D-press register button.
  */
-export const VerdictCta: React.FC<VerdictCtaProps> = ({ onOpenRegister }) => {
+export const VerdictCta: React.FC<VerdictCtaProps> = ({ onJoinBulletin }) => {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -68,12 +68,12 @@ export const VerdictCta: React.FC<VerdictCtaProps> = ({ onOpenRegister }) => {
 
           <div className="mt-8">
             <motion.button
-              onClick={onOpenRegister}
+              onClick={onJoinBulletin}
               whileHover={reduceMotion ? undefined : { scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
               className="duo-btn duo-btn-red !px-8 !py-4"
             >
-              <span>Claim your placard — register</span>
+              <span>Notify me when seats open</span>
               <HandArrow className="w-8 h-5" />
             </motion.button>
             <p className="vx-hand-note text-[#777777] mt-4">

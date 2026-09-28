@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { Mail, MapPin, Send, CheckCircle2, Shield, Loader2 } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { subscribeNewsletter } from '../lib/newsletter';
-import { fireConfetti } from './gallery/ConfettiBurst';
 import { LogoBadge } from './LogoBadge';
 
 interface FooterProps {
-  onOpenRegister: () => void;
   onOpenResolutionBuilder: () => void;
   onOpenCms?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolutionBuilder, onOpenCms }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenResolutionBuilder, onOpenCms }) => {
   const { conferenceInfo, isExecutive, refreshSubscribers } = useConferenceData();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterState, setNewsletterState] = useState<'idle' | 'busy' | 'done' | 'duplicate' | 'invalid'>('idle');
@@ -29,7 +27,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
     } else {
       setNewsletterState('done');
       setNewsletterEmail('');
-      fireConfetti(60);
     }
     setTimeout(() => setNewsletterState(prev => (prev === 'busy' ? prev : 'idle')), 5000);
   };
@@ -89,11 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
               Delegate Portal
             </h4>
             <ul className="space-y-2 text-[#4b4b4b]">
-              <li>
-                <button onClick={onOpenRegister} className="hover:text-[#f4a024] transition-colors text-left cursor-pointer">
-                  Apply as Delegate
-                </button>
-              </li>
+              <li><a href="#media" className="hover:text-[#f4a024] transition-colors">Read Our Stories</a></li>
               <li>
                 <button onClick={onOpenResolutionBuilder} className="hover:text-[#f4a024] transition-colors text-left text-[#f4a024] font-bold cursor-pointer">
                   Resolution Builder Tool

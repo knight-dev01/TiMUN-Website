@@ -7,7 +7,7 @@ export const VenueSection: React.FC = () => {
   const { conferenceInfo } = useConferenceData();
 
   return (
-    <section id="venue" className="py-20 bg-white relative">
+    <section id="venue" className="py-12 sm:py-20 bg-white relative">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
 
         {/* Section Header */}

@@ -5,13 +5,13 @@ import { LogoBadge } from './LogoBadge';
 import { HandArrow } from './gallery/HumanMarks';
 
 interface HeroProps {
-  onOpenRegister: () => void;
+  onJoinBulletin: () => void;
   onExploreCommittees: () => void;
   onOpenResolutionBuilder: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
-  onOpenRegister,
+  onJoinBulletin,
   onExploreCommittees,
   onOpenResolutionBuilder
 }) => {
@@ -40,7 +40,7 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <section id="hero" className="relative bg-white overflow-hidden">
-      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 pt-[130px] pb-14">
+      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 pt-[104px] sm:pt-[130px] pb-10 sm:pb-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
           {/* Left — wordmark first, the logo IS the hero */}
@@ -64,13 +64,13 @@ export const Hero: React.FC<HeroProps> = ({
 
             <div className="flex flex-wrap items-center gap-3 mt-7">
               <motion.button
-                onClick={onOpenRegister}
+                onClick={onJoinBulletin}
                 id="hero-btn-apply"
                 whileHover={reduceMotion ? undefined : { scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
                 className="duo-btn duo-btn-red"
               >
-                <span>Take your seat</span>
+                <span>Get conference updates</span>
                 <HandArrow className="w-8 h-5" />
               </motion.button>
               <button

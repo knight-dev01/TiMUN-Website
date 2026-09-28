@@ -59,7 +59,7 @@ export const MediaSection: React.FC = () => {
   ];
 
   return (
-    <section id="media" className="py-20 bg-white text-slate-900 border-b border-slate-100">
+    <section id="media" className="py-12 sm:py-20 bg-white text-slate-900 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mb-10">
           <div className="text-xs font-bold uppercase tracking-widest text-[#8a5200] mb-2">

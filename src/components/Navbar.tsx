@@ -4,7 +4,7 @@ import { useConferenceData } from '../context/ConferenceContext';
 import { LogoBadge } from './LogoBadge';
 
 interface NavbarProps {
-  onOpenRegister: () => void;
+  onJoinBulletin: () => void;
   onOpenResolutionBuilder: () => void;
   activeSection: string;
   setActiveSection: (section: string) => void;
@@ -19,7 +19,7 @@ const NAV_LINKS = [
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({
-  onOpenRegister,
+  onJoinBulletin,
   onOpenResolutionBuilder,
   activeSection,
   setActiveSection
@@ -77,21 +77,21 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Right actions — executive portal lives in the footer only */}
         <div className="hidden sm:flex items-center gap-2">
           <button
-            onClick={onOpenRegister}
+            onClick={onJoinBulletin}
             id="nav-btn-register-main"
             className="duo-btn duo-btn-red !py-2.5 !px-5"
           >
-            Register
+            Get Updates
           </button>
         </div>
 
         {/* Mobile controls */}
         <div className="flex lg:hidden items-center gap-2">
           <button
-            onClick={onOpenRegister}
+            onClick={onJoinBulletin}
             className="duo-btn duo-btn-red !py-2 !px-4 sm:hidden"
           >
-            Register
+            Updates
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -132,10 +132,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span>Resolution Desk</span>
             </button>
             <button
-              onClick={() => { setMobileMenuOpen(false); onOpenRegister(); }}
+              onClick={() => { setMobileMenuOpen(false); onJoinBulletin(); }}
               className="duo-btn duo-btn-red w-full"
             >
-              <span>Register for {conferenceInfo.acronym || 'TiMUN 2027'}</span>
+              <span>Get {conferenceInfo.acronym || 'TiMUN 2027'} updates</span>
             </button>
           </div>
         </div>

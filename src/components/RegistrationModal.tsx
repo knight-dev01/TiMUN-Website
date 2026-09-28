@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { X, CheckCircle, ShieldCheck, ChevronRight, ChevronLeft, User, Users, Award, Printer, CreditCard, Landmark, Loader2, AlertTriangle } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
-import { fireConfetti } from './gallery/ConfettiBurst';
 import { RegistrationRecord, PaymentCurrency } from '../types';
 import {
   feeFor,
@@ -134,8 +133,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
       payment_status: status,
       payment_method: method,
     });
-    // Welcome to the hall — paper-bit celebration
-    fireConfetti(status === 'paid' ? 120 : 70);
+    // Parked: registration relaunches here (confetti returns with it).
   };
 
   const handleNext = (e: React.FormEvent) => {

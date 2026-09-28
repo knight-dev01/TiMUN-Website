@@ -31,7 +31,7 @@ const PENDING = [
  * here simply by re-adding them in App — no code is deleted.
  */
 export const ComingSoon: React.FC = () => (
-    <section id="coming-soon" className="relative bg-white py-20 overflow-hidden">
+    <section id="coming-soon" className="relative bg-white py-12 sm:py-20 overflow-hidden">
       <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6">
       <div className="text-center max-w-2xl mx-auto mb-10">
         <p className="text-[15px] font-bold uppercase tracking-widest text-[#dd0000]">
