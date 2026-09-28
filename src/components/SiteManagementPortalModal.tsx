@@ -393,7 +393,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
         {/* Notification Alert */}
         {notification && (
           <div className={`px-6 py-2.5 text-xs font-medium flex items-center gap-2 shrink-0 ${
-            notification.type === 'success' ? 'bg-emerald-900/90 text-emerald-200 border-b border-emerald-700' : 'bg-rose-900/90 text-rose-200 border-b border-rose-700'
+            notification.type === 'success' ? 'bg-[#1f4a32]/90 text-emerald-200 border-b border-[#35794f]' : 'bg-rose-900/90 text-rose-200 border-b border-rose-700'
           }`}>
             {notification.type === 'success' ? <CheckCircle2 className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
             <span>{notification.message}</span>

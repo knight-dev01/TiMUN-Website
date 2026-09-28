@@ -58,7 +58,8 @@
 }
 
 /* ---- ONE button system for the whole site ----
-   Chunky 3D-press keys. Same radius, same press, every variant. */
+   Flat professional keys with a subtle press. Same radius, same
+   behavior, every variant — no game-like 3D edges. */
 .duo-btn {
   display: inline-flex;
   align-items: center;
@@ -71,19 +72,19 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   border: 2px solid transparent;
-  border-bottom-width: 5px;
   cursor: pointer;
-  transition: transform 0.06s ease, border-bottom-width 0.06s ease, filter 0.15s ease;
+  transition: transform 0.08s ease, filter 0.15s ease, box-shadow 0.15s ease;
   user-select: none;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
 }
 
 .duo-btn:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.05);
 }
 
 .duo-btn:active {
-  transform: translateY(3px);
-  border-bottom-width: 2px;
+  transform: translateY(2px);
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
 
 .duo-btn:disabled {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { TextReveal } from './gallery/TextReveal';
 import { HelpCircle, ChevronDown, ChevronUp, Mail, Send, CheckCircle2, MessageSquare } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 
@@ -43,9 +44,10 @@ export const FaqContactSection: React.FC = () => {
             <HelpCircle className="w-3.5 h-3.5 text-[#8a5200]" />
             <span>Support & Delegate Inquiries</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight">
-            Frequently Asked Questions
-          </h2>
+          <TextReveal
+            text="Frequently Asked Questions"
+            className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight"
+          />
           <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">
             Everything you need to know about delegate registration, background guides, and conference logistics.
           </p>

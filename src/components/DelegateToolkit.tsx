@@ -178,7 +178,7 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
         {/* Tab 3: Resolution Helper Promo */}
         {activeTab === 'resolution' && (
           <div className="bg-white p-8 rounded border border-slate-200 text-center space-y-4 animate-fadeIn max-w-2xl mx-auto shadow-sm">
-            <div className="w-14 h-14 rounded bg-[#fdeecd] border border-[#f7b955] text-amber-800 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded bg-[#fdeecd] border border-[#f7b955] text-[#8a5200] flex items-center justify-center mx-auto">
               <Sparkles className="w-7 h-7" />
             </div>
 

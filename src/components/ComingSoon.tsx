@@ -1,6 +1,7 @@
 import React from 'react';
 import { Users, Calendar, PenTool, Award } from 'lucide-react';
 import { Watermark } from './gallery/Watermark';
+import { TextReveal } from './gallery/TextReveal';
 
 const PENDING = [
   {
@@ -38,9 +39,10 @@ export const ComingSoon: React.FC = () => (
         <p className="text-[15px] font-bold uppercase tracking-widest text-[#dd0000]">
           Still in the oven
         </p>
-        <h2 className="duo-section-title text-4xl sm:text-5xl mt-2">
-          More rooms opening soon
-        </h2>
+          <TextReveal
+            text="More rooms opening soon"
+            className="duo-section-title text-4xl sm:text-5xl mt-2"
+          />
         <p className="text-[#777777] text-[17px] mt-3">
           We are starting with the essentials. These halls unlock as the
           Secretariat publishes them — watch the Stories below.

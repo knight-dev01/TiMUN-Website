@@ -185,7 +185,7 @@ export const RegistrationsManager: React.FC<{ notify: (t: 'success' | 'error', m
               </div>
             </div>
             <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 ${
-              r.paymentStatus === 'paid' ? 'bg-emerald-900/60 text-emerald-300 border border-emerald-700'
+              r.paymentStatus === 'paid' ? 'bg-[#1f4a32]/60 text-[#9adbb5] border border-[#35794f]'
               : r.paymentStatus === 'pending' ? 'bg-[#5f3a00]/40 text-[#f7b955] border border-[#8a5200]'
               : r.paymentStatus === 'waived' ? 'bg-[#00387d]/50 text-[#8fb0d8] border border-blue-700'
               : 'bg-rose-900/50 text-rose-300 border border-rose-700'
@@ -194,7 +194,7 @@ export const RegistrationsManager: React.FC<{ notify: (t: 'success' | 'error', m
               {r.paymentStatus}
             </span>
             <div className="flex gap-1.5">
-              <button onClick={() => { updateRegistrationPayment(r.id, { paymentStatus: 'paid' }); notify('success', `${r.id} marked as paid.`); }} className="px-2.5 py-1.5 rounded bg-emerald-800 hover:bg-emerald-700 text-emerald-100 font-bold cursor-pointer">Mark paid</button>
+              <button onClick={() => { updateRegistrationPayment(r.id, { paymentStatus: 'paid' }); notify('success', `${r.id} marked as paid.`); }} className="px-2.5 py-1.5 rounded bg-[#2c6543] hover:bg-[#35794f] text-[#dcf3e5] font-bold cursor-pointer">Mark paid</button>
               <button onClick={() => { updateRegistrationPayment(r.id, { paymentStatus: 'pending' }); notify('success', `${r.id} marked as pending.`); }} className="px-2.5 py-1.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-200 font-bold cursor-pointer">Pending</button>
               <button onClick={() => { if (window.confirm(`Delete registration ${r.id}?`)) { deleteRegistration(r.id); notify('success', 'Registration deleted.'); } }} className="px-2.5 py-1.5 rounded bg-rose-900/60 hover:bg-rose-800 text-rose-200 cursor-pointer"><Trash2 className="w-3.5 h-3.5" /></button>
             </div>

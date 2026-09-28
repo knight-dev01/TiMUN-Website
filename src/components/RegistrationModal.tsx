@@ -528,7 +528,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                   <button
                     type="button"
                     onClick={() => finalize('waived', 'none')}
-                    className="w-full px-6 py-3 rounded text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] cursor-pointer"
+                    className="duo-btn duo-btn-navy w-full"
                   >
                     Submit Chair Application (Free)
                   </button>
@@ -539,10 +539,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       disabled={paying || !paystackReady}
                       onClick={handlePaystack}
                       title={paystackReady ? 'Pay securely online' : 'Add VITE_PAYSTACK_PUBLIC_KEY to enable online payments'}
-                      className={`w-full px-6 py-3 rounded text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 transition-colors ${
+                      className={`duo-btn w-full ${
                         paystackReady
-                          ? 'text-white bg-emerald-700 hover:bg-emerald-600 cursor-pointer'
-                          : 'text-slate-400 bg-slate-100 border border-slate-200 cursor-not-allowed'
+                          ? 'duo-btn-green'
+                          : '!bg-slate-100 !text-slate-400 !border-slate-200'
                       }`}
                     >
                       {paying ? <Loader2 className="w-4 h-4 animate-spin" /> : <CreditCard className="w-4 h-4" />}
@@ -592,10 +592,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+                  className="duo-btn duo-btn-navy"
                 >
                   <span>{step === 3 ? 'Continue to Payment' : 'Next Step'}</span>
-                  <ChevronRight className="w-4 h-4 text-[#f4a024]" />
+                  <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
             )}
@@ -617,8 +617,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         ) : (
           /* Confirmation Receipt View */
           <div className="p-8 space-y-6 text-center animate-fadeIn" id="printable-ticket">
-            <div className="w-16 h-16 rounded bg-emerald-100 text-emerald-900 border border-emerald-300 flex items-center justify-center mx-auto shadow-xs">
-              <CheckCircle className="w-8 h-8 text-emerald-700" />
+            <div className="w-16 h-16 rounded bg-[#dcf3e5] text-[#1f4a32] border border-[#9adbb5] flex items-center justify-center mx-auto shadow-xs">
+              <CheckCircle className="w-8 h-8 text-[#35794f]" />
             </div>
 
             <div>
@@ -671,7 +671,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
               <button
                 onClick={onClose}
-                className="px-5 py-2 rounded text-xs font-bold uppercase tracking-wider text-white bg-[#00387d] hover:bg-[#294a70] cursor-pointer shadow-xs"
+                className="duo-btn duo-btn-navy"
               >
                 Done
               </button>

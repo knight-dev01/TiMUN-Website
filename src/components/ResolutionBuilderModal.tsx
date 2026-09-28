@@ -203,7 +203,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                             preambularClauses: prev.preambularClauses.map(p => p.id === clause.id ? { ...p, starter: val } : p)
                           }));
                         }}
-                        className="bg-white border border-slate-300 rounded px-2.5 py-1 text-xs font-bold italic text-amber-800 shrink-0"
+                        className="bg-white border border-slate-300 rounded px-2.5 py-1 text-xs font-bold italic text-[#8a5200] shrink-0"
                       >
                         {PREAMBULAR_STARTERS.map(st => (
                           <option key={st} value={st}>{st}</option>
@@ -264,7 +264,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                               operativeClauses: prev.operativeClauses.map(o => o.id === clause.id ? { ...o, starter: val } : o)
                             }));
                           }}
-                          className="bg-white border border-slate-300 rounded px-2 py-1 text-xs font-bold text-amber-800 shrink-0"
+                          className="bg-white border border-slate-300 rounded px-2 py-1 text-xs font-bold text-[#8a5200] shrink-0"
                         >
                           {OPERATIVE_STARTERS.map(st => (
                             <option key={st} value={st}>{st}</option>

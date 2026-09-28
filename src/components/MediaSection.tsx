@@ -4,6 +4,7 @@ import { Newspaper, PlayCircle, Image as ImageIcon, Megaphone, X, Calendar, User
 import { useConferenceData } from '../context/ConferenceContext';
 import { MediaKind, MediaPost } from '../types';
 import { SafeImage } from './SafeImage';
+import { TextReveal } from './gallery/TextReveal';
 import { trackEvent } from '../lib/analytics';
 
 /** Convert a YouTube watch/share URL to a privacy-friendly nocookie embed. */
@@ -64,9 +65,10 @@ export const MediaSection: React.FC = () => {
           <div className="text-xs font-bold uppercase tracking-widest text-[#8a5200] mb-2">
             Insights & Media
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight">
-            Stories, guides & moments
-          </h2>
+          <TextReveal
+            text="Stories, guides & moments"
+            className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight"
+          />
           <p className="text-slate-500 mt-3 text-sm sm:text-base leading-relaxed">
             Articles and write-ups from the Secretariat, conference updates, briefing videos
             and photo stories — from Lagos to Abuja and everywhere our delegates call home.

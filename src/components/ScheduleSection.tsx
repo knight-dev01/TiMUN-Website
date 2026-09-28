@@ -109,7 +109,7 @@ export const ScheduleSection: React.FC = () => {
                   </span>
 
                   {item.dressCode && (
-                    <span className="flex items-center gap-1 text-amber-800 font-semibold">
+                    <span className="flex items-center gap-1 text-[#8a5200] font-semibold">
                       <Shirt className="w-3 h-3" />
                       <span>{item.dressCode}</span>
                     </span>
@@ -121,7 +121,7 @@ export const ScheduleSection: React.FC = () => {
                 <span className={`px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${
                   item.type === 'session' ? 'bg-[#00387d] text-white' :
                   item.type === 'ceremony' ? 'bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955]' :
-                  item.type === 'social' ? 'bg-emerald-100 text-emerald-900 border border-emerald-300' :
+                  item.type === 'social' ? 'bg-[#dcf3e5] text-[#1f4a32] border border-[#9adbb5]' :
                   'bg-slate-200 text-slate-800'
                 }`}>
                   {item.type}

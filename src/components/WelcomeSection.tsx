@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { TextReveal } from './gallery/TextReveal';
+import { LogoBadge } from './LogoBadge';
 import { 
   Quote, 
   CheckCircle2, 
@@ -58,7 +60,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
       subtitle: "Practising & Leading",
       description: "Providing the tangible platform to apply what they have learned, negotiate policy, build high-value networks, demonstrate leadership, and create societal impact.",
       icon: Target,
-      color: "bg-emerald-50 text-emerald-900 border-emerald-200"
+      color: "bg-emerald-50 text-[#1f4a32] border-emerald-200"
     }
   ];
 
@@ -159,9 +161,10 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
             <Landmark className="w-3.5 h-3.5 text-[#294a70]" />
             <span>Charter & Institutional Profile</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight">
-            About Trinity International Model United Nations
-          </h2>
+          <TextReveal
+            text="About Trinity International Model United Nations"
+            className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight"
+          />
           <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">
             A hybrid diplomatic simulation, youth development, leadership, and professional empowerment organization.
           </p>
@@ -224,12 +227,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
                 <div className="w-full bg-slate-900 text-white p-6 rounded-xl border border-slate-800 shadow-lg relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#e08c0a]/10 rounded-full blur-2xl" />
                   <div className="flex items-center gap-3 mb-4">
-                    <img 
-                      src="/logo.png" 
-                      alt="TiMUN Official Logo" 
-                      className="h-12 w-auto object-contain bg-white/10 p-1.5 rounded"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                    />
+                    <LogoBadge size="md" onDark />
                     <div>
                       <div className="text-xs font-bold text-[#f4a024] uppercase tracking-wider">Organizational Profile</div>
                       <div className="font-serif font-bold text-sm text-slate-100">TiMUN Executive Directorate</div>
@@ -383,7 +381,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
                   <div key={idx} className="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between hover:border-[#00387d]/30 transition-all">
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 rounded bg-[#fef6e7] border border-[#fbdda1] flex items-center justify-center text-amber-800">
+                        <div className="w-10 h-10 rounded bg-[#fef6e7] border border-[#fbdda1] flex items-center justify-center text-[#8a5200]">
                           <Icon className="w-5 h-5" />
                         </div>
                         <span className="text-xs font-mono font-bold text-slate-400">

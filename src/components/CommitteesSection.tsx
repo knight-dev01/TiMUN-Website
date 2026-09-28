@@ -244,7 +244,7 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
                   </button>
                 ) : (
                   <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                    item.status === 'assigned' ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-[#fdeecd] text-amber-800 border border-[#fbdda1]'
+                    item.status === 'assigned' ? 'bg-[#fde2e2] text-[#a80e0e] border border-[#f8bcbc]' : 'bg-[#fdeecd] text-[#8a5200] border border-[#fbdda1]'
                   }`}>
                     {item.status}
                   </span>

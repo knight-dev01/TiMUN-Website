@@ -1,4 +1,5 @@
 import React from 'react';
+import { TextReveal } from './gallery/TextReveal';
 import { MapPin, Navigation, Hotel, Plane, Bus } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 
@@ -14,9 +15,10 @@ export const VenueSection: React.FC = () => {
           <p className="text-[15px] font-bold uppercase tracking-widest text-[#dd0000]">
             Campus Location & Housing
           </p>
-          <h2 className="duo-section-title text-4xl sm:text-5xl mt-2">
-            Venue & Logistics
-          </h2>
+          <TextReveal
+            text="Venue & Logistics"
+            className="duo-section-title text-4xl sm:text-5xl mt-2"
+          />
           <p className="text-[#777777] text-[17px] mt-3">
             Hosted at Trinity University, Yaba — in the heart of mainland Lagos.
           </p>
@@ -46,7 +48,7 @@ export const VenueSection: React.FC = () => {
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#f4a024] text-[#15305b] px-4 py-2 rounded-xl font-bold text-[13px] border-2 border-[#b56a00] flex items-center gap-1.5">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#f4a024] text-[#15305b] px-4 py-2 rounded-xl font-bold text-[13px] border-2 border-[#b56a00] flex items-center gap-1.5 shadow-lg">
                 <MapPin className="w-4 h-4" />
                 <span>Main Auditorium (TiMUN HQ)</span>
               </div>
