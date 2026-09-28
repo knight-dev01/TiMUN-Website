@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { ConferenceDataProvider } from './context/ConferenceContext';
 import { SEO } from './components/SEO';
 import { trackPageView, trackEvent } from './lib/analytics';
+import { touchVisit, awardXp } from './lib/passport';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { WelcomeSection } from './components/WelcomeSection';
@@ -23,6 +24,7 @@ import { VerdictCta } from './components/gallery/VerdictCta';
 import { WaveDivider } from './components/gallery/WaveDivider';
 import { FlagMarquee } from './components/gallery/FlagMarquee';
 import { BackToTop } from './components/gallery/BackToTop';
+import { JourneySection } from './components/JourneySection';
 import { Footer } from './components/Footer';
 import { RegistrationModal } from './components/RegistrationModal';
 import { ResolutionBuilderModal } from './components/ResolutionBuilderModal';
@@ -53,10 +55,14 @@ function AppContent() {
 
   useEffect(() => {
     trackPageView('landing');
+    touchVisit();
   }, []);
 
   useEffect(() => {
-    if (resolutionBuilderOpen) trackEvent('resolution_builder_opened');
+    if (resolutionBuilderOpen) {
+      trackEvent('resolution_builder_opened');
+      awardXp('resolution_opened');
+    }
   }, [resolutionBuilderOpen]);
 
   useEffect(() => {
@@ -90,6 +96,13 @@ function AppContent() {
 
         {/* Assembly of nations ticker */}
         <FlagMarquee />
+
+        {/* Road to the Gavel — delegate journey */}
+        <JourneySection
+          onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
+          onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
+          onExploreCommittees={handleExploreCommittees}
+        />
 
         {/* Room 02 — Mandate */}
         <GalleryRoom id="room-mandate" index="02" label="Mandate">

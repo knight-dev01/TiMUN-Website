@@ -84,7 +84,7 @@ export const VerdictCta: React.FC<VerdictCtaProps> = ({ onOpenRegister }) => {
               onClick={onOpenRegister}
               whileHover={reduceMotion ? undefined : { scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
-              className="vx-soft-btn bg-amber-400 text-slate-950 px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-amber-300 transition-colors shadow-xl inline-flex items-center gap-2 cursor-pointer"
+              className="duo-btn px-8 py-4 text-xs font-bold uppercase tracking-widest shadow-xl inline-flex items-center gap-2 cursor-pointer"
             >
               <span>Claim your placard — register</span>
               <HandArrow className="w-8 h-5" />

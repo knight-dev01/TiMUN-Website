@@ -5,6 +5,7 @@ import { useConferenceData } from '../context/ConferenceContext';
 import { MediaKind, MediaPost } from '../types';
 import { SafeImage } from './SafeImage';
 import { trackEvent } from '../lib/analytics';
+import { awardXp } from '../lib/passport';
 
 /** Convert a YouTube watch/share URL to a privacy-friendly nocookie embed. */
 export function toYouTubeEmbed(url: string): string {
@@ -47,6 +48,7 @@ export const MediaSection: React.FC = () => {
   const open = (post: MediaPost) => {
     setOpenPost(post);
     trackEvent('media_post_opened', { kind: post.kind, id: post.id });
+    awardXp('story_read');
   };
 
   const filters: { id: 'all' | MediaKind; label: string }[] = [

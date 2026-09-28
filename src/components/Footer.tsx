@@ -3,6 +3,8 @@ import { Globe, Mail, Phone, MapPin, Send, CheckCircle2, Shield, Heart, Loader2 
 import { useConferenceData } from '../context/ConferenceContext';
 import { subscribeNewsletter } from '../lib/newsletter';
 import { fireConfetti } from './gallery/ConfettiBurst';
+import { awardXp } from '../lib/passport';
+import { Watermark } from './gallery/Watermark';
 
 interface FooterProps {
   onOpenRegister: () => void;
@@ -28,13 +30,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
     } else {
       setNewsletterState('done');
       setNewsletterEmail('');
+      awardXp('subscribed');
       fireConfetti(60);
     }
     setTimeout(() => setNewsletterState(prev => (prev === 'busy' ? prev : 'idle')), 5000);
   };
 
   return (
-    <footer className="bg-blue-950 text-slate-300 text-xs border-t border-blue-900">
+    <footer id="bulletin" className="relative overflow-hidden bg-blue-950 text-slate-300 text-xs border-t border-blue-900">
+      <Watermark side="left" dark opacity={0.08} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           

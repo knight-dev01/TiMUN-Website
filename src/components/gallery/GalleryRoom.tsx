@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
+import { Watermark } from './Watermark';
 
 interface GalleryRoomProps {
   id: string;
@@ -26,9 +27,13 @@ export const GalleryRoom: React.FC<GalleryRoomProps> = ({ id, index, label, chil
   const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
   const rotateX = useTransform(scrollYProgress, [0, 1], [8, 0]);
 
+  // Watermark side alternates per room so the logo drifts across the page.
+  const side = index === '–' || parseInt(index, 10) % 2 === 0 ? 'left' : 'right';
+
   if (reduceMotion) {
     return (
-      <div id={id} data-room={label} data-room-index={index}>
+      <div id={id} data-room={label} data-room-index={index} className="relative">
+        <Watermark side={side} />
         {children}
       </div>
     );
@@ -40,9 +45,10 @@ export const GalleryRoom: React.FC<GalleryRoomProps> = ({ id, index, label, chil
       ref={ref}
       data-room={label}
       data-room-index={index}
-      className="hall-perspective"
+      className="hall-perspective relative"
       style={{ y, opacity, scale, rotateX, transformOrigin: 'center top' }}
     >
+      <Watermark side={side} />
       {children}
     </motion.div>
   );

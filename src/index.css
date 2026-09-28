@@ -55,6 +55,31 @@
   font-style: italic;
 }
 
+/* Duo-psychology tactile button: chunky, presses like a real key. */
+.duo-btn {
+  border-radius: 14px 16px 14px 18px / 16px 14px 18px 14px;
+  background: #F59E0B;
+  color: #041D50;
+  border: 2px solid #B45309;
+  border-bottom-width: 5px;
+  transition: transform 0.06s ease, border-bottom-width 0.06s ease, filter 0.15s ease;
+}
+
+.duo-btn:hover {
+  filter: brightness(1.05);
+}
+
+.duo-btn:active {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+}
+
+.duo-btn-navy {
+  background: #08307F;
+  color: #fff;
+  border-color: #041D50;
+}
+
 .vx-tape {
   position: relative;
 }

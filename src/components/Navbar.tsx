@@ -126,40 +126,24 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </nav>
 
-        {/* Right Actions */}
-        <div className="hidden sm:flex items-center gap-3">
-          {/* Resolution Builder link */}
-          <button
-            onClick={onOpenResolutionBuilder}
-            id="nav-btn-resolution-builder"
-            className="text-xs font-medium text-slate-600 hover:text-blue-900 flex items-center gap-1.5 px-2.5 py-1.5 rounded hover:bg-slate-100 transition-colors cursor-pointer"
-            title="Draft UN Resolution clauses"
-          >
-            <PenTool className="w-3.5 h-3.5 text-amber-600" />
-            <span className="hidden xl:inline">Resolution Builder</span>
-          </button>
-
-          {/* Executive Portal Button */}
+        {/* Right Actions — minimal: register + executive icon */}
+        <div className="hidden sm:flex items-center gap-2">
+          {/* Executive Portal (icon only) */}
           {onOpenCms && (
             <button
               onClick={onOpenCms}
-              className={`text-xs font-medium flex items-center gap-1.5 px-2.5 py-1.5 rounded transition-colors cursor-pointer ${
+              aria-label={isExecutive ? 'Executive Portal' : 'Executive Login'}
+              className={`p-2 rounded-full transition-colors cursor-pointer ${
                 isExecutive
-                  ? 'bg-amber-100 text-amber-900 hover:bg-amber-200 border border-amber-300 font-semibold'
-                  : 'text-slate-600 hover:text-blue-900 hover:bg-slate-100'
+                  ? 'bg-amber-100 text-amber-900 hover:bg-amber-200'
+                  : 'text-slate-400 hover:text-blue-900 hover:bg-slate-100'
               }`}
               title={isExecutive ? `Executive Portal (${executiveUser?.name || 'Logged In'})` : 'Executive Login'}
             >
               {isExecutive ? (
-                <>
-                  <ShieldCheck className="w-3.5 h-3.5 text-amber-700" />
-                  <span>Exec Portal</span>
-                </>
+                <ShieldCheck className="w-4 h-4 text-amber-700" />
               ) : (
-                <>
-                  <Lock className="w-3.5 h-3.5 text-slate-500" />
-                  <span>Exec Login</span>
-                </>
+                <Lock className="w-4 h-4" />
               )}
             </button>
           )}

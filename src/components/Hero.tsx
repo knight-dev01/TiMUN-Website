@@ -124,7 +124,7 @@ export const Hero: React.FC<HeroProps> = ({
                 id="hero-btn-apply"
                 whileHover={reduceMotion ? undefined : { scale: 1.03 }}
                 whileTap={{ scale: 0.96 }}
-                className="vx-soft-btn bg-amber-400 text-slate-950 px-7 py-3.5 text-xs font-bold uppercase tracking-widest hover:bg-amber-300 transition-colors shadow-lg flex items-center gap-2 cursor-pointer"
+                className="duo-btn px-7 py-3.5 text-xs font-bold uppercase tracking-widest shadow-lg flex items-center gap-2 cursor-pointer"
               >
                 <span>Take your seat — register</span>
                 <HandArrow className="w-8 h-5" />
