@@ -17,6 +17,9 @@ import { SecretariatSection } from './components/SecretariatSection';
 import { VenueSection } from './components/VenueSection';
 import { MediaSection } from './components/MediaSection';
 import { FaqContactSection } from './components/FaqContactSection';
+import { GalleryRoom } from './components/gallery/GalleryRoom';
+import { HallProgress } from './components/gallery/HallProgress';
+import { VerdictCta } from './components/gallery/VerdictCta';
 import { Footer } from './components/Footer';
 import { RegistrationModal } from './components/RegistrationModal';
 import { ResolutionBuilderModal } from './components/ResolutionBuilderModal';
@@ -60,6 +63,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-amber-200 selection:text-slate-900">
       <SEO />
+      <HallProgress />
 
       {/* Top Fixed Header Navbar */}
       <Navbar
@@ -70,44 +74,59 @@ function AppContent() {
         setActiveSection={setActiveSection}
       />
 
-      {/* Main Sections */}
+      {/* Main Sections — conference-hall walkthrough rooms */}
       <main>
-        {/* Hero Banner */}
-        <Hero
-          onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
-          onExploreCommittees={handleExploreCommittees}
-          onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
-        />
+        {/* Room 01 — Arrival */}
+        <GalleryRoom id="room-arrival" index="01" label="Arrival">
+          <Hero
+            onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
+            onExploreCommittees={handleExploreCommittees}
+            onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
+          />
+        </GalleryRoom>
 
-        {/* Institutional Welcome & SG Letter */}
-        <WelcomeSection
-          onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
-        />
+        {/* Room 02 — Mandate */}
+        <GalleryRoom id="room-mandate" index="02" label="Mandate">
+          <WelcomeSection
+            onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
+          />
+        </GalleryRoom>
 
-        {/* Committees & Topics + Country Matrix */}
-        <CommitteesSection
-          onOpenRegisterWithChoice={handleOpenRegisterWithChoice}
-        />
+        {/* Room 03 — Assembly */}
+        <GalleryRoom id="room-assembly" index="03" label="Assembly">
+          <CommitteesSection
+            onOpenRegisterWithChoice={handleOpenRegisterWithChoice}
+          />
+        </GalleryRoom>
 
-        {/* 3-Day Schedule Itinerary */}
-        <ScheduleSection />
+        {/* Side chambers */}
+        <GalleryRoom id="room-deliberation" index="–" label="Deliberation">
+          <ScheduleSection />
+        </GalleryRoom>
 
-        {/* Delegate Toolkit & ROP & Resolution Helper */}
-        <DelegateToolkit
-          onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
-        />
+        <GalleryRoom id="room-drafting" index="–" label="Drafting">
+          <DelegateToolkit
+            onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
+          />
+        </GalleryRoom>
 
-        {/* Secretariat Board */}
-        <SecretariatSection onOpenCms={() => setCmsModalOpen(true)} />
+        <GalleryRoom id="room-secretariat" index="–" label="Secretariat">
+          <SecretariatSection onOpenCms={() => setCmsModalOpen(true)} />
+        </GalleryRoom>
 
-        {/* Venue, Campus Map & Hotels */}
-        <VenueSection />
+        <GalleryRoom id="room-venue" index="–" label="Venue">
+          <VenueSection />
+        </GalleryRoom>
 
-        {/* Insights & Media — articles, updates, videos, photo stories */}
-        <MediaSection />
+        <GalleryRoom id="room-gallery" index="–" label="Gallery">
+          <MediaSection />
+        </GalleryRoom>
 
-        {/* FAQ & Secretariat Support */}
-        <FaqContactSection />
+        {/* Room 04 — Verdict */}
+        <GalleryRoom id="room-verdict" index="04" label="Verdict">
+          <FaqContactSection />
+          <VerdictCta onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
+        </GalleryRoom>
       </main>
 
       {/* Footer */}

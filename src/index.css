@@ -1,5 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400;1,6..12,600&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-sans: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', Georgia, serif;
+  --color-paper: #FFFDF7;
+  --color-navy: #08307F;
+  --color-navy-deep: #041D50;
+  --color-podium: #0BE149;
+}
 
 @layer base {
   html {
@@ -7,19 +16,60 @@
   }
 
   body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    font-family: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
     background-color: #ffffff;
     color: #0f172a;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-serif {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Fraunces', Georgia, serif;
+    letter-spacing: -0.02em;
   }
 
   img {
     image-rendering: auto;
   }
+}
+
+/* ---- Soft organic UI (gallery + landing) ---- */
+.vx-display {
+  font-family: 'Fraunces', Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+.vx-soft {
+  border-radius: 26px 30px 26px 32px / 30px 26px 32px 26px;
+}
+
+.vx-soft-btn {
+  border-radius: 18px 22px 18px 24px / 22px 18px 24px 18px;
+}
+
+.vx-paper {
+  background-color: #FFFDF7;
+}
+
+.vx-hand-note {
+  font-family: 'Fraunces', Georgia, serif;
+  font-style: italic;
+}
+
+.vx-tape {
+  position: relative;
+}
+
+.vx-tape::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 84px;
+  height: 22px;
+  background: rgba(11, 225, 73, 0.18);
+  border-left: 1px dashed rgba(4, 29, 80, 0.25);
+  border-right: 1px dashed rgba(4, 29, 80, 0.25);
 }
 
 @keyframes fadeIn {
@@ -31,3 +81,45 @@
   animation: fadeIn 0.3s ease-out forwards;
 }
 
+@keyframes podium-sweep {
+  0% { transform: translateX(-120%) skewX(-12deg); }
+  60%, 100% { transform: translateX(240%) skewX(-12deg); }
+}
+
+.podium-sweep {
+  animation: podium-sweep 5s ease-in-out infinite;
+}
+
+/* Gallery stage helpers (GPU props only) */
+.hall-perspective {
+  perspective: 1200px;
+}
+
+.hall-ellipse {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  transform: rotateX(72deg);
+}
+
+.podium-cone {
+  background: linear-gradient(to top, rgba(11, 225, 73, 0.28), rgba(11, 225, 73, 0));
+  mix-blend-mode: screen;
+  filter: blur(6px);
+  clip-path: polygon(38% 100%, 62% 100%, 100% 0, 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-fadeIn,
+  .podium-sweep {
+    animation: none;
+  }
+
+  .hall-ellipse,
+  .podium-cone {
+    transform: none;
+  }
+}

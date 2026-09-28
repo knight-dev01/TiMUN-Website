@@ -1,0 +1,54 @@
+VERIDEX TRANSFORMATION — ONE FULL PROMPT (landing-only cinematic gallery + soft human UI)
+
+CONTEXT
+You are working in "C:\Users\Adegoke\Desktop\Veridex System", a Vite 6 + React 18 + TypeScript + Tailwind 4 + motion/react + Hono + Supabase repo. Entry: index.html -> src/main.tsx -> src/App.tsx (view='landing' first, explicit ?dex/?seed/?design routes). Landing lives in src/components/landing/ (Hero, HowItWorks, CohortSection, FinalCTASection, LandingPage, Footer in components/layout). Brand tokens: navy #08307F / #041D50, green #0BE149, greys in design-tokens.json + src/styles/theme.css. motion/react is already installed — use it, do NOT add three.js/gsap.
+
+GOAL
+Turn the landing (ONLY the landing: Hero + HowItWorks + Cohort + FinalCTA + Footer) into a cinematic 2.5D MUN/UN-assembly-hall walkthrough with a looping video background, scroll-driven gallery rooms, auto-tour mode, soft organic UI, softer human fonts, and zero generic AI-looking icons/designs. Do NOT touch ApplicationLayout, AdminHub/AdminLogin, or src/eval/ portal styling except shared font/radius tokens where safe.
+
+1) VIDEO BACKGROUND (progressive enhancement)
+- New src/components/gallery/SiteGalleryBackground.tsx: fixed inset-0 -z-10, poster-first (Unsplash hall poster), <video autoplay muted loop playsInline preload="metadata"> with 2 stock Pexels/Coverr mp4 sources (720p, each <5MB), hidden on mobile (poster only), pause on document.hidden and when prefers-reduced-motion.
+- Grading overlays: from-[#041D50]/80 via-[#08307F]/55 to-[#041D50]/85 + radial vignette + green podium glow. Text must stay readable.
+
+2) 2.5D HALL STAGE (no WebGL)
+- New src/components/gallery/HallStage.tsx: CSS-3D curved desk arcs (3 bordered ellipses), 2 podium light-ray cones (mix-blend-screen, blur), DelegatesCanvas 2D canvas (~80 dots on desktop, ~36 mobile, green/white alpha, slow rise + drift, IntersectionObserver pause, rAF only).
+- Transform/opacity only. No layout thrash.
+
+3) GALLERY ROOMS + PROGRESS + AUTO-TOUR
+- New GalleryRoom.tsx: section snap-start min-h-[110vh], perspective 1200, motion useScroll target offset ['start end','center center'] -> y 90->0, opacity 0->1, scale .94->1, rotateX 8->0. Props: id, index, label. Bypass when prefers-reduced-motion.
+- New HallProgress.tsx: fixed left rail (lg only) 01 Arrival / 02 Mandate / 03 Assembly / 04 Verdict, scrollYProgress spring line, click scrollIntoView smooth.
+- AutoTour in same file: "Walk the hall" button, chains rooms every ~2.6s smooth scroll, stops on wheel/touchmove/Escape, hidden behavior under reduced-motion.
+- LandingPage.tsx: render <SiteGalleryBackground/> + <HallProgress/> once, fixed HallStage behind, wrap Hero/HowItWorks/Cohort/FinalCTA in GalleryRoom ids room-arrival/mandate/assembly/verdict, footer in bg-[#041D50]/80 backdrop-blur. Container scroll-smooth. Keep hasDraft banner.
+- App.tsx: AnimatePresence mode="wait" door transitions for view switch (exit opacity/y/blur .25s, enter .35s). Video/stage only when view==='landing'.
+
+4) ROOM CHOREOGRAPHY
+- Hero: mouse parallax x/y ±18px spring, headline word stagger, CTA magnetic whileHover 1.03, Stamp badge (not pill), Fraunces display + squiggle underline, handwritten italic sub-note rotated -1.5deg, HandArrow CTA.
+- HowItWorks: frosted #FFFDF7/90 vx-soft card, editorial stacked list (not 3 identical cards), hand numbers 01-03, middle row tinted + slight rotate, CTA + italic aside.
+- CohortSection: frosted cards, tape strips, slight rotates (-0.5/+0.6deg), progress bar animates on useInView, checklist uses HandCheck not dots, no GraduationCap/Clock lucide.
+- FinalCTASection: podium spotlight sweep, hand-circled "verified", single pulse on inView, soft button.
+- Footer: human microcopy, real link labels, no href="#" dead links.
+
+5) SOFT ORGANIC UI TOKENS
+- Fonts: display 'Fraunces' serif (vx-display class, letter-spacing -0.02em), body/buttons/inputs 'Nunito Sans' rounded humanist. Google import in src/index.css. Update theme.css body + button + input families. Keep eval portal Inter for dense tables (do not regress).
+- Radii: --radius 1.15rem. Buttons vx-soft-btn (18px 22px 18px 24px / 22px 18px 24px 18px), cards vx-soft (26px 30px 26px 32px / 30px 26px 32px 26px). Remove rounded-full pills from landing/gallery.
+- Surfaces: warm paper #FFFDF7, navy ink, generous line-height, italic asides, imperfect rotates (-3deg to +0.6deg), dashed stamp borders, tape corners.
+
+6) DE-AI RULES (strict)
+- No lucide ArrowRight/Sparkles/GraduationCap/Clock/Shield in landing. Use src/components/gallery/HumanMarks.tsx: HandArrow (wobbly), Squiggle, HandCheck, Asterisk, Stamp (rotated dashed badge).
+- No centered-everything, no identical 3-card grids, no purple/blue gradients, no "Lorem/Trusted/Unlock/Delve" clichés. Vary alignment, use real specifics ("38 of 50", "within 6 days", "~12 min").
+- No autoplay audio. Silent motion only.
+
+7) PERF + A11Y
+- 60fps mid phones: one fixed stage, one canvas, GPU props only, will-change transient, particles halved <768px, video off on mobile, prefers-reduced-motion disables all dolly/parallax/tour.
+- Keyboard: rail buttons focusable, ESC stops tour, video aria-hidden, contrast white on navy wash.
+
+8) FILES
+Create: components/gallery/SiteGalleryBackground.tsx, HallStage.tsx, GalleryRoom.tsx, HallProgress.tsx, HumanMarks.tsx, index.ts. Edit: landing/LandingPage, Hero, HowItWorks, CohortSection, FinalCTASection, layout/Footer, App.tsx, index.css, styles/theme.css. No deletions. No new npm deps.
+
+9) ACCEPTANCE
+- npm run dev: landing scrolls like hall rooms, video loops, rail + tour work, no jank on mobile emulation.
+- npm run build + npm run typecheck pass.
+- Reduced-motion + blocked-video fallbacks still look intentional (poster + gradients).
+- No lucide imports remain in landing/gallery; no rounded-full pills in landing; Fraunces/Nunito applied.
+
+Build order: tokens+fonts -> HumanMarks -> stage/background -> rooms/rail/tour -> LandingPage wiring -> per-room choreography -> App transitions -> verify.

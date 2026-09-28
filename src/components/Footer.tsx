@@ -124,13 +124,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
               Conference Bulletin
             </h4>
             <p className="text-[11px] text-slate-300 leading-relaxed">
-              Subscribe to receive study guide releases, country allocation notices, and gala updates.
+              One short email when study guides drop, when countries are assigned,
+              and when gala details land. No noise, unsubscribe anytime.
             </p>
 
             {newsletterState === 'done' ? (
               <div className="p-3 bg-blue-900/80 rounded border border-amber-400/40 text-amber-300 text-center flex items-center justify-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Subscribed successfully!</span>
+                <span>You are on the list — see you in the hall.</span>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="space-y-2">
