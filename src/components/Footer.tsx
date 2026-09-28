@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Globe, Mail, Phone, MapPin, Send, CheckCircle2, Shield, Heart, Loader2 } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { subscribeNewsletter } from '../lib/newsletter';
+import { fireConfetti } from './gallery/ConfettiBurst';
 
 interface FooterProps {
   onOpenRegister: () => void;
@@ -27,6 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
     } else {
       setNewsletterState('done');
       setNewsletterEmail('');
+      fireConfetti(60);
     }
     setTimeout(() => setNewsletterState(prev => (prev === 'busy' ? prev : 'idle')), 5000);
   };

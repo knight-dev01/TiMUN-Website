@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;1,6..12,400;1,6..12,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Lora', Georgia, serif;
   --color-paper: #FFFDF7;
   --color-navy: #08307F;
   --color-navy-deep: #041D50;
@@ -16,15 +16,15 @@
   }
 
   body {
-    font-family: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    background-color: #ffffff;
+    font-family: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background-color: #FFFDF7;
     color: #0f172a;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-serif {
-    font-family: 'Fraunces', Georgia, serif;
-    letter-spacing: -0.02em;
+    font-family: 'Lora', Georgia, serif;
+    letter-spacing: -0.01em;
   }
 
   img {
@@ -34,8 +34,8 @@
 
 /* ---- Soft organic UI (gallery + landing) ---- */
 .vx-display {
-  font-family: 'Fraunces', Georgia, serif;
-  letter-spacing: -0.02em;
+  font-family: 'Lora', Georgia, serif;
+  letter-spacing: -0.01em;
 }
 
 .vx-soft {
@@ -51,7 +51,7 @@
 }
 
 .vx-hand-note {
-  font-family: 'Fraunces', Georgia, serif;
+  font-family: 'Lora', Georgia, serif;
   font-style: italic;
 }
 
@@ -108,13 +108,48 @@
   clip-path: polygon(38% 100%, 62% 100%, 100% 0, 0 0);
 }
 
+@keyframes hall-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.hall-marquee-track {
+  animation: hall-marquee 36s linear infinite;
+}
+
+.hall-marquee:hover .hall-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes aurora-drift {
+  0%, 100% { transform: translate3d(-4%, -2%, 0) scale(1); }
+  50% { transform: translate3d(4%, 3%, 0) scale(1.08); }
+}
+
+.aurora-blob {
+  animation: aurora-drift 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes warm-flicker {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 0.9; }
+}
+
+.warm-flicker {
+  animation: warm-flicker 5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   .animate-fadeIn,
-  .podium-sweep {
+  .podium-sweep,
+  .hall-marquee-track,
+  .aurora-blob,
+  .warm-flicker {
     animation: none;
   }
 

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { motion } from 'motion/react';
 import { Newspaper, PlayCircle, Image as ImageIcon, Megaphone, X, Calendar, User, Tag, Clock } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { MediaKind, MediaPost } from '../types';
@@ -170,7 +171,10 @@ export const MediaSection: React.FC = () => {
       {/* Reader modal */}
       {openPost && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60" onClick={() => setOpenPost(null)}>
-          <div
+          <motion.div
+            initial={{ opacity: 0, y: 44, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 24 }}
             className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             onClick={e => e.stopPropagation()}
           >
@@ -242,7 +246,7 @@ export const MediaSection: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       )}
     </section>

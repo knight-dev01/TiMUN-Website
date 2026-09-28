@@ -4,7 +4,7 @@ import { Calendar, MapPin, Users } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { SafeImage } from './SafeImage';
 import { NIGERIAN_PHOTOS } from '../data/mediaData';
-import { SiteGalleryBackground } from './gallery/SiteGalleryBackground';
+import { HallBackdrop } from './gallery/HallBackdrop';
 import { HallStage } from './gallery/HallStage';
 import { HandArrow, Squiggle, Stamp } from './gallery/HumanMarks';
 import heroBg from '../assets/images/tumun_hero_bg_1786354167438.jpg';
@@ -66,7 +66,7 @@ export const Hero: React.FC<HeroProps> = ({
       onMouseMove={handleMouse}
       className="relative pt-28 pb-16 text-white overflow-hidden bg-[#041D50]"
     >
-      <SiteGalleryBackground localPoster={heroBg} />
+      <HallBackdrop localPoster={heroBg} />
       <HallStage />
 
       <motion.div
@@ -123,6 +123,7 @@ export const Hero: React.FC<HeroProps> = ({
                 onClick={onOpenRegister}
                 id="hero-btn-apply"
                 whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
                 className="vx-soft-btn bg-amber-400 text-slate-950 px-7 py-3.5 text-xs font-bold uppercase tracking-widest hover:bg-amber-300 transition-colors shadow-lg flex items-center gap-2 cursor-pointer"
               >
                 <span>Take your seat — register</span>

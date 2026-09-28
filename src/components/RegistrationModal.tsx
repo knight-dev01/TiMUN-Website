@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { X, CheckCircle, ShieldCheck, ChevronRight, ChevronLeft, User, Users, Award, Printer, CreditCard, Landmark, Loader2, AlertTriangle } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
+import { fireConfetti } from './gallery/ConfettiBurst';
 import { RegistrationRecord, PaymentCurrency } from '../types';
 import {
   feeFor,
@@ -25,6 +27,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   initialCountry = ''
 }) => {
   const { committees, addRegistration } = useConferenceData();
+  const reduceMotion = useReducedMotion();
 
   const [step, setStep] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -126,6 +129,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
       payment_status: status,
       payment_method: method,
     });
+    // Welcome to the hall — paper-bit celebration
+    fireConfetti(status === 'paid' ? 120 : 70);
   };
 
   const handleNext = (e: React.FormEvent) => {
@@ -184,7 +189,12 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fadeIn">
-      <div className="bg-white border border-slate-200 rounded max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-xl relative text-slate-900">
+      <motion.div
+        initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 44, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+        className="bg-white border border-slate-200 rounded max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-xl relative text-slate-900"
+      >
 
         {/* Header */}
         <div className="p-6 bg-slate-50 border-b border-slate-200 flex items-center justify-between sticky top-0 z-20">
@@ -664,7 +674,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
           </div>
         )}
 
-      </div>
+      </motion.div>
     </div>
   );
 };

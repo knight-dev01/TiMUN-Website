@@ -34,7 +34,7 @@ export const FaqContactSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-20 bg-white text-slate-900 border-b border-slate-200 relative">
+    <section id="faq" className="py-20 vx-paper text-slate-900 border-b border-amber-100 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

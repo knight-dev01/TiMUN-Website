@@ -20,6 +20,9 @@ import { FaqContactSection } from './components/FaqContactSection';
 import { GalleryRoom } from './components/gallery/GalleryRoom';
 import { HallProgress } from './components/gallery/HallProgress';
 import { VerdictCta } from './components/gallery/VerdictCta';
+import { WaveDivider } from './components/gallery/WaveDivider';
+import { FlagMarquee } from './components/gallery/FlagMarquee';
+import { BackToTop } from './components/gallery/BackToTop';
 import { Footer } from './components/Footer';
 import { RegistrationModal } from './components/RegistrationModal';
 import { ResolutionBuilderModal } from './components/ResolutionBuilderModal';
@@ -85,6 +88,9 @@ function AppContent() {
           />
         </GalleryRoom>
 
+        {/* Assembly of nations ticker */}
+        <FlagMarquee />
+
         {/* Room 02 — Mandate */}
         <GalleryRoom id="room-mandate" index="02" label="Mandate">
           <WelcomeSection
@@ -123,11 +129,14 @@ function AppContent() {
         </GalleryRoom>
 
         {/* Room 04 — Verdict */}
+        <WaveDivider fill="#041D50" bg="#FFFDF7" />
         <GalleryRoom id="room-verdict" index="04" label="Verdict">
           <FaqContactSection />
           <VerdictCta onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
         </GalleryRoom>
       </main>
+
+      <BackToTop />
 
       {/* Footer */}
       <Footer
