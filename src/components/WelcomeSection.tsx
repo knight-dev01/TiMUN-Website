@@ -224,38 +224,37 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
               </div>
 
               <div className="lg:col-span-5 flex flex-col items-center">
-                <div className="w-full bg-slate-900 text-white p-6 rounded-xl border border-slate-800 shadow-lg relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-[#e08c0a]/10 rounded-full blur-2xl" />
+                <div className="w-full bg-white p-6 rounded-[20px] border-2 border-slate-200 shadow-sm relative overflow-hidden">
                   <div className="flex items-center gap-3 mb-4">
-                    <LogoBadge size="md" onDark />
+                    <LogoBadge size="md" />
                     <div>
-                      <div className="text-xs font-bold text-[#f4a024] uppercase tracking-wider">Organizational Profile</div>
-                      <div className="font-serif font-bold text-sm text-slate-100">TiMUN Executive Directorate</div>
+                      <div className="text-xs font-bold text-[#dd0000] uppercase tracking-wider">Organizational Profile</div>
+                      <div className="font-serif font-bold text-sm text-[#00387d]">TiMUN Executive Directorate</div>
                     </div>
                   </div>
-                  <div className="space-y-2.5 text-xs text-slate-300 border-t border-slate-800 pt-3">
+                  <div className="space-y-2.5 text-xs text-[#4b4b4b] border-t-2 border-slate-100 pt-3">
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Governance:</span>
-                      <span className="font-semibold text-white">Independent Organization</span>
+                      <span className="text-[#777777]">Governance:</span>
+                      <span className="font-semibold text-[#00387d]">Independent Organization</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Associate Institution:</span>
-                      <span className="font-semibold text-[#f7b955]">Trinity University</span>
+                      <span className="text-[#777777]">Associate Institution:</span>
+                      <span className="font-semibold text-[#b56a00]">Trinity University</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Scope:</span>
-                      <span className="font-semibold text-white">National & International</span>
+                      <span className="text-[#777777]">Scope:</span>
+                      <span className="font-semibold text-[#00387d]">National & International</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Target Group:</span>
-                      <span className="font-semibold text-white">Students, NYSC, Young Pros</span>
+                      <span className="text-[#777777]">Target Group:</span>
+                      <span className="font-semibold text-[#00387d]">Students, NYSC, Young Pros</span>
                     </div>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-slate-800 flex justify-between items-center">
-                    <span className="text-[11px] text-slate-400">Ready to join our next session?</span>
+                  <div className="mt-4 pt-3 border-t-2 border-slate-100 flex justify-between items-center">
+                    <span className="text-[11px] text-[#777777]">Ready to join our next session?</span>
                     <button
                       onClick={onOpenRegister}
-                      className="px-3 py-1.5 bg-[#e08c0a] hover:bg-[#f4a024] text-slate-950 rounded text-xs font-bold uppercase tracking-wider cursor-pointer"
+                      className="duo-btn duo-btn-red !py-1.5 !px-3 !text-[11px]"
                     >
                       Register Now
                     </button>
@@ -340,21 +339,21 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onOpenRegister }
             </div>
 
             {/* Quote Card */}
-            <div className="p-6 bg-[#00387d] text-white rounded-xl border border-[#294a70] shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="p-6 bg-white rounded-[20px] border-2 border-[#00387d] flex flex-col md:flex-row items-center justify-between gap-6">
               <div className="flex items-start gap-4">
-                <Quote className="w-10 h-10 text-[#f4a024] shrink-0 opacity-80" />
+                <Quote className="w-10 h-10 text-[#f4a024] shrink-0" />
                 <div>
-                  <p className="font-serif italic text-base sm:text-lg text-slate-100 leading-relaxed">
+                  <p className="font-serif italic text-base sm:text-lg text-[#00387d] leading-relaxed">
                     "Knowledge gives youth an understanding of the world; Exposure shows how it operates in reality; Opportunity gives them the stage to lead."
                   </p>
-                  <span className="text-xs text-[#f7b955] font-semibold tracking-wider uppercase mt-1 block">
+                  <span className="text-xs text-[#b56a00] font-semibold tracking-wider uppercase mt-1 block">
                     TiMUN Educational Philosophy
                   </span>
                 </div>
               </div>
               <button
                 onClick={onOpenRegister}
-                className="shrink-0 px-6 py-3 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 rounded-lg text-xs font-bold uppercase tracking-widest shadow-xs transition-colors cursor-pointer"
+                className="duo-btn duo-btn-gold shrink-0"
               >
                 Experience the Pillars
               </button>

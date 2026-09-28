@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;600;700;800&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 @import "tailwindcss";
 
-/* ---- TiMUN × TU Yaba × Duo design tokens ---- */
+/* ---- TiMUN × TU Yaba × Duo design tokens ----
+   General system fonts only: zero downloads, native on every device. */
 @theme {
-  --font-sans: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Roboto Slab', Georgia, serif;
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: Georgia, 'Times New Roman', serif;
   --color-tu-navy: #00387d;
   --color-tu-navy-deep: #15305b;
   --color-tu-steel: #294a70;
@@ -26,14 +26,14 @@
   }
 
   body {
-    font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: #ffffff;
     color: #4b4b4b;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-serif {
-    font-family: 'Roboto Slab', Georgia, serif;
+    font-family: Georgia, 'Times New Roman', serif;
     color: #00387d;
     letter-spacing: 0;
   }
@@ -45,11 +45,12 @@
 
 /* ---- Duo display + hand-note (storybook voice) ---- */
 .vx-display {
-  font-family: 'Roboto Slab', Georgia, serif;
+  font-family: Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.01em;
 }
 
 .vx-hand-note {
-  font-family: 'Roboto Slab', Georgia, serif;
+  font-family: Georgia, 'Times New Roman', serif;
   font-style: italic;
 }
 
@@ -165,7 +166,7 @@
 }
 
 .duo-section-title {
-  font-family: 'Roboto Slab', Georgia, serif;
+  font-family: Georgia, 'Times New Roman', serif;
   font-weight: 700;
   color: #00387d;
 }

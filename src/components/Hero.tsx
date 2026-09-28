@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { LogoBadge } from './LogoBadge';
-import { Watermark } from './gallery/Watermark';
 import { HandArrow } from './gallery/HumanMarks';
 
 interface HeroProps {
@@ -41,7 +40,20 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <section id="hero" className="relative bg-white overflow-hidden">
-      <Watermark side="right" opacity={0.06} />
+      {/* Full-bleed logo backdrop: the mark covers the whole hero */}
+      <div aria-hidden="true" className="pointer-events-none select-none absolute inset-0 overflow-hidden">
+        <img
+          src="/logo.png"
+          alt=""
+          loading="eager"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] max-w-none sm:w-[110%] h-auto object-contain opacity-[0.07]"
+          onError={e => {
+            e.currentTarget.style.display = 'none';
+          }}
+        />
+        {/* Gentle bottom fade into the page */}
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-white" />
+      </div>
       <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 pt-[130px] pb-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 

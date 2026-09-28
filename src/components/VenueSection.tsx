@@ -41,7 +41,7 @@ export const VenueSection: React.FC = () => {
             </div>
 
             {/* Stylized campus map */}
-            <div className="relative rounded-xl overflow-hidden border-2 border-slate-200 h-72 bg-[#15305b]">
+            <div className="relative rounded-xl overflow-hidden border-2 border-slate-200 h-72 bg-slate-200">
               <img
                 src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1200&q=80"
                 alt="Lagos, Nigeria"

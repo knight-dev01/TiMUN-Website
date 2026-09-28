@@ -15,6 +15,8 @@ import { MediaSection } from './components/MediaSection';
 import { FaqContactSection } from './components/FaqContactSection';
 import { ComingSoon } from './components/ComingSoon';
 import { VerdictCta } from './components/gallery/VerdictCta';
+import { FlagMarquee } from './components/gallery/FlagMarquee';
+import { PersistentBackdrop } from './components/gallery/PersistentBackdrop';
 import { BackToTop } from './components/gallery/BackToTop';
 import { Watermark } from './components/gallery/Watermark';
 import { Reveal } from './components/gallery/Reveal';
@@ -58,11 +60,11 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-white font-sans antialiased selection:bg-[#f4a024] selection:text-[#15305b]" style={{ color: '#4b4b4b' }}>
       <SEO />
+      <PersistentBackdrop />
 
       <Navbar
         onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
         onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
-        onOpenCms={() => setCmsModalOpen(true)}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
       />
@@ -76,6 +78,9 @@ function AppContent() {
           onExploreCommittees={handleExploreCommittees}
           onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
         />
+
+        {/* Assembly of nations — member-state flags */}
+        <FlagMarquee />
 
         <Reveal>
           <div className="relative">

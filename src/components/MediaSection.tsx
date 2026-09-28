@@ -83,7 +83,7 @@ export const MediaSection: React.FC = () => {
               onClick={() => setFilter(f.id)}
               className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer border ${
                 filter === f.id
-                  ? 'bg-slate-900 text-white border-slate-900'
+                  ? 'bg-[#00387d] text-white border-[#00387d]'
                   : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-900'
               }`}
             >

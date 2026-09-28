@@ -13,7 +13,7 @@ const Circled: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <svg
       viewBox="0 0 120 40"
       preserveAspectRatio="none"
-      className="absolute -inset-x-2 -inset-y-1 w-[calc(100%+16px)] h-[calc(100%+8px)] text-[#f4a024]"
+      className="absolute -inset-x-2 -inset-y-1 w-[calc(100%+16px)] h-[calc(100%+8px)] text-[#dd0000]"
       aria-hidden="true"
     >
       <ellipse
@@ -45,19 +45,19 @@ export const VerdictCta: React.FC<VerdictCtaProps> = ({ onOpenRegister }) => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.45 }}
-        className="relative overflow-hidden rounded-[20px] bg-[#00387d] text-white px-6 py-12 sm:p-14 text-center border-b-8 border-[#15305b]"
+        className="relative overflow-hidden rounded-[20px] bg-white px-6 py-12 sm:p-14 text-center border-2 border-slate-200"
       >
         <div className="relative">
-          <p className="text-[15px] font-bold uppercase tracking-widest text-[#f4a024]">
+          <p className="text-[15px] font-bold uppercase tracking-widest text-[#dd0000]">
             The record will show —
           </p>
-          <h2 className="text-3xl sm:text-5xl font-bold mt-4 leading-tight" style={{ fontFamily: "'Roboto Slab', Georgia, serif", color: '#fff' }}>
+          <h2 className="text-3xl sm:text-5xl font-bold mt-4 leading-tight" style={{ fontFamily: "Georgia, 'Times New Roman', serif", color: '#00387d' }}>
             8 councils deliberated.
             <br />
             Every delegate <Circled>verified</Circled>.
           </h2>
 
-          <ul className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 mt-6 text-[15px] text-white/85">
+          <ul className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 mt-6 text-[15px] text-[#4b4b4b]">
             {['Study guides in hand', 'Your country placard', 'Gala dinner included'].map(item => (
               <li key={item} className="flex items-center gap-2">
                 <HandCheck className="w-5 h-5 text-[#f4a024]" />
@@ -76,7 +76,7 @@ export const VerdictCta: React.FC<VerdictCtaProps> = ({ onOpenRegister }) => {
               <span>Claim your placard — register</span>
               <HandArrow className="w-8 h-5" />
             </motion.button>
-            <p className="vx-hand-note text-white/60 mt-4">
+            <p className="vx-hand-note text-[#777777] mt-4">
               early birds get first pick of countries…
             </p>
           </div>

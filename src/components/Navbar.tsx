@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Lock, ShieldCheck, PenTool, ChevronRight } from 'lucide-react';
+import { Menu, X, PenTool, ChevronRight } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { LogoBadge } from './LogoBadge';
 
 interface NavbarProps {
   onOpenRegister: () => void;
   onOpenResolutionBuilder: () => void;
-  onOpenCms?: () => void;
   activeSection: string;
   setActiveSection: (section: string) => void;
 }
@@ -22,11 +21,10 @@ const NAV_LINKS = [
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenRegister,
   onOpenResolutionBuilder,
-  onOpenCms,
   activeSection,
   setActiveSection
 }) => {
-  const { conferenceInfo, isExecutive, executiveUser } = useConferenceData();
+  const { conferenceInfo } = useConferenceData();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -76,22 +74,8 @@ export const Navbar: React.FC<NavbarProps> = ({
           ))}
         </nav>
 
-        {/* Right actions */}
+        {/* Right actions — executive portal lives in the footer only */}
         <div className="hidden sm:flex items-center gap-2">
-          {onOpenCms && (
-            <button
-              onClick={onOpenCms}
-              aria-label={isExecutive ? 'Executive Portal' : 'Executive Login'}
-              title={isExecutive ? `Executive Portal (${executiveUser?.name || 'Logged In'})` : 'Executive Login'}
-              className={`p-2.5 rounded-xl border-2 transition-colors cursor-pointer ${
-                isExecutive
-                  ? 'bg-[#fdeecd] text-[#5f3a00] border-[#f7b955]'
-                  : 'text-[#afafaf] hover:text-[#00387d] border-transparent hover:border-slate-200'
-              }`}
-            >
-              {isExecutive ? <ShieldCheck className="w-5 h-5" /> : <Lock className="w-5 h-5" />}
-            </button>
-          )}
           <button
             onClick={onOpenRegister}
             id="nav-btn-register-main"
