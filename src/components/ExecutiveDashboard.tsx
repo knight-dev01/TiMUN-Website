@@ -68,7 +68,7 @@ export const ExecutiveOverview: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {cards.map((c, i) => (
           <div key={i} className="bg-slate-800/60 p-4 rounded-lg border border-slate-700">
-            <div className="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-[#f7b955] text-xs font-bold uppercase tracking-wider">
               <c.icon className="w-4 h-4" />
               <span>{c.label}</span>
             </div>
@@ -80,14 +80,14 @@ export const ExecutiveOverview: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-slate-800/60 p-4 rounded-lg border border-slate-700">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-amber-300 mb-3">Registrations by committee</h4>
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#f7b955] mb-3">Registrations by committee</h4>
           {byCommittee.length === 0 && <p className="text-xs text-slate-400">No registrations yet. Share the registration link to start filling committees.</p>}
           <div className="space-y-2">
             {byCommittee.map(([name, v]) => (
               <div key={name} className="flex items-center gap-3 text-xs">
                 <span className="w-32 truncate text-slate-200 font-bold">{name}</span>
                 <div className="flex-1 h-2 rounded bg-slate-900 overflow-hidden">
-                  <div className="h-full bg-amber-400" style={{ width: `${Math.max(4, (v.total / Math.max(1, registrations.length)) * 100)}%` }} />
+                  <div className="h-full bg-[#f4a024]" style={{ width: `${Math.max(4, (v.total / Math.max(1, registrations.length)) * 100)}%` }} />
                 </div>
                 <span className="text-slate-400 w-20 text-right">{v.total} total • {v.paid} paid</span>
               </div>
@@ -97,7 +97,7 @@ export const ExecutiveOverview: React.FC = () => {
 
         <div className="bg-slate-800/60 p-4 rounded-lg border border-slate-700">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-amber-300">Site activity (last 14 days)</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#f7b955]">Site activity (last 14 days)</h4>
             <button
               onClick={() => { clearAnalyticsEvents(); force(x => x + 1); }}
               className="text-[11px] text-slate-400 hover:text-rose-300 cursor-pointer"
@@ -109,7 +109,7 @@ export const ExecutiveOverview: React.FC = () => {
           <div className="flex items-end gap-1.5 h-24">
             {summary.byDay.map(d => (
               <div key={d.day} className="flex-1 flex flex-col items-center gap-1" title={`${d.day}: ${d.count}`}>
-                <div className="w-full rounded-t bg-blue-500/70" style={{ height: `${Math.max(4, (d.count / maxDay) * 80)}px` }} />
+                <div className="w-full rounded-t bg-[#eef4fa]0/70" style={{ height: `${Math.max(4, (d.count / maxDay) * 80)}px` }} />
                 <span className="text-[9px] text-slate-500 font-mono">{d.day.slice(5)}</span>
               </div>
             ))}
@@ -145,7 +145,7 @@ export const RegistrationsManager: React.FC<{ notify: (t: 'success' | 'error', m
             value={q}
             onChange={e => setQ(e.target.value)}
             placeholder="Search name, email, institution, ref, committee…"
-            className="w-full bg-slate-900 border border-slate-700 rounded pl-9 pr-3 py-2 text-xs text-white outline-none focus:border-amber-400"
+            className="w-full bg-slate-900 border border-slate-700 rounded pl-9 pr-3 py-2 text-xs text-white outline-none focus:border-[#f4a024]"
           />
         </div>
         <select
@@ -161,7 +161,7 @@ export const RegistrationsManager: React.FC<{ notify: (t: 'success' | 'error', m
         </select>
         <button
           onClick={() => { download(`timun-registrations-${new Date().toISOString().slice(0,10)}.csv`, toCsv(filtered)); notify('success', `Exported ${filtered.length} registrations to CSV.`); }}
-          className="px-4 py-2 bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold uppercase tracking-wider rounded flex items-center gap-2 cursor-pointer"
+          className="px-4 py-2 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 text-xs font-bold uppercase tracking-wider rounded flex items-center gap-2 cursor-pointer"
         >
           <Download className="w-4 h-4" />
           <span>Export CSV</span>
@@ -186,8 +186,8 @@ export const RegistrationsManager: React.FC<{ notify: (t: 'success' | 'error', m
             </div>
             <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 ${
               r.paymentStatus === 'paid' ? 'bg-emerald-900/60 text-emerald-300 border border-emerald-700'
-              : r.paymentStatus === 'pending' ? 'bg-amber-900/40 text-amber-300 border border-amber-700'
-              : r.paymentStatus === 'waived' ? 'bg-blue-900/50 text-blue-300 border border-blue-700'
+              : r.paymentStatus === 'pending' ? 'bg-[#5f3a00]/40 text-[#f7b955] border border-[#8a5200]'
+              : r.paymentStatus === 'waived' ? 'bg-[#00387d]/50 text-[#8fb0d8] border border-blue-700'
               : 'bg-rose-900/50 text-rose-300 border border-rose-700'
             }`}>
               {r.paymentStatus === 'paid' ? <CheckCircle2 className="w-3 h-3" /> : r.paymentStatus === 'pending' ? <Clock className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}

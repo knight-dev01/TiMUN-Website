@@ -18,7 +18,7 @@ export const SEO: React.FC = () => {
         name: `${conferenceInfo.acronym || 'TiMUN 2027'} — ${conferenceInfo.title || ''}`,
         startDate: '2027-11-12',
         endDate: '2027-11-14',
-        locationName: conferenceInfo.location || 'Trinity University Campus',
+        locationName: conferenceInfo.location || 'Trinity University, Yaba, Lagos',
         description: conferenceInfo.theme || '',
       })
     );

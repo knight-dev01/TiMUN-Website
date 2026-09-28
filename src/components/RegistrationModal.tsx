@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from 'motion/react';
 import { X, CheckCircle, ShieldCheck, ChevronRight, ChevronLeft, User, Users, Award, Printer, CreditCard, Landmark, Loader2, AlertTriangle } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { fireConfetti } from './gallery/ConfettiBurst';
-import { awardXp } from '../lib/passport';
 import { RegistrationRecord, PaymentCurrency } from '../types';
 import {
   feeFor,
@@ -27,7 +26,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   initialCommittee = '',
   initialCountry = ''
 }) => {
-  const { committees, addRegistration } = useConferenceData();
+  const { committees, addRegistration, conferenceInfo } = useConferenceData();
   const reduceMotion = useReducedMotion();
 
   const [step, setStep] = useState<number>(1);
@@ -75,7 +74,12 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
   if (!isOpen) return null;
 
-  const fee = feeFor(formData.type, currency, Number(formData.delegationSize) || 5);
+  const fee = feeFor(formData.type, currency, Number(formData.delegationSize) || 5, {
+    feeIndividualUsd: conferenceInfo.feeIndividualUsd,
+    feeDelegationBaseUsd: conferenceInfo.feeDelegationBaseUsd,
+    feePerDelegateUsd: conferenceInfo.feePerDelegateUsd,
+    ngnPerUsd: conferenceInfo.ngnPerUsd,
+  });
   const paystackReady = isPaystackConfigured();
   const manual = manualPaymentDetails();
 
@@ -130,8 +134,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
       payment_status: status,
       payment_method: method,
     });
-    // Welcome to the hall — paper-bit celebration + passport XP
-    awardXp('registered');
+    // Welcome to the hall — paper-bit celebration
     fireConfetti(status === 'paid' ? 120 : 70);
   };
 
@@ -201,11 +204,11 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         {/* Header */}
         <div className="p-6 bg-slate-50 border-b border-slate-200 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-900 font-bold shadow-xs">
-              <ShieldCheck className="w-5 h-5 text-amber-700" />
+            <div className="w-10 h-10 rounded bg-[#fdeecd] border border-[#f7b955] flex items-center justify-center text-[#5f3a00] font-bold shadow-xs">
+              <ShieldCheck className="w-5 h-5 text-[#8a5200]" />
             </div>
             <div>
-              <h3 className="font-serif font-bold text-lg text-blue-900">
+              <h3 className="font-serif font-bold text-lg text-[#00387d]">
                 TiMUN 2027 Registration
               </h3>
               <p className="text-xs text-slate-600">
@@ -216,7 +219,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-2 rounded text-slate-500 hover:text-blue-900 bg-white border border-slate-200 cursor-pointer"
+            className="p-2 rounded text-slate-500 hover:text-[#00387d] bg-white border border-slate-200 cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -232,14 +235,14 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 <div key={st.s} className="flex items-center gap-2">
                   <div className={`w-7 h-7 rounded text-xs font-bold flex items-center justify-center transition-colors ${
                     step === st.s
-                      ? 'bg-blue-900 text-white shadow-xs'
+                      ? 'bg-[#00387d] text-white shadow-xs'
                       : step > st.s
-                      ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                      ? 'bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955]'
                       : 'bg-slate-100 text-slate-500 border border-slate-200'
                   }`}>
                     {step > st.s ? '✓' : st.s}
                   </div>
-                  <span className={`text-xs font-bold uppercase tracking-wider ${step === st.s ? 'text-blue-900' : 'text-slate-400'}`}>
+                  <span className={`text-xs font-bold uppercase tracking-wider ${step === st.s ? 'text-[#00387d]' : 'text-slate-400'}`}>
                     {st.label}
                   </span>
                 </div>
@@ -249,14 +252,14 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
             {/* STEP 1: Registration Type */}
             {step === 1 && (
               <div className="space-y-4 animate-fadeIn">
-                <label className="block text-xs font-bold text-blue-900 uppercase tracking-wider">
+                <label className="block text-xs font-bold text-[#00387d] uppercase tracking-wider">
                   Select Registration Type:
                 </label>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
-                    { id: 'individual', title: 'Individual Delegate', fee: '$65', desc: 'Student, NYSC corps member, or young professional representing a country/state.', icon: User },
-                    { id: 'delegation', title: 'Institutional Delegation', fee: '$110 Base + $55/del', desc: 'University, School, or Organization registering a group team.', icon: Users },
+                    { id: 'individual', title: 'Individual Delegate', fee: `$${conferenceInfo.feeIndividualUsd ?? 65}`, desc: 'Student, NYSC corps member, or young professional representing a country/state.', icon: User },
+                    { id: 'delegation', title: 'Institutional Delegation', fee: `$${conferenceInfo.feeDelegationBaseUsd ?? 110} Base + $${conferenceInfo.feePerDelegateUsd ?? 55}/del`, desc: 'University, School, or Organization registering a group team.', icon: Users },
                     { id: 'chair', title: 'Chair Staff Application', fee: 'Free (Honorarium)', desc: 'Apply to serve as Committee Director / Dais Member.', icon: Award }
                   ].map((option) => {
                     const Icon = option.icon;
@@ -267,15 +270,15 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                         onClick={() => setFormData(prev => ({ ...prev, type: option.id as any }))}
                         className={`p-4 rounded border cursor-pointer transition-all ${
                           selected
-                            ? 'bg-amber-50/80 border-blue-900 shadow-xs ring-1 ring-blue-900'
+                            ? 'bg-[#fef6e7]/80 border-[#00387d] shadow-xs ring-1 ring-[#00387d]'
                             : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                         }`}
                       >
                         <div className="flex justify-between items-center mb-2">
-                          <Icon className={`w-5 h-5 ${selected ? 'text-blue-900' : 'text-slate-500'}`} />
-                          <span className="text-xs font-extrabold text-amber-700">{option.fee}</span>
+                          <Icon className={`w-5 h-5 ${selected ? 'text-[#00387d]' : 'text-slate-500'}`} />
+                          <span className="text-xs font-extrabold text-[#8a5200]">{option.fee}</span>
                         </div>
-                        <div className="font-serif font-bold text-blue-900 text-sm">{option.title}</div>
+                        <div className="font-serif font-bold text-[#00387d] text-sm">{option.title}</div>
                         <div className="text-[11px] text-slate-600 mt-1 leading-relaxed">{option.desc}</div>
                       </div>
                     );
@@ -283,7 +286,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 </div>
 
                 <div className="p-4 bg-slate-50 rounded border border-slate-200 text-xs text-slate-600 space-y-1">
-                  <div className="font-bold text-blue-900 uppercase tracking-wider">Registration Package Includes:</div>
+                  <div className="font-bold text-[#00387d] uppercase tracking-wider">Registration Package Includes:</div>
                   <div>• Full access to 4 Committee sessions & Plenary</div>
                   <div>• Official TiMUN Handbook, Conference Folder & Credentials</div>
                   <div>• Practical Leadership Workshops & Rules of Procedure Masterclasses</div>
@@ -307,7 +310,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       placeholder="e.g. Eleanor Vance"
                       value={formData.fullName}
                       onChange={handleChange}
-                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                     />
                   </div>
 
@@ -322,7 +325,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       placeholder="delegate@university.edu"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                     />
                   </div>
 
@@ -337,7 +340,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       placeholder="+234 ..."
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                     />
                   </div>
 
@@ -352,7 +355,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       placeholder="e.g. Trinity University / St. Jude Academy"
                       value={formData.institution}
                       onChange={handleChange}
-                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                     />
                   </div>
                 </div>
@@ -369,7 +372,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       max={40}
                       value={formData.delegationSize}
                       onChange={handleChange}
-                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                     />
                   </div>
                 )}
@@ -382,7 +385,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     name="experienceLevel"
                     value={formData.experienceLevel}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   >
                     <option value="Novice (0-2 MUNs)">Novice (0-2 MUNs)</option>
                     <option value="Experienced (3-6 MUNs)">Experienced (3-6 MUNs)</option>
@@ -404,7 +407,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       name="firstChoiceCommittee"
                       value={formData.firstChoiceCommittee}
                       onChange={handleChange}
-                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                     >
                       {committees.map(c => (
                         <option key={c.id} value={c.acronym}>
@@ -422,7 +425,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       name="secondChoiceCommittee"
                       value={formData.secondChoiceCommittee}
                       onChange={handleChange}
-                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                      className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                     >
                       {committees.map(c => (
                         <option key={c.id} value={c.acronym}>
@@ -443,7 +446,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     placeholder="List top 3 country preferences"
                     value={formData.preferredCountries}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   />
                 </div>
 
@@ -457,7 +460,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     placeholder="e.g. Vegetarian, Halal, Gluten-free, Wheelchair access"
                     value={formData.dietaryRequirements}
                     onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-2 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   />
                 </div>
 
@@ -468,7 +471,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     name="positionPaperAgree"
                     checked={formData.positionPaperAgree}
                     onChange={handleChange}
-                    className="rounded text-blue-900 focus:ring-blue-900 bg-slate-50 border-slate-300"
+                    className="rounded text-[#00387d] focus:ring-[#00387d] bg-slate-50 border-slate-300"
                   />
                   <label htmlFor="positionPaperAgree" className="text-xs text-slate-600">
                     I agree to submit my 2-page Position Paper by October 31, 2026 to be eligible for conference awards.
@@ -480,17 +483,17 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
             {/* STEP 4: Payment */}
             {step === 4 && (
               <div className="space-y-4 animate-fadeIn">
-                <div className="p-4 bg-amber-50 rounded border border-amber-300">
+                <div className="p-4 bg-[#fef6e7] rounded border border-[#f7b955]">
                   <div className="flex flex-wrap justify-between items-center gap-3">
                     <div>
-                      <div className="font-bold text-blue-900">Total due:</div>
+                      <div className="font-bold text-[#00387d]">Total due:</div>
                       <div className="text-xs text-slate-600">
                         {formData.type === 'chair'
                           ? 'Chair staff application — no payment required.'
                           : `${formData.type === 'delegation' ? `Delegation of ${formData.delegationSize}` : 'Individual delegate'} • ≈ $${fee.usd} USD`}
                       </div>
                     </div>
-                    <div className="text-2xl font-extrabold text-amber-900">
+                    <div className="text-2xl font-extrabold text-[#5f3a00]">
                       {formData.type === 'chair' ? '$0' : formatMoney(fee.amount, currency)}
                     </div>
                   </div>
@@ -503,8 +506,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                           onClick={() => setCurrency(c)}
                           className={`px-4 py-1.5 rounded text-xs font-bold uppercase tracking-wider border cursor-pointer ${
                             currency === c
-                              ? 'bg-blue-900 text-white border-blue-900'
-                              : 'bg-white text-slate-600 border-slate-300 hover:border-blue-900'
+                              ? 'bg-[#00387d] text-white border-[#00387d]'
+                              : 'bg-white text-slate-600 border-slate-300 hover:border-[#00387d]'
                           }`}
                         >
                           Pay in {c === 'NGN' ? '₦ Naira' : '$ Dollar'}
@@ -525,7 +528,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                   <button
                     type="button"
                     onClick={() => finalize('waived', 'none')}
-                    className="w-full px-6 py-3 rounded text-xs font-bold uppercase tracking-widest text-white bg-blue-900 hover:bg-blue-800 cursor-pointer"
+                    className="w-full px-6 py-3 rounded text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] cursor-pointer"
                   >
                     Submit Chair Application (Free)
                   </button>
@@ -553,7 +556,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     )}
 
                     <div className="p-4 bg-slate-50 rounded border border-slate-200 text-xs space-y-1.5">
-                      <div className="font-bold text-blue-900 uppercase tracking-wider flex items-center gap-1.5">
+                      <div className="font-bold text-[#00387d] uppercase tracking-wider flex items-center gap-1.5">
                         <Landmark className="w-4 h-4" />
                         <span>Or pay by bank transfer</span>
                       </div>
@@ -563,7 +566,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       <button
                         type="button"
                         onClick={handleManual}
-                        className="mt-2 px-4 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-white border border-slate-300 hover:border-blue-900 cursor-pointer"
+                        className="mt-2 px-4 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-white border border-slate-300 hover:border-[#00387d] cursor-pointer"
                       >
                         I've transferred / will pay on arrival — save as pending
                       </button>
@@ -589,10 +592,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-blue-900 hover:bg-blue-800 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+                  className="px-6 py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
                 >
                   <span>{step === 3 ? 'Continue to Payment' : 'Next Step'}</span>
-                  <ChevronRight className="w-4 h-4 text-amber-400" />
+                  <ChevronRight className="w-4 h-4 text-[#f4a024]" />
                 </button>
               </div>
             )}
@@ -619,14 +622,14 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
             </div>
 
             <div>
-              <span className="px-3 py-1 rounded bg-amber-100 border border-amber-300 text-amber-900 text-xs font-mono font-bold">
+              <span className="px-3 py-1 rounded bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-xs font-mono font-bold">
                 REGISTRATION REF: {registrationId}
               </span>
-              <h3 className="font-serif font-bold text-2xl text-blue-900 mt-3">
+              <h3 className="font-serif font-bold text-2xl text-[#00387d] mt-3">
                 Registration Confirmed!
               </h3>
               <p className="text-slate-600 text-sm mt-1 max-w-md mx-auto leading-relaxed">
-                Thank you, <strong className="text-slate-900">{formData.fullName}</strong>. Your {formData.type} application for <strong className="text-blue-900">{formData.institution}</strong> has been saved.
+                Thank you, <strong className="text-slate-900">{formData.fullName}</strong>. Your {formData.type} application for <strong className="text-[#00387d]">{formData.institution}</strong> has been saved.
               </p>
               <p className="mt-2 inline-block px-3 py-1 rounded text-xs font-bold uppercase tracking-wider border bg-slate-50 border-slate-200 text-slate-700">
                 Payment: {savedPaymentStatus} • {savedAmount}
@@ -649,7 +652,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               </div>
               <div className="flex justify-between border-b border-slate-200 pb-2">
                 <span className="text-slate-500">Primary Committee Choice:</span>
-                <span className="text-blue-900 font-bold">{formData.firstChoiceCommittee}</span>
+                <span className="text-[#00387d] font-bold">{formData.firstChoiceCommittee}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-slate-500">Country Preference:</span>
@@ -662,13 +665,13 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 onClick={handlePrint}
                 className="px-4 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-100 border border-slate-200 hover:bg-slate-200 flex items-center gap-1.5 cursor-pointer"
               >
-                <Printer className="w-4 h-4 text-blue-900" />
+                <Printer className="w-4 h-4 text-[#00387d]" />
                 <span>Print Confirmation Ticket</span>
               </button>
 
               <button
                 onClick={onClose}
-                className="px-5 py-2 rounded text-xs font-bold uppercase tracking-wider text-white bg-blue-900 hover:bg-blue-800 cursor-pointer shadow-xs"
+                className="px-5 py-2 rounded text-xs font-bold uppercase tracking-wider text-white bg-[#00387d] hover:bg-[#294a70] cursor-pointer shadow-xs"
               >
                 Done
               </button>

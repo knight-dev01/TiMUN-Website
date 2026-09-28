@@ -5,7 +5,7 @@
  * under prefers-reduced-motion.
  */
 
-const COLORS = ['#08307F', '#F59E0B', '#0BE149', '#FFFDF7', '#FBBF24'];
+const COLORS = ['#00387d', '#dd0000', '#f4a024', '#54b77e', '#ffffff'];
 
 interface Bit {
   x: number;

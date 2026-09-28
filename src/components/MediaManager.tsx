@@ -63,13 +63,13 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
     URL.revokeObjectURL(url);
   };
 
-  const inputCls = 'w-full bg-slate-900 border border-slate-700 rounded p-2 text-xs text-white focus:border-amber-400 outline-none';
+  const inputCls = 'w-full bg-slate-900 border border-slate-700 rounded p-2 text-xs text-white focus:border-[#f4a024] outline-none';
 
   return (
     <div className="space-y-8">
       {/* Publish form */}
       <form onSubmit={handleAdd} className="bg-slate-800/60 p-4 rounded-lg border border-slate-700 space-y-3">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-2">
+        <h4 className="text-xs font-bold uppercase tracking-wider text-[#f7b955] flex items-center gap-2">
           <Plus className="w-4 h-4" />
           <span>Publish: article / update / video / photos</span>
         </h4>
@@ -98,7 +98,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
           <input type="checkbox" checked={form.featured} onChange={e => set('featured', e.target.checked)} className="rounded" />
           <span>Feature this story at the top of Insights & Media</span>
         </label>
-        <button type="submit" className="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider rounded cursor-pointer">
+        <button type="submit" className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 font-bold text-xs uppercase tracking-wider rounded cursor-pointer">
           Publish story
         </button>
       </form>
@@ -115,7 +115,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
             <button
               onClick={() => { updateMediaPost(p.id, { featured: !p.featured }); notify('success', p.featured ? 'Unfeatured.' : 'Set as featured story.'); }}
               title="Toggle featured"
-              className={`p-2 rounded cursor-pointer ${p.featured ? 'text-amber-300 bg-amber-400/10' : 'text-slate-500 hover:text-amber-300'}`}
+              className={`p-2 rounded cursor-pointer ${p.featured ? 'text-[#f7b955] bg-[#f4a024]/10' : 'text-slate-500 hover:text-[#f7b955]'}`}
             >
               <Star className="w-4 h-4" fill={p.featured ? 'currentColor' : 'none'} />
             </button>
@@ -132,7 +132,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
       {/* Newsletter subscribers */}
       <div className="bg-slate-800/60 p-4 rounded-lg border border-slate-700 space-y-3">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-amber-300 flex items-center gap-2">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#f7b955] flex items-center gap-2">
             <Mail className="w-4 h-4" />
             <span>Bulletin subscribers ({subscribers.length})</span>
           </h4>
@@ -140,7 +140,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
             <button onClick={() => { refreshSubscribers(); notify('success', 'Subscriber list refreshed.'); }} className="px-3 py-1.5 rounded bg-slate-700 hover:bg-slate-600 text-xs font-bold cursor-pointer">
               Refresh
             </button>
-            <button onClick={downloadSubs} className="px-3 py-1.5 rounded bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+            <button onClick={downloadSubs} className="px-3 py-1.5 rounded bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
               <Download className="w-3.5 h-3.5" />
               <span>Export CSV</span>
             </button>
@@ -154,7 +154,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
               <div key={s.id} className="flex items-center justify-between text-xs bg-slate-900/60 rounded px-3 py-1.5">
                 <span className="text-slate-200">{s.email}{s.name ? ` • ${s.name}` : ''}</span>
                 <span className="flex items-center gap-2">
-                  <span className={`text-[10px] font-bold uppercase ${s.synced ? 'text-emerald-400' : 'text-amber-400'}`}>
+                  <span className={`text-[10px] font-bold uppercase ${s.synced ? 'text-emerald-400' : 'text-[#f4a024]'}`}>
                     {s.synced ? 'synced' : 'local'}
                   </span>
                   <button onClick={() => { removeSubscriber(s.id); notify('success', 'Subscriber removed.'); }} className="text-rose-400 hover:text-rose-300 cursor-pointer">

@@ -19,6 +19,35 @@ export const NGN_PER_USD: number = (() => {
   return Number.isFinite(n) && n > 0 ? n : 1500;
 })();
 
+/** Admin-editable fee config (see ConferenceInfoType — portal "Venue & Fees"). */
+export interface FeeConfig {
+  feeIndividualUsd: number;
+  feeDelegationBaseUsd: number;
+  feePerDelegateUsd: number;
+  ngnPerUsd: number;
+}
+
+export const DEFAULT_FEES: FeeConfig = {
+  feeIndividualUsd: 65,
+  feeDelegationBaseUsd: 110,
+  feePerDelegateUsd: 55,
+  ngnPerUsd: NGN_PER_USD,
+};
+
+function num(v: unknown, fallback: number): number {
+  const n = Number(v);
+  return Number.isFinite(n) && n >= 0 ? n : fallback;
+}
+
+export function resolveFees(partial?: Partial<FeeConfig>): FeeConfig {
+  return {
+    feeIndividualUsd: num(partial?.feeIndividualUsd, DEFAULT_FEES.feeIndividualUsd),
+    feeDelegationBaseUsd: num(partial?.feeDelegationBaseUsd, DEFAULT_FEES.feeDelegationBaseUsd),
+    feePerDelegateUsd: num(partial?.feePerDelegateUsd, DEFAULT_FEES.feePerDelegateUsd),
+    ngnPerUsd: num(partial?.ngnPerUsd, DEFAULT_FEES.ngnPerUsd),
+  };
+}
+
 export function paystackPublicKey(): string {
   return (import.meta as any)?.env?.VITE_PAYSTACK_PUBLIC_KEY || '';
 }
@@ -27,26 +56,31 @@ export function isPaystackConfigured(): boolean {
   return paystackPublicKey().startsWith('pk_');
 }
 
-/** Base fees in USD. */
-export function feeUsd(type: RegistrationType, delegationSize = 5): number {
-  if (type === 'individual') return 65;
-  if (type === 'delegation') return 110 + Math.max(2, delegationSize) * 55;
+/** Base fees in USD (admin-configurable via FeeConfig). */
+export function feeUsd(type: RegistrationType, delegationSize = 5, cfg?: Partial<FeeConfig>): number {
+  const fees = resolveFees(cfg);
+  if (type === 'individual') return fees.feeIndividualUsd;
+  if (type === 'delegation') {
+    return fees.feeDelegationBaseUsd + Math.max(2, delegationSize) * fees.feePerDelegateUsd;
+  }
   return 0; // chair — free / honorarium
 }
 
-export function convertUsdToNgn(usd: number): number {
+export function convertUsdToNgn(usd: number, ngnPerUsd = NGN_PER_USD): number {
   // Round to nearest 100 NGN for clean bank-transfer figures.
-  return Math.round((usd * NGN_PER_USD) / 100) * 100;
+  return Math.round((usd * ngnPerUsd) / 100) * 100;
 }
 
 export function feeFor(
   type: RegistrationType,
   currency: PaymentCurrency,
-  delegationSize = 5
+  delegationSize = 5,
+  cfg?: Partial<FeeConfig>
 ): { amount: number; currency: PaymentCurrency; usd: number } {
-  const usd = feeUsd(type, delegationSize);
+  const fees = resolveFees(cfg);
+  const usd = feeUsd(type, delegationSize, fees);
   if (currency === 'USD') return { amount: usd, currency, usd };
-  return { amount: convertUsdToNgn(usd), currency, usd };
+  return { amount: convertUsdToNgn(usd, fees.ngnPerUsd), currency, usd };
 }
 
 export function formatMoney(amount: number, currency: PaymentCurrency): string {

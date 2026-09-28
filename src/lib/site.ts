@@ -28,7 +28,7 @@ export const SITE_KEYWORDS = [
   'resolution writing',
 ].join(', ');
 
-export const SITE_THEME_COLOR = '#0a1a3c';
+export const SITE_THEME_COLOR = '#00387d';
 export const SITE_LOCALE = 'en_US';
 export const SITE_TWITTER_HANDLE = '@timun_org';
 

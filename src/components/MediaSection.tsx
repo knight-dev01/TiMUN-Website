@@ -5,7 +5,6 @@ import { useConferenceData } from '../context/ConferenceContext';
 import { MediaKind, MediaPost } from '../types';
 import { SafeImage } from './SafeImage';
 import { trackEvent } from '../lib/analytics';
-import { awardXp } from '../lib/passport';
 
 /** Convert a YouTube watch/share URL to a privacy-friendly nocookie embed. */
 export function toYouTubeEmbed(url: string): string {
@@ -26,8 +25,8 @@ const KIND_META: Record<MediaKind, { label: string; icon: any }> = {
 function KindBadge({ kind }: { kind: MediaKind }) {
   const Icon = KIND_META[kind].icon;
   return (
-    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-900 text-white text-[10px] font-bold uppercase tracking-widest">
-      <Icon className="w-3 h-3 text-amber-400" />
+    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00387d] text-white text-[10px] font-bold uppercase tracking-widest">
+      <Icon className="w-3 h-3 text-[#f4a024]" />
       <span>{KIND_META[kind].label}</span>
     </span>
   );
@@ -48,7 +47,6 @@ export const MediaSection: React.FC = () => {
   const open = (post: MediaPost) => {
     setOpenPost(post);
     trackEvent('media_post_opened', { kind: post.kind, id: post.id });
-    awardXp('story_read');
   };
 
   const filters: { id: 'all' | MediaKind; label: string }[] = [
@@ -63,7 +61,7 @@ export const MediaSection: React.FC = () => {
     <section id="media" className="py-20 bg-white text-slate-900 border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mb-10">
-          <div className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#8a5200] mb-2">
             Insights & Media
           </div>
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight">

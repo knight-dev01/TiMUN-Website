@@ -1,13 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500;600;700;800&family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 @import "tailwindcss";
 
+/* ---- TiMUN × TU Yaba × Duo design tokens ---- */
 @theme {
-  --font-sans: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-display: 'Lora', Georgia, serif;
-  --color-paper: #FFFDF7;
-  --color-navy: #08307F;
-  --color-navy-deep: #041D50;
-  --color-podium: #0BE149;
+  --font-sans: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Roboto Slab', Georgia, serif;
+  --color-tu-navy: #00387d;
+  --color-tu-navy-deep: #15305b;
+  --color-tu-steel: #294a70;
+  --color-tu-red: #dd0000;
+  --color-tu-red-dark: #a80e0e;
+  --color-tu-gold: #f4a024;
+  --color-tu-gold-dark: #b56a00;
+  --color-tu-green: #54b77e;
+  --color-tu-green-dark: #35794f;
+  --color-tu-paper: #FFFDF7;
+  --color-tu-ink: #4b4b4b;
+  --color-tu-muted: #777777;
+  --color-tu-faint: #afafaf;
 }
 
 @layer base {
@@ -16,15 +26,16 @@
   }
 
   body {
-    font-family: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    background-color: #FFFDF7;
-    color: #0f172a;
+    font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background-color: #ffffff;
+    color: #4b4b4b;
     -webkit-font-smoothing: antialiased;
   }
 
   h1, h2, h3, .font-serif {
-    font-family: 'Lora', Georgia, serif;
-    letter-spacing: -0.01em;
+    font-family: 'Roboto Slab', Georgia, serif;
+    color: #00387d;
+    letter-spacing: 0;
   }
 
   img {
@@ -32,41 +43,42 @@
   }
 }
 
-/* ---- Soft organic UI (gallery + landing) ---- */
+/* ---- Duo display + hand-note (storybook voice) ---- */
 .vx-display {
-  font-family: 'Lora', Georgia, serif;
-  letter-spacing: -0.01em;
+  font-family: 'Roboto Slab', Georgia, serif;
 }
 
-.vx-soft {
-  border-radius: 26px 30px 26px 32px / 30px 26px 32px 26px;
-}
-
-.vx-soft-btn {
-  border-radius: 18px 22px 18px 24px / 22px 18px 24px 18px;
+.vx-hand-note {
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-style: italic;
 }
 
 .vx-paper {
   background-color: #FFFDF7;
 }
 
-.vx-hand-note {
-  font-family: 'Lora', Georgia, serif;
-  font-style: italic;
-}
-
-/* Duo-psychology tactile button: chunky, presses like a real key. */
+/* ---- ONE button system for the whole site ----
+   Chunky 3D-press keys. Same radius, same press, every variant. */
 .duo-btn {
-  border-radius: 14px 16px 14px 18px / 16px 14px 18px 14px;
-  background: #F59E0B;
-  color: #041D50;
-  border: 2px solid #B45309;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 12px;
+  padding: 0.8rem 1.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 2px solid transparent;
   border-bottom-width: 5px;
+  cursor: pointer;
   transition: transform 0.06s ease, border-bottom-width 0.06s ease, filter 0.15s ease;
+  user-select: none;
 }
 
 .duo-btn:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.06);
 }
 
 .duo-btn:active {
@@ -74,12 +86,90 @@
   border-bottom-width: 2px;
 }
 
-.duo-btn-navy {
-  background: #08307F;
-  color: #fff;
-  border-color: #041D50;
+.duo-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: grayscale(0.4);
 }
 
+.duo-btn-red {
+  background: #dd0000;
+  color: #fff;
+  border-color: #a80e0e;
+}
+
+.duo-btn-navy {
+  background: #00387d;
+  color: #fff;
+  border-color: #15305b;
+}
+
+.duo-btn-green {
+  background: #54b77e;
+  color: #fff;
+  border-color: #35794f;
+}
+
+.duo-btn-gold {
+  background: #f4a024;
+  color: #15305b;
+  border-color: #b56a00;
+}
+
+.duo-btn-ghost {
+  background: #fff;
+  color: #00387d;
+  border-color: #afafaf;
+}
+
+/* ---- ONE card / chip / input system ---- */
+.duo-card {
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 20px;
+}
+
+.duo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  border: 2px solid #e5e7eb;
+  background: #fff;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.duo-input {
+  width: 100%;
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+  color: #4b4b4b;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.duo-input:focus {
+  border-color: #00387d;
+}
+
+.duo-input::placeholder {
+  color: #afafaf;
+}
+
+.duo-section-title {
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-weight: 700;
+  color: #00387d;
+}
+
+/* Tape corner (notice-board warmth, used sparingly) */
 .vx-tape {
   position: relative;
 }
@@ -92,9 +182,9 @@
   transform: translateX(-50%) rotate(-3deg);
   width: 84px;
   height: 22px;
-  background: rgba(11, 225, 73, 0.18);
-  border-left: 1px dashed rgba(4, 29, 80, 0.25);
-  border-right: 1px dashed rgba(4, 29, 80, 0.25);
+  background: rgba(244, 160, 36, 0.25);
+  border-left: 1px dashed rgba(0, 56, 125, 0.3);
+  border-right: 1px dashed rgba(0, 56, 125, 0.3);
 }
 
 @keyframes fadeIn {
@@ -115,24 +205,6 @@
   animation: podium-sweep 5s ease-in-out infinite;
 }
 
-/* Gallery stage helpers (GPU props only) */
-.hall-perspective {
-  perspective: 1200px;
-}
-
-.hall-ellipse {
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 50%;
-  transform: rotateX(72deg);
-}
-
-.podium-cone {
-  background: linear-gradient(to top, rgba(11, 225, 73, 0.28), rgba(11, 225, 73, 0));
-  mix-blend-mode: screen;
-  filter: blur(6px);
-  clip-path: polygon(38% 100%, 62% 100%, 100% 0, 0 0);
-}
-
 @keyframes hall-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -146,25 +218,6 @@
   animation-play-state: paused;
 }
 
-@keyframes aurora-drift {
-  0%, 100% { transform: translate3d(-4%, -2%, 0) scale(1); }
-  50% { transform: translate3d(4%, 3%, 0) scale(1.08); }
-}
-
-.aurora-blob {
-  animation: aurora-drift 14s ease-in-out infinite;
-  will-change: transform;
-}
-
-@keyframes warm-flicker {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 0.9; }
-}
-
-.warm-flicker {
-  animation: warm-flicker 5s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -172,14 +225,11 @@
 
   .animate-fadeIn,
   .podium-sweep,
-  .hall-marquee-track,
-  .aurora-blob,
-  .warm-flicker {
+  .hall-marquee-track {
     animation: none;
   }
 
-  .hall-ellipse,
-  .podium-cone {
+  .duo-btn:active {
     transform: none;
   }
 }

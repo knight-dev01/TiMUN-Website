@@ -1,15 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { motion } from 'motion/react';
-import { Check, Flame, Star, Lock } from 'lucide-react';
-import {
-  Passport,
-  awardXp,
-  nextRankFor,
-  rankFor,
-  readPassport,
-  touchVisit,
-} from '../lib/passport';
+import React, { useEffect, useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
+import { Check } from 'lucide-react';
 import { HandArrow } from './gallery/HumanMarks';
+import { Watermark } from './gallery/Watermark';
 
 interface JourneySectionProps {
   onOpenRegister: () => void;
@@ -17,235 +10,166 @@ interface JourneySectionProps {
   onExploreCommittees: () => void;
 }
 
-interface Node {
-  key: string;
-  title: string;
-  hint: string;
-  xp: number;
-  action: () => void;
-  cta: string;
-}
+const DONE_KEY = 'timun_journey_done_v1';
 
-const NODES: Node[] = [
-  {
-    key: 'registered',
-    title: 'Take your seat',
-    hint: 'Register as delegate, delegation or chair staff',
-    xp: 100,
-    action: () => {},
-    cta: 'Register',
-  },
-  {
-    key: 'committees_explored',
-    title: 'Meet your council',
-    hint: 'Tour the 8 committees and pick your arena',
-    xp: 10,
-    action: () => {},
-    cta: 'Explore',
-  },
-  {
-    key: 'toolkit_opened',
-    title: 'Learn the rules',
-    hint: 'Master motions, points and position papers',
-    xp: 10,
-    action: () => {},
-    cta: 'Open toolkit',
-  },
-  {
-    key: 'resolution_opened',
-    title: 'Draft a resolution',
-    hint: 'Write clauses at the resolution desk',
-    xp: 20,
-    action: () => {},
-    cta: 'Draft',
-  },
-  {
-    key: 'subscribed',
-    title: 'Get the bulletin',
-    hint: 'Study guides and country alerts by email',
-    xp: 15,
-    action: () => {},
-    cta: 'Subscribe',
-  },
-  {
-    key: 'arrival',
-    title: 'Walk in on Nov 12',
-    hint: 'Accreditation opens at Laurie Auditorium',
-    xp: 0,
-    action: () => {},
-    cta: 'Locked',
-  },
-];
+function readDone(): Record<string, boolean> {
+  try {
+    return JSON.parse(localStorage.getItem(DONE_KEY) || '{}');
+  } catch {
+    return {};
+  }
+}
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 }
 
 /**
- * Road to the Gavel — Duolingo-style winding path, TiMUN voice.
- * One node at a time, XP for every step, streak for coming back.
+ * Road to the Gavel — static six-step guide path. No XP, no streaks:
+ * just the clear order of business, Duo-path style, TiMUN voice.
  */
 export const JourneySection: React.FC<JourneySectionProps> = ({
   onOpenRegister,
   onOpenResolutionBuilder,
   onExploreCommittees,
 }) => {
-  const [passport, setPassport] = useState<Passport>(() => touchVisit());
-
-  const refresh = useCallback(() => setPassport(readPassport()), []);
+  const reduceMotion = useReducedMotion();
+  const [done, setDone] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    refresh();
-    window.addEventListener('timun:xp', refresh);
+    setDone(readDone());
+    const refresh = () => setDone(readDone());
     window.addEventListener('focus', refresh);
-    return () => {
-      window.removeEventListener('timun:xp', refresh);
-      window.removeEventListener('focus', refresh);
-    };
-  }, [refresh]);
+    return () => window.removeEventListener('focus', refresh);
+  }, []);
 
-  const bound: Node[] = [
-    { ...NODES[0], action: onOpenRegister },
+  const complete = (key: string) => {
+    const next = { ...readDone(), [key]: true };
+    try {
+      localStorage.setItem(DONE_KEY, JSON.stringify(next));
+    } catch {
+      /* ignore */
+    }
+    setDone(next);
+  };
+
+  const steps = [
     {
-      ...NODES[1],
+      key: 'registered',
+      title: 'Take your seat',
+      hint: 'Register as delegate, delegation or chair staff',
+      cta: 'Register',
+      action: onOpenRegister,
+    },
+    {
+      key: 'committees_explored',
+      title: 'Meet your council',
+      hint: 'Tour the 8 committees and pick your arena',
+      cta: 'Explore',
       action: () => {
-        awardXp('committees_explored');
+        complete('committees_explored');
         onExploreCommittees();
       },
     },
     {
-      ...NODES[2],
+      key: 'toolkit_opened',
+      title: 'Learn the rules',
+      hint: 'Master motions, points and position papers',
+      cta: 'Open toolkit',
       action: () => {
-        awardXp('toolkit_opened');
+        complete('toolkit_opened');
         scrollTo('toolkit');
       },
     },
-    { ...NODES[3], action: onOpenResolutionBuilder },
     {
-      ...NODES[4],
+      key: 'resolution_opened',
+      title: 'Draft a resolution',
+      hint: 'Write clauses at the resolution desk',
+      cta: 'Draft',
       action: () => {
-        awardXp('subscribed');
+        complete('resolution_opened');
+        onOpenResolutionBuilder();
+      },
+    },
+    {
+      key: 'subscribed',
+      title: 'Get the bulletin',
+      hint: 'Study guides and country alerts by email',
+      cta: 'Subscribe',
+      action: () => {
+        complete('subscribed');
         scrollTo('bulletin');
       },
     },
-    { ...NODES[5], action: () => scrollTo('venue') },
+    {
+      key: 'arrival',
+      title: 'Walk in on Nov 12',
+      hint: 'Accreditation opens in Yaba, Lagos',
+      cta: '',
+      action: () => scrollTo('venue'),
+    },
   ];
 
-  const firstOpen = bound.findIndex(n => !passport.done[n.key] && n.key !== 'arrival');
-  const next = nextRankFor(passport.xp);
-  const progress = next
-    ? Math.min(100, Math.round((passport.xp / (passport.xp + next.need)) * 100))
-    : 100;
+  const firstOpen = steps.findIndex(s => !done[s.key] && s.key !== 'arrival');
 
   return (
-    <section id="journey" className="py-20 vx-paper text-slate-900 border-b border-amber-100">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-4">
-          <div className="text-xs font-bold uppercase tracking-widest text-amber-700 mb-2">
+    <section id="journey" className="relative bg-white py-20 overflow-hidden">
+      <Watermark side="left" />
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="text-[15px] font-bold uppercase tracking-widest text-[#dd0000]">
             Your road to the gavel
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+          </p>
+          <h2 className="duo-section-title text-4xl sm:text-5xl mt-2">
             Six small steps. One big hall.
           </h2>
-          <p className="text-slate-500 mt-3 text-sm sm:text-base">
-            Do them in any order — every step earns XP and brings the opening
-            gavel closer.
+          <p className="text-[#777777] text-[17px] mt-3">
+            Do them in any order — each one brings the opening gavel closer.
           </p>
         </div>
 
-        {/* Passport strip: rank, XP bar, streak */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#041D50] text-white text-xs font-bold">
-            <Star className="w-3.5 h-3.5 text-amber-400" />
-            {rankFor(passport.xp)} · {passport.xp} XP
-          </span>
-          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-amber-200 text-xs font-bold text-slate-700">
-            <Flame className={`w-3.5 h-3.5 ${passport.streakDays > 1 ? 'text-orange-500' : 'text-slate-300'}`} />
-            {passport.streakDays > 0 ? `${passport.streakDays}-day streak` : 'Start your streak today'}
-          </span>
-          {next && (
-            <span className="text-xs text-slate-500">
-              {next.need} XP to {next.title}
-            </span>
-          )}
-        </div>
-        <div className="h-2 rounded-full bg-amber-100 overflow-hidden mb-12 max-w-xl mx-auto">
-          <motion.div
-            className="h-full rounded-full bg-gradient-to-r from-amber-400 to-[#0BE149]"
-            initial={false}
-            animate={{ width: `${progress}%` }}
-            transition={{ type: 'spring', stiffness: 90, damping: 20 }}
-          />
-        </div>
-
-        {/* Winding path */}
         <ol className="relative">
-          {/* Dashed spine */}
           <span
             aria-hidden="true"
-            className="absolute left-[27px] sm:left-1/2 top-2 bottom-2 w-0 sm:-translate-x-1/2 border-l-2 border-dashed border-[#08307F]/25"
+            className="absolute left-[27px] sm:left-1/2 top-2 bottom-2 w-0 sm:-translate-x-1/2 border-l-[3px] border-dashed border-[#00387d]/25"
           />
-          {bound.map((node, i) => {
-            const done = !!passport.done[node.key];
-            const locked = node.key === 'arrival';
+          {steps.map((step, i) => {
+            const isDone = !!done[step.key];
+            const locked = step.key === 'arrival';
             const isCurrent = i === firstOpen;
             const left = i % 2 === 0;
             return (
-              <li key={node.key} className="relative flex sm:justify-center gap-4 sm:gap-0 pb-8 last:pb-0">
-                {/* Node dot */}
-                <span className="relative z-10 ml-3 sm:ml-0 shrink-0">
-                  <motion.span
-                    initial={false}
-                    animate={isCurrent && !done ? { scale: [1, 1.12, 1] } : { scale: 1 }}
-                    transition={{ repeat: isCurrent && !done ? Infinity : 0, duration: 1.8 }}
-                    className={`flex w-12 h-12 rounded-full items-center justify-center border-[3px] font-bold ${
-                      done
-                        ? 'bg-[#0BE149] border-[#0BE149] text-[#041D50]'
-                        : locked
-                        ? 'bg-slate-100 border-slate-200 text-slate-400'
-                        : 'bg-white border-amber-400 text-slate-900 shadow-md'
-                    }`}
-                  >
-                    {done ? <Check className="w-5 h-5" /> : locked ? <Lock className="w-5 h-5" /> : <span>{i + 1}</span>}
-                  </motion.span>
-                </span>
-
-                {/* Card */}
-                <div
-                  className={`flex-1 sm:flex-none sm:w-[42%] bg-white rounded-2xl border p-4 sm:absolute sm:top-0 ${
-                    left ? 'sm:right-[54%]' : 'sm:left-[54%]'
-                  } ${
-                    done
-                      ? 'border-[#0BE149]/50'
-                      : isCurrent
-                      ? 'border-amber-400 shadow-lg'
-                      : 'border-slate-200'
-                  } ${i % 2 === 0 ? 'sm:rotate-[-0.5deg]' : 'sm:rotate-[0.5deg]'}`}
+              <li key={step.key} className="relative flex sm:justify-center gap-4 pb-8 last:pb-0">
+                <motion.span
+                  initial={false}
+                  animate={isCurrent && !isDone && !reduceMotion ? { scale: [1, 1.12, 1] } : { scale: 1 }}
+                  transition={{ repeat: isCurrent && !isDone ? Infinity : 0, duration: 1.8 }}
+                  className={`relative z-10 ml-3 sm:ml-0 shrink-0 flex w-14 h-14 rounded-full items-center justify-center border-[3px] font-bold text-lg ${
+                    isDone
+                      ? 'bg-[#54b77e] border-[#35794f] text-white'
+                      : locked
+                      ? 'bg-slate-100 border-slate-200 text-[#afafaf]'
+                      : 'bg-white border-[#f4a024] text-[#00387d]'
+                  }`}
                 >
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className="font-bold text-slate-900">{node.title}</h3>
-                    {node.xp > 0 && (
-                      <span
-                        className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-                          done ? 'bg-[#0BE149]/15 text-emerald-800' : 'bg-amber-100 text-amber-900'
-                        }`}
-                      >
-                        +{node.xp} XP
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-slate-500 mt-1">{node.hint}</p>
-                  {!done && !locked && (
-                    <button
-                      onClick={node.action}
-                      className="duo-btn mt-3 inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider cursor-pointer"
-                    >
-                      <span>{isCurrent ? 'Do this next' : node.cta}</span>
+                  {isDone ? <Check className="w-6 h-6" /> : <span>{i + 1}</span>}
+                </motion.span>
+
+                <div
+                  className={`flex-1 sm:flex-none sm:w-[42%] duo-card p-5 sm:absolute sm:top-0 ${
+                    left ? 'sm:right-[54%]' : 'sm:left-[54%]'
+                  } ${isCurrent ? '!border-[#f4a024]' : ''}`}
+                >
+                  <h3 className="duo-section-title text-xl">{step.title}</h3>
+                  <p className="text-[15px] text-[#777777] mt-1">{step.hint}</p>
+                  {!isDone && !locked && (
+                    <button onClick={step.action} className="duo-btn duo-btn-gold mt-3 !py-2 !px-4">
+                      <span>{isCurrent ? 'Do this next' : step.cta}</span>
                       <HandArrow className="w-6 h-4" />
                     </button>
                   )}
-                  {done && (
-                    <p className="text-[11px] font-bold text-emerald-700 mt-2 uppercase tracking-wider">
+                  {isDone && (
+                    <p className="text-[13px] font-bold text-[#35794f] mt-2 uppercase tracking-wider">
                       Done — nicely played.
                     </p>
                   )}

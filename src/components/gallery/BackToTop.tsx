@@ -29,10 +29,10 @@ export const BackToTop: React.FC = () => {
           whileTap={{ scale: 0.92 }}
           onClick={() => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })}
           aria-label="Back to the entrance"
-          className="vx-soft-btn fixed bottom-5 right-5 z-40 flex items-center gap-2 bg-[#041D50] text-white pl-4 pr-3 py-3 shadow-2xl border border-white/20 cursor-pointer"
+          className="fixed bottom-5 right-5 z-40 flex items-center gap-2 bg-[#dd0000] text-white pl-4 pr-3 py-3 shadow-2xl border-2 border-[#a80e0e] rounded-xl cursor-pointer"
         >
           <span className="text-[11px] font-bold uppercase tracking-widest">Entrance</span>
-          <HandArrow className="w-7 h-4 -rotate-90 text-[#0BE149]" />
+          <HandArrow className="w-7 h-4 -rotate-90 text-[#f4a024]" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -19,12 +19,12 @@ export const SafeImage: React.FC<SafeImageProps> = ({
   if (failed || !rest.src) {
     return (
       <div
-        className={`flex items-center justify-center bg-gradient-to-br from-blue-900 via-blue-950 to-slate-900 text-center p-6 ${className}`}
+        className={`flex items-center justify-center bg-gradient-to-br from-[#00387d] via-[#15305b] to-slate-900 text-center p-6 ${className}`}
         role="img"
         aria-label={alt || fallbackLabel}
       >
         <div>
-          <div className="font-serif italic font-bold text-amber-400 text-lg leading-snug">
+          <div className="font-serif italic font-bold text-[#f4a024] text-lg leading-snug">
             {fallbackLabel}
           </div>
           {alt ? (

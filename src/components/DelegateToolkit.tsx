@@ -16,16 +16,16 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
   );
 
   return (
-    <section id="toolkit" className="py-20 vx-paper text-slate-900 border-b border-amber-100 relative">
+    <section id="toolkit" className="py-20 vx-paper text-slate-900 border-b border-[#fdeecd] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-100 border border-amber-300 text-amber-900 text-[11px] font-bold uppercase tracking-widest mb-3">
-            <PenTool className="w-3.5 h-3.5 text-amber-700" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+            <PenTool className="w-3.5 h-3.5 text-[#8a5200]" />
             <span>Academic & Diplomatic Preparation</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-blue-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight">
             Delegate Preparation Toolkit
           </h2>
           <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">
@@ -40,8 +40,8 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
               onClick={() => setActiveTab('rop')}
               className={`px-4 sm:px-6 py-2.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === 'rop'
-                  ? 'bg-blue-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-blue-900'
+                  ? 'bg-[#00387d] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#00387d]'
               }`}
             >
               Parliamentary Rules (ROP)
@@ -50,8 +50,8 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
               onClick={() => setActiveTab('position')}
               className={`px-4 sm:px-6 py-2.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === 'position'
-                  ? 'bg-blue-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-blue-900'
+                  ? 'bg-[#00387d] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#00387d]'
               }`}
             >
               Position Paper Guidelines
@@ -60,8 +60,8 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
               onClick={() => setActiveTab('resolution')}
               className={`px-4 sm:px-6 py-2.5 rounded text-xs sm:text-sm font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === 'resolution'
-                  ? 'bg-blue-900 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-blue-900'
+                  ? 'bg-[#00387d] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-[#00387d]'
               }`}
             >
               Draft Resolution Helper
@@ -81,14 +81,14 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
                   placeholder="Filter motion or point..."
                   value={searchRop}
                   onChange={(e) => setSearchRop(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded pl-9 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-900"
+                  className="w-full bg-slate-50 border border-slate-300 rounded pl-9 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#00387d]"
                 />
               </div>
             </div>
 
             <div className="overflow-x-auto bg-white rounded border border-slate-200 shadow-sm">
               <table className="w-full text-left text-xs">
-                <thead className="bg-blue-900 text-white uppercase font-bold text-[11px] tracking-wider">
+                <thead className="bg-[#00387d] text-white uppercase font-bold text-[11px] tracking-wider">
                   <tr>
                     <th className="p-4">Motion / Point</th>
                     <th className="p-4">Purpose & Description</th>
@@ -98,7 +98,7 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
                 <tbody className="divide-y divide-slate-200 text-slate-700">
                   {filteredRop.map((item, idx) => (
                     <tr key={idx} className="hover:bg-slate-50 transition-colors">
-                      <td className="p-4 font-bold text-blue-900 font-serif text-sm">
+                      <td className="p-4 font-bold text-[#00387d] font-serif text-sm">
                         {item.motion}
                       </td>
                       <td className="p-4 leading-relaxed text-slate-600">
@@ -107,7 +107,7 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
                       <td className="p-4 text-center font-bold">
                         <span className={`px-2.5 py-0.5 rounded text-[10px] uppercase tracking-wider ${
                           item.interruption.startsWith('Yes')
-                            ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                            ? 'bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955]'
                             : 'bg-slate-100 text-slate-600 border border-slate-200'
                         }`}>
                           {item.interruption}
@@ -125,50 +125,50 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
         {activeTab === 'position' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fadeIn">
             <div className="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-xs">
-              <h3 className="font-serif font-bold text-lg text-blue-900 flex items-center gap-2">
-                <FileCheck className="w-5 h-5 text-amber-600" />
+              <h3 className="font-serif font-bold text-lg text-[#00387d] flex items-center gap-2">
+                <FileCheck className="w-5 h-5 text-[#b56a00]" />
                 <span>Required Structure (2 Pages Maximum)</span>
               </h3>
 
               <div className="space-y-3 text-xs text-slate-600">
                 <div className="p-3 bg-slate-50 rounded border border-slate-200">
-                  <strong className="text-blue-900 block mb-1 font-serif text-sm">Section I: Topic Background & History</strong>
+                  <strong className="text-[#00387d] block mb-1 font-serif text-sm">Section I: Topic Background & History</strong>
                   Explain the historical context, key treaties, and past UN resolutions related to your committee's topic.
                 </div>
 
                 <div className="p-3 bg-slate-50 rounded border border-slate-200">
-                  <strong className="text-blue-900 block mb-1 font-serif text-sm">Section II: National Position & Past Actions</strong>
+                  <strong className="text-[#00387d] block mb-1 font-serif text-sm">Section II: National Position & Past Actions</strong>
                   Detail your assigned country's specific policy, national legislation, voting record, and regional alliance stance.
                 </div>
 
                 <div className="p-3 bg-slate-50 rounded border border-slate-200">
-                  <strong className="text-blue-900 block mb-1 font-serif text-sm">Section III: Proposed Multilateral Solutions</strong>
+                  <strong className="text-[#00387d] block mb-1 font-serif text-sm">Section III: Proposed Multilateral Solutions</strong>
                   Propose actionable, realistic operative clauses your delegation intends to introduce during committee debate.
                 </div>
               </div>
             </div>
 
             <div className="bg-white p-6 rounded border border-slate-200 space-y-4 shadow-xs">
-              <h3 className="font-serif font-bold text-lg text-blue-900">
+              <h3 className="font-serif font-bold text-lg text-[#00387d]">
                 Award Eligibility Criteria
               </h3>
 
               <ul className="space-y-3 text-xs text-slate-600 leading-relaxed">
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0 mt-0.5" />
                   <span>Submitted via email to <strong>positionpapers@timun.org</strong> by October 31, 2026.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0 mt-0.5" />
                   <span>Formatted in Times New Roman 12pt, 1.15 line spacing, 1-inch margins.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0 mt-0.5" />
                   <span>Includes full Chicago or APA citations for all facts and statistics cited.</span>
                 </li>
               </ul>
 
-              <div className="p-4 bg-amber-50 border border-amber-300 rounded text-xs text-amber-900 font-semibold leading-relaxed">
+              <div className="p-4 bg-[#fef6e7] border border-[#f7b955] rounded text-xs text-[#5f3a00] font-semibold leading-relaxed">
                 Note: Plagiarism checks are run on all submitted position papers. AI-assisted research must be verified and cited properly.
               </div>
             </div>
@@ -178,11 +178,11 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
         {/* Tab 3: Resolution Helper Promo */}
         {activeTab === 'resolution' && (
           <div className="bg-white p-8 rounded border border-slate-200 text-center space-y-4 animate-fadeIn max-w-2xl mx-auto shadow-sm">
-            <div className="w-14 h-14 rounded bg-amber-100 border border-amber-300 text-amber-800 flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded bg-[#fdeecd] border border-[#f7b955] text-amber-800 flex items-center justify-center mx-auto">
               <Sparkles className="w-7 h-7" />
             </div>
 
-            <h3 className="font-serif font-bold text-2xl text-blue-900">
+            <h3 className="font-serif font-bold text-2xl text-[#00387d]">
               Interactive UN Resolution Assistant
             </h3>
 
@@ -192,10 +192,10 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
 
             <button
               onClick={onOpenResolutionBuilder}
-              className="px-6 py-3 rounded text-xs font-bold uppercase tracking-widest text-white bg-blue-900 hover:bg-blue-800 shadow-sm flex items-center gap-2 mx-auto cursor-pointer"
+              className="px-6 py-3 rounded text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] shadow-sm flex items-center gap-2 mx-auto cursor-pointer"
             >
               <span>Launch Resolution Drafter</span>
-              <ChevronRight className="w-4 h-4 text-amber-400" />
+              <ChevronRight className="w-4 h-4 text-[#f4a024]" />
             </button>
           </div>
         )}

@@ -34,16 +34,16 @@ export const FaqContactSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-20 vx-paper text-slate-900 border-b border-amber-100 relative">
+    <section id="faq" className="py-20 vx-paper text-slate-900 border-b border-[#fdeecd] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-100 border border-amber-300 text-amber-900 text-[11px] font-bold uppercase tracking-widest mb-3">
-            <HelpCircle className="w-3.5 h-3.5 text-amber-700" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+            <HelpCircle className="w-3.5 h-3.5 text-[#8a5200]" />
             <span>Support & Delegate Inquiries</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-blue-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight">
             Frequently Asked Questions
           </h2>
           <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">
@@ -59,8 +59,8 @@ export const FaqContactSection: React.FC = () => {
               onClick={() => setActiveCategory(cat)}
               className={`px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 activeCategory === cat
-                  ? 'bg-blue-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-blue-900 border border-slate-200'
+                  ? 'bg-[#00387d] text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:text-[#00387d] border border-slate-200'
               }`}
             >
               {cat}
@@ -82,10 +82,10 @@ export const FaqContactSection: React.FC = () => {
                 >
                   <button
                     onClick={() => setOpenFaqId(isOpen ? null : faq.id)}
-                    className="w-full p-4 text-left font-serif font-bold text-sm text-blue-900 flex justify-between items-center gap-4 hover:text-amber-700 transition-colors cursor-pointer"
+                    className="w-full p-4 text-left font-serif font-bold text-sm text-[#00387d] flex justify-between items-center gap-4 hover:text-[#8a5200] transition-colors cursor-pointer"
                   >
                     <span>{faq.question}</span>
-                    {isOpen ? <ChevronUp className="w-4 h-4 text-amber-600 shrink-0" /> : <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />}
+                    {isOpen ? <ChevronUp className="w-4 h-4 text-[#b56a00] shrink-0" /> : <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />}
                   </button>
 
                   {isOpen && (
@@ -100,8 +100,8 @@ export const FaqContactSection: React.FC = () => {
 
           {/* Contact Secretariat Form Column */}
           <div className="lg:col-span-5 bg-white p-6 rounded border border-slate-200 space-y-4 shadow-xs">
-            <div className="flex items-center gap-2 text-blue-900 font-bold text-sm">
-              <MessageSquare className="w-5 h-5 text-amber-600" />
+            <div className="flex items-center gap-2 text-[#00387d] font-bold text-sm">
+              <MessageSquare className="w-5 h-5 text-[#b56a00]" />
               <span>Contact Secretariat Directly</span>
             </div>
 
@@ -115,7 +115,7 @@ export const FaqContactSection: React.FC = () => {
                     placeholder="Full name"
                     value={contactData.name}
                     onChange={(e) => setContactData({ ...contactData, name: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   />
                 </div>
 
@@ -127,7 +127,7 @@ export const FaqContactSection: React.FC = () => {
                     placeholder="delegate@school.edu"
                     value={contactData.email}
                     onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   />
                 </div>
 
@@ -136,7 +136,7 @@ export const FaqContactSection: React.FC = () => {
                   <select
                     value={contactData.subject}
                     onChange={(e) => setContactData({ ...contactData, subject: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   >
                     <option value="General Inquiry">General Inquiry</option>
                     <option value="Institutional Partnership">Institutional Partnership & Sponsorship</option>
@@ -155,22 +155,22 @@ export const FaqContactSection: React.FC = () => {
                     placeholder="Write your question for the Secretariat..."
                     value={contactData.message}
                     onChange={(e) => setContactData({ ...contactData, message: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-blue-900"
+                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-blue-900 hover:bg-blue-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                  className="w-full py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
                 >
-                  <Send className="w-3.5 h-3.5 text-amber-400" />
+                  <Send className="w-3.5 h-3.5 text-[#f4a024]" />
                   <span>Send Inquiry to Secretariat</span>
                 </button>
               </form>
             ) : (
               <div className="p-6 text-center space-y-3 animate-fadeIn">
                 <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                <h4 className="font-bold text-blue-900 text-sm">Message Sent!</h4>
+                <h4 className="font-bold text-[#00387d] text-sm">Message Sent!</h4>
                 <p className="text-xs text-slate-600 leading-relaxed">
                   Our Delegate Affairs team will respond to <strong>{contactData.email}</strong> within 24 hours.
                 </p>

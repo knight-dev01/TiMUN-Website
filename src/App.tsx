@@ -7,24 +7,17 @@ import React, { useEffect, useState } from 'react';
 import { ConferenceDataProvider } from './context/ConferenceContext';
 import { SEO } from './components/SEO';
 import { trackPageView, trackEvent } from './lib/analytics';
-import { touchVisit, awardXp } from './lib/passport';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { WelcomeSection } from './components/WelcomeSection';
-import { CommitteesSection } from './components/CommitteesSection';
-import { DelegateToolkit } from './components/DelegateToolkit';
-import { ScheduleSection } from './components/ScheduleSection';
-import { SecretariatSection } from './components/SecretariatSection';
 import { VenueSection } from './components/VenueSection';
 import { MediaSection } from './components/MediaSection';
 import { FaqContactSection } from './components/FaqContactSection';
-import { GalleryRoom } from './components/gallery/GalleryRoom';
-import { HallProgress } from './components/gallery/HallProgress';
+import { ComingSoon } from './components/ComingSoon';
 import { VerdictCta } from './components/gallery/VerdictCta';
-import { WaveDivider } from './components/gallery/WaveDivider';
-import { FlagMarquee } from './components/gallery/FlagMarquee';
 import { BackToTop } from './components/gallery/BackToTop';
-import { JourneySection } from './components/JourneySection';
+import { Watermark } from './components/gallery/Watermark';
+import { Reveal } from './components/gallery/Reveal';
 import { Footer } from './components/Footer';
 import { RegistrationModal } from './components/RegistrationModal';
 import { ResolutionBuilderModal } from './components/ResolutionBuilderModal';
@@ -46,23 +39,16 @@ function AppContent() {
   };
 
   const handleExploreCommittees = () => {
-    setActiveSection('committees');
-    const element = document.getElementById('committees');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    setActiveSection('coming-soon');
+    document.getElementById('coming-soon')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
     trackPageView('landing');
-    touchVisit();
   }, []);
 
   useEffect(() => {
-    if (resolutionBuilderOpen) {
-      trackEvent('resolution_builder_opened');
-      awardXp('resolution_opened');
-    }
+    if (resolutionBuilderOpen) trackEvent('resolution_builder_opened');
   }, [resolutionBuilderOpen]);
 
   useEffect(() => {
@@ -70,11 +56,9 @@ function AppContent() {
   }, [cmsModalOpen]);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans antialiased selection:bg-amber-200 selection:text-slate-900">
+    <div className="min-h-screen bg-white font-sans antialiased selection:bg-[#f4a024] selection:text-[#15305b]" style={{ color: '#4b4b4b' }}>
       <SEO />
-      <HallProgress />
 
-      {/* Top Fixed Header Navbar */}
       <Navbar
         onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
         onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
@@ -83,82 +67,54 @@ function AppContent() {
         setActiveSection={setActiveSection}
       />
 
-      {/* Main Sections — conference-hall walkthrough rooms */}
+      {/* Core site: About leads, everything else pending.
+          Hidden sections (committees, schedule, toolkit, secretariat)
+          remain in the repo and return by re-adding them here. */}
       <main>
-        {/* Room 01 — Arrival */}
-        <GalleryRoom id="room-arrival" index="01" label="Arrival">
-          <Hero
-            onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
-            onExploreCommittees={handleExploreCommittees}
-            onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
-          />
-        </GalleryRoom>
-
-        {/* Assembly of nations ticker */}
-        <FlagMarquee />
-
-        {/* Road to the Gavel — delegate journey */}
-        <JourneySection
+        <Hero
           onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
-          onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
           onExploreCommittees={handleExploreCommittees}
+          onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
         />
 
-        {/* Room 02 — Mandate */}
-        <GalleryRoom id="room-mandate" index="02" label="Mandate">
-          <WelcomeSection
-            onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
-          />
-        </GalleryRoom>
+        <Reveal>
+          <div className="relative">
+            <Watermark side="right" />
+            <WelcomeSection onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
+          </div>
+        </Reveal>
 
-        {/* Room 03 — Assembly */}
-        <GalleryRoom id="room-assembly" index="03" label="Assembly">
-          <CommitteesSection
-            onOpenRegisterWithChoice={handleOpenRegisterWithChoice}
-          />
-        </GalleryRoom>
+        <Reveal>
+          <div className="relative">
+            <Watermark side="left" />
+            <MediaSection />
+          </div>
+        </Reveal>
 
-        {/* Side chambers */}
-        <GalleryRoom id="room-deliberation" index="–" label="Deliberation">
-          <ScheduleSection />
-        </GalleryRoom>
+        <Reveal>
+          <div className="relative">
+            <Watermark side="right" />
+            <VenueSection />
+          </div>
+        </Reveal>
 
-        <GalleryRoom id="room-drafting" index="–" label="Drafting">
-          <DelegateToolkit
-            onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
-          />
-        </GalleryRoom>
+        <ComingSoon />
 
-        <GalleryRoom id="room-secretariat" index="–" label="Secretariat">
-          <SecretariatSection onOpenCms={() => setCmsModalOpen(true)} />
-        </GalleryRoom>
-
-        <GalleryRoom id="room-venue" index="–" label="Venue">
-          <VenueSection />
-        </GalleryRoom>
-
-        <GalleryRoom id="room-gallery" index="–" label="Gallery">
-          <MediaSection />
-        </GalleryRoom>
-
-        {/* Room 04 — Verdict */}
-        <WaveDivider fill="#041D50" bg="#FFFDF7" />
-        <GalleryRoom id="room-verdict" index="04" label="Verdict">
+        <div className="relative">
+          <Watermark side="left" />
           <FaqContactSection />
           <VerdictCta onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
-        </GalleryRoom>
+        </div>
       </main>
 
       <BackToTop />
 
-      {/* Footer */}
       <Footer
         onOpenRegister={() => handleOpenRegisterWithChoice('', '')}
         onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
         onOpenCms={() => setCmsModalOpen(true)}
       />
 
-      {/* Interactive Registration Modal */}
       <RegistrationModal
         isOpen={registerModalOpen}
         onClose={() => setRegisterModalOpen(false)}
@@ -166,18 +122,15 @@ function AppContent() {
         initialCountry={initialCountry}
       />
 
-      {/* UN Draft Resolution Builder Modal */}
       <ResolutionBuilderModal
         isOpen={resolutionBuilderOpen}
         onClose={() => setResolutionBuilderOpen(false)}
       />
 
-      {/* Site Data Upload & Population Manager Modal */}
       <SiteManagementPortalModal
         isOpen={cmsModalOpen}
         onClose={() => setCmsModalOpen(false)}
       />
-
     </div>
   );
 }
@@ -189,4 +142,3 @@ export default function App() {
     </ConferenceDataProvider>
   );
 }
-

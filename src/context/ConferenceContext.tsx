@@ -16,6 +16,11 @@ export interface ConferenceInfoType {
   earlyBirdDeadline: string;
   delegateFee: string;
   delegationFee: string;
+  // Live checkout numbers (USD base; NGN derived via ngnPerUsd)
+  feeIndividualUsd: number;
+  feeDelegationBaseUsd: number;
+  feePerDelegateUsd: number;
+  ngnPerUsd: number;
   contactEmail: string;
   stats: {
     delegates: string;
@@ -82,20 +87,27 @@ const AUTH_KEY = 'timun_executive_session';
 const ConferenceContext = createContext<ConferenceContextType | undefined>(undefined);
 
 export const ConferenceDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const defaultInfo = (): ConferenceInfoType => ({
+    ...CONFERENCE_INFO,
+    edition: "Inaugural Edition • 1st Annual Conference",
+    // Merge live numbers over seed data (older saves lack these fields)
+    feeIndividualUsd: (CONFERENCE_INFO as any).feeIndividualUsd ?? 65,
+    feeDelegationBaseUsd: (CONFERENCE_INFO as any).feeDelegationBaseUsd ?? 110,
+    feePerDelegateUsd: (CONFERENCE_INFO as any).feePerDelegateUsd ?? 55,
+    ngnPerUsd: (CONFERENCE_INFO as any).ngnPerUsd ?? 1500,
+  });
+
   const [conferenceInfo, setConferenceInfo] = useState<ConferenceInfoType>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed.conferenceInfo) return parsed.conferenceInfo;
+        if (parsed.conferenceInfo) return { ...defaultInfo(), ...parsed.conferenceInfo };
       }
     } catch (e) {
       console.error(e);
     }
-    return {
-      ...CONFERENCE_INFO,
-      edition: "Inaugural Edition • 1st Annual Conference"
-    };
+    return defaultInfo();
   });
 
   const [committees, setCommittees] = useState<Committee[]>(() => {
@@ -422,8 +434,8 @@ export const ConferenceDataProvider: React.FC<{ children: React.ReactNode }> = (
       acronym: "TiMUN 2027",
       edition: "Inaugural Edition • 1st Annual Conference",
       dates: "November 12 – 14, 2027",
-      location: "Trinity University Campus • San Antonio, Texas",
-      venue: "Laurie Auditorium & Campus Center",
+      location: "Trinity University, Yaba • Lagos, Nigeria",
+      venue: "Main Auditorium & Senate Hall Complex",
       theme: "Enter Your Conference Theme Here",
       registrationDeadline: "October 25, 2027",
       earlyBirdDeadline: "September 20, 2027",

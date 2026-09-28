@@ -1,19 +1,19 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { HandArrow, HandCheck, Squiggle, Stamp } from './HumanMarks';
+import { HandArrow, HandCheck } from './HumanMarks';
 
 interface VerdictCtaProps {
   onOpenRegister: () => void;
 }
 
-/** Hand-circled word: wobbly SVG ellipse drawn around children. */
+/** Hand-circled word: wobbly gold ellipse drawn around children. */
 const Circled: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <span className="relative inline-block whitespace-nowrap">
     <span className="relative z-10">{children}</span>
     <svg
       viewBox="0 0 120 40"
       preserveAspectRatio="none"
-      className="absolute -inset-x-2 -inset-y-1 w-[calc(100%+16px)] h-[calc(100%+8px)] text-[#0BE149]"
+      className="absolute -inset-x-2 -inset-y-1 w-[calc(100%+16px)] h-[calc(100%+8px)] text-[#f4a024]"
       aria-hidden="true"
     >
       <ellipse
@@ -25,7 +25,6 @@ const Circled: React.FC<{ children: React.ReactNode }> = ({ children }) => (
         stroke="currentColor"
         strokeWidth="2.5"
         strokeLinecap="round"
-        strokeDasharray="300"
         transform="rotate(-2 60 20)"
       />
     </svg>
@@ -33,47 +32,35 @@ const Circled: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 /**
- * Room 04 — Verdict. The closing podium: spotlight sweep, hand-circled
- * "verified", one-time entrance pulse, single soft register button.
+ * Verdict band — solid TU navy, gold circled "verified",
+ * single red 3D-press register button.
  */
 export const VerdictCta: React.FC<VerdictCtaProps> = ({ onOpenRegister }) => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+    <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pb-20">
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 0.45 }}
-        className="relative overflow-hidden rounded-3xl bg-[#041D50] text-white px-6 py-12 sm:p-14 text-center"
+        className="relative overflow-hidden rounded-[20px] bg-[#00387d] text-white px-6 py-12 sm:p-14 text-center border-b-8 border-[#15305b]"
       >
-        {/* Podium spotlight sweep */}
-        {!reduceMotion && (
-          <div className="absolute inset-y-0 w-1/3 podium-sweep bg-gradient-to-r from-transparent via-[#0BE149]/15 to-transparent" aria-hidden="true" />
-        )}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 90% at 50% 110%, rgba(11,225,73,0.22), transparent 70%)',
-          }}
-          aria-hidden="true"
-        />
-
         <div className="relative">
-          <Stamp className="text-amber-300">The record will show —</Stamp>
-          <h2 className="vx-display text-3xl sm:text-5xl font-semibold mt-5 leading-tight">
+          <p className="text-[15px] font-bold uppercase tracking-widest text-[#f4a024]">
+            The record will show —
+          </p>
+          <h2 className="text-3xl sm:text-5xl font-bold mt-4 leading-tight" style={{ fontFamily: "'Roboto Slab', Georgia, serif", color: '#fff' }}>
             8 councils deliberated.
             <br />
             Every delegate <Circled>verified</Circled>.
           </h2>
-          <Squiggle className="w-40 h-4 text-[#0BE149] mx-auto mt-4" />
 
-          <ul className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 mt-6 text-sm text-white/80">
+          <ul className="flex flex-col sm:flex-row items-center justify-center gap-x-8 gap-y-2 mt-6 text-[15px] text-white/85">
             {['Study guides in hand', 'Your country placard', 'Gala dinner included'].map(item => (
               <li key={item} className="flex items-center gap-2">
-                <HandCheck className="w-5 h-5 text-[#0BE149]" />
+                <HandCheck className="w-5 h-5 text-[#f4a024]" />
                 <span>{item}</span>
               </li>
             ))}
@@ -84,12 +71,12 @@ export const VerdictCta: React.FC<VerdictCtaProps> = ({ onOpenRegister }) => {
               onClick={onOpenRegister}
               whileHover={reduceMotion ? undefined : { scale: 1.03 }}
               whileTap={{ scale: 0.96 }}
-              className="duo-btn px-8 py-4 text-xs font-bold uppercase tracking-widest shadow-xl inline-flex items-center gap-2 cursor-pointer"
+              className="duo-btn duo-btn-red !px-8 !py-4"
             >
               <span>Claim your placard — register</span>
               <HandArrow className="w-8 h-5" />
             </motion.button>
-            <p className="vx-hand-note text-white/60 mt-4 rotate-[-1deg]">
+            <p className="vx-hand-note text-white/60 mt-4">
               early birds get first pick of countries…
             </p>
           </div>

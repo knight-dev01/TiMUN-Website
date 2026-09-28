@@ -3,18 +3,18 @@ import React from 'react';
 interface WatermarkProps {
   side?: 'left' | 'right';
   opacity?: number;
-  dark?: boolean;
+  onDark?: boolean;
 }
 
 /**
- * Giant faint TiMUN logo seated inside each hall room — the backdrop
- * travels with the user as they scroll. Grayscale + very low opacity
- * so it reads as paper watermark, never as content.
+ * Giant faint TiMUN navy-ink logo drifting behind each section — the
+ * backdrop travels with the user as they scroll. Reads as a paper
+ * watermark, never as content.
  */
 export const Watermark: React.FC<WatermarkProps> = ({
   side = 'right',
   opacity = 0.05,
-  dark = false,
+  onDark = false,
 }) => (
   <div
     aria-hidden="true"
@@ -26,7 +26,7 @@ export const Watermark: React.FC<WatermarkProps> = ({
       src="/logo.png"
       alt=""
       loading="lazy"
-      style={{ opacity, filter: dark ? 'grayscale(1) invert(1)' : 'grayscale(1)' }}
+      style={{ opacity, filter: onDark ? 'grayscale(1) invert(1)' : 'grayscale(1)' }}
       className="w-[300px] sm:w-[460px] h-auto object-contain"
       onError={e => {
         e.currentTarget.style.display = 'none';

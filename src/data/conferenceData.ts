@@ -5,8 +5,8 @@ export const CONFERENCE_INFO = {
   acronym: "TiMUN 2027",
   edition: "Annual International Youth Diplomacy & Leadership Conference",
   dates: "November 12 – 14, 2027",
-  location: "Trinity University Campus • Associate Institution",
-  venue: "Laurie Auditorium, Chapman Center & Multilateral Suites",
+  location: "Trinity University, Yaba • Lagos, Nigeria",
+  venue: "Main Auditorium & Senate Hall Complex",
   theme: "Beyond the Classroom: Equipping Youth to Lead in Diplomacy, Governance & Global Affairs",
   registrationDeadline: "October 25, 2027",
   earlyBirdDeadline: "September 20, 2027",
@@ -31,7 +31,7 @@ export const COMMITTEES: Committee[] = [
     delegateCapacity: 15,
     assignedCount: 11,
     description: "The premier global organ for international peace and security. Delegates navigate fast-moving crisis scenarios, maritime chokepoints, and conflict de-escalation.",
-    roomLocation: "Laurie Executive Suite 101",
+    roomLocation: "Senate Hall 101",
     bgImage: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80",
     studyGuideUrl: "#",
     topics: [
@@ -174,7 +174,7 @@ export const COMMITTEES: Committee[] = [
     delegateCapacity: 60,
     assignedCount: 42,
     description: "The General Assembly First Committee dealing with global disarmament, preventing militarization of outer space, and AI weapon governance.",
-    roomLocation: "Laurie Auditorium East Wing",
+    roomLocation: "Main Auditorium East Wing",
     bgImage: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80",
     studyGuideUrl: "#",
     topics: [
@@ -328,8 +328,8 @@ export const SCHEDULE: DaySchedule[] = [
     date: "November 12, 2027",
     dayName: "Friday — Accreditation, Opening Ceremony & Simulation Commencement",
     items: [
-      { time: "09:00 - 11:30", title: "Delegate Accreditation & Conference Pack Collection", location: "Laurie Auditorium Foyer", description: "Accreditation, credentials validation, TiMUN delegate folders, handbook, and badge collection.", type: "ceremony" },
-      { time: "11:30 - 13:00", title: "Inaugural Opening Ceremony & Diplomatic Keynotes", location: "Laurie Auditorium Main Stage", description: "Addresses by the Founders & Executive Directorate, Associate Institution Representatives, and Distinguished Guest Diplomats.", type: "ceremony", dressCode: "Western Business / Official National Attire" },
+      { time: "09:00 - 11:30", title: "Delegate Accreditation & Conference Pack Collection", location: "Main Auditorium Foyer", description: "Accreditation, credentials validation, TiMUN delegate folders, handbook, and badge collection.", type: "ceremony" },
+      { time: "11:30 - 13:00", title: "Inaugural Opening Ceremony & Diplomatic Keynotes", location: "Main Auditorium Stage", description: "Addresses by the Founders & Executive Directorate, Trinity University leadership, and Distinguished Guest Diplomats.", type: "ceremony", dressCode: "Western Business / Official National Attire" },
       { time: "13:00 - 14:15", title: "Executive Welcome Luncheon & Networking", location: "Campus Banquet Atrium", description: "Catered networking lunch connecting delegates, faculty advisors, and institutional partners.", type: "meal" },
       { time: "14:30 - 16:00", title: "First-Time Delegate Workshop & Rules of Procedure (ROP) Masterclass", location: "Chapman Hall 102", description: "Interactive session on parliamentary procedure, caucus navigation, points & motions, and resolution formulation.", type: "workshop" },
       { time: "16:15 - 19:30", title: "Committee Session I — Setting the Agenda, Roll Call & Opening Statements", location: "Respective Committee Rooms", description: "Formal opening speeches, establishing speakers' lists, setting agenda priority, and initial moderated debate.", type: "session", dressCode: "Western Business Attire" },
@@ -354,8 +354,8 @@ export const SCHEDULE: DaySchedule[] = [
     dayName: "Sunday — Voting Procedure, Plenary Action & Awards Ceremony",
     items: [
       { time: "09:00 - 11:30", title: "Committee Session IV — Final Voting Procedure on Resolutions", location: "Respective Committee Rooms", description: "Roll call votes, division of question, clause-by-clause voting, and committee concluding statements.", type: "session", dressCode: "Western Business Attire" },
-      { time: "11:45 - 13:00", title: "General Assembly Plenary Session", location: "Laurie Auditorium", description: "Plenary ratification of committee outcomes and presentation of adopted resolutions.", type: "session" },
-      { time: "13:30 - 15:30", title: "Grand Closing & Awards Ceremony", location: "Laurie Auditorium Main Stage", description: "Presentation of Best Delegate, Outstanding Delegate, Best Delegation, Leadership Honors, and certificate distribution.", type: "ceremony" }
+      { time: "11:45 - 13:00", title: "General Assembly Plenary Session", location: "Main Auditorium", description: "Plenary ratification of committee outcomes and presentation of adopted resolutions.", type: "session" },
+      { time: "13:30 - 15:30", title: "Grand Closing & Awards Ceremony", location: "Main Auditorium Stage", description: "Presentation of Best Delegate, Outstanding Delegate, Best Delegation, Leadership Honors, and certificate distribution.", type: "ceremony" }
     ]
   }
 ];

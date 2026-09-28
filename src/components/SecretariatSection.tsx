@@ -19,11 +19,11 @@ export const SecretariatSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-100 border border-amber-300 text-amber-900 text-[11px] font-bold uppercase tracking-widest mb-3">
-            <Award className="w-3.5 h-3.5 text-amber-700" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+            <Award className="w-3.5 h-3.5 text-[#8a5200]" />
             <span>Executive Board & Leadership</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-blue-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight">
             The Conference Secretariat
           </h2>
           <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">
@@ -40,8 +40,8 @@ export const SecretariatSection: React.FC = () => {
               onClick={() => setSelectedDept(dept)}
               className={`px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 selectedDept === dept
-                  ? 'bg-blue-900 text-white shadow-xs'
-                  : 'bg-slate-100 text-slate-600 hover:text-blue-900 border border-slate-200'
+                  ? 'bg-[#00387d] text-white shadow-xs'
+                  : 'bg-slate-100 text-slate-600 hover:text-[#00387d] border border-slate-200'
               }`}
             >
               {dept}
@@ -54,9 +54,9 @@ export const SecretariatSection: React.FC = () => {
           {filteredMembers.map((member) => (
             <div
               key={member.id}
-              className="bg-slate-50 rounded border border-slate-200 p-6 hover:border-blue-900 transition-all duration-300 flex flex-col items-center text-center shadow-xs group"
+              className="bg-slate-50 rounded border border-slate-200 p-6 hover:border-[#00387d] transition-all duration-300 flex flex-col items-center text-center shadow-xs group"
             >
-              <div className="w-28 h-28 rounded overflow-hidden border-2 border-amber-400 mb-4 shadow-xs group-hover:scale-105 transition-transform">
+              <div className="w-28 h-28 rounded overflow-hidden border-2 border-[#f4a024] mb-4 shadow-xs group-hover:scale-105 transition-transform">
                 <img
                   src={member.image}
                   alt={member.name}
@@ -65,15 +65,15 @@ export const SecretariatSection: React.FC = () => {
                 />
               </div>
 
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 mb-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] mb-2">
                 {member.department}
               </span>
 
-              <h3 className="font-serif font-bold text-lg text-blue-900">
+              <h3 className="font-serif font-bold text-lg text-[#00387d]">
                 {member.name}
               </h3>
 
-              <p className="text-xs font-bold text-amber-700 uppercase tracking-wider mt-0.5">
+              <p className="text-xs font-bold text-[#8a5200] uppercase tracking-wider mt-0.5">
                 {member.role}
               </p>
 
@@ -84,9 +84,9 @@ export const SecretariatSection: React.FC = () => {
               <div className="pt-4 mt-auto border-t border-slate-200 w-full flex items-center justify-center gap-3">
                 <a
                   href={`mailto:${member.email}`}
-                  className="text-xs text-slate-600 hover:text-blue-900 flex items-center gap-1.5 font-medium transition-colors"
+                  className="text-xs text-slate-600 hover:text-[#00387d] flex items-center gap-1.5 font-medium transition-colors"
                 >
-                  <Mail className="w-3.5 h-3.5 text-amber-600" />
+                  <Mail className="w-3.5 h-3.5 text-[#b56a00]" />
                   <span>{member.email}</span>
                 </a>
               </div>

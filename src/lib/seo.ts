@@ -85,7 +85,7 @@ export function conferenceJsonLd(opts: {
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
         location: {
           '@type': 'Place',
-          name: opts.locationName || 'Trinity University Campus',
+          name: opts.locationName || 'Trinity University, Yaba, Lagos',
         },
         organizer: {
           '@type': 'Organization',

@@ -34,16 +34,16 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
   });
 
   return (
-    <section id="committees" className="py-20 vx-paper text-slate-900 border-b border-amber-100 relative">
+    <section id="committees" className="py-20 vx-paper text-slate-900 border-b border-[#fdeecd] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-amber-100 border border-amber-300 text-amber-900 text-[11px] font-bold uppercase tracking-widest mb-3">
-            <Users className="w-3.5 h-3.5 text-amber-700" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+            <Users className="w-3.5 h-3.5 text-[#8a5200]" />
             <span>Academic Organs & Councils</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-blue-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight">
             Committees & Agenda Topics
           </h2>
           <p className="text-slate-600 mt-2 text-sm sm:text-base leading-relaxed">
@@ -67,8 +67,8 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
                 onClick={() => setSelectedCategory(cat.id as CommitteeCategory)}
                 className={`px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   selectedCategory === cat.id
-                    ? 'bg-blue-900 text-white shadow-xs'
-                    : 'text-slate-600 hover:text-blue-900 hover:bg-slate-100'
+                    ? 'bg-[#00387d] text-white shadow-xs'
+                    : 'text-slate-600 hover:text-[#00387d] hover:bg-slate-100'
                 }`}
               >
                 {cat.label}
@@ -84,7 +84,7 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
               placeholder="Search committee or topic..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-300 rounded pl-9 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-900"
+              className="w-full bg-slate-50 border border-slate-300 rounded pl-9 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-[#00387d]"
             />
           </div>
 
@@ -97,7 +97,7 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
             return (
               <div
                 key={committee.id}
-                className="group bg-white rounded-lg border border-slate-200 hover:border-blue-900 transition-all duration-300 flex flex-col overflow-hidden shadow-xs hover:shadow-md"
+                className="group bg-white rounded-lg border border-slate-200 hover:border-[#00387d] transition-all duration-300 flex flex-col overflow-hidden shadow-xs hover:shadow-md"
               >
                 {/* Header Image Thumbnail */}
                 <div className="relative h-44 overflow-hidden bg-slate-900">
@@ -107,21 +107,21 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 filter brightness-90"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#00387d]/90 via-[#00387d]/30 to-transparent" />
                   
                   {/* Category Badges */}
                   <div className="absolute top-3 left-3 flex items-center gap-2">
-                    <span className="px-2.5 py-0.5 rounded bg-blue-900 text-white text-[11px] font-bold uppercase tracking-wider border border-amber-400/40">
+                    <span className="px-2.5 py-0.5 rounded bg-[#00387d] text-white text-[11px] font-bold uppercase tracking-wider border border-[#f4a024]/40">
                       {committee.acronym}
                     </span>
-                    <span className="px-2 py-0.5 rounded bg-amber-100 text-amber-900 text-[10px] font-bold border border-amber-300">
+                    <span className="px-2 py-0.5 rounded bg-[#fdeecd] text-[#5f3a00] text-[10px] font-bold border border-[#f7b955]">
                       {committee.level}
                     </span>
                   </div>
 
                   {/* Room Tag */}
-                  <div className="absolute bottom-3 left-3 text-[11px] text-white flex items-center gap-1 font-medium bg-blue-950/80 px-2 py-0.5 rounded backdrop-blur-sm">
-                    <MapPin className="w-3 h-3 text-amber-400" />
+                  <div className="absolute bottom-3 left-3 text-[11px] text-white flex items-center gap-1 font-medium bg-[#15305b]/80 px-2 py-0.5 rounded backdrop-blur-sm">
+                    <MapPin className="w-3 h-3 text-[#f4a024]" />
                     <span>{committee.roomLocation}</span>
                   </div>
                 </div>
@@ -129,7 +129,7 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
                 {/* Content */}
                 <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <h3 className="font-serif font-bold text-lg text-blue-900 group-hover:text-amber-700 transition-colors">
+                    <h3 className="font-serif font-bold text-lg text-[#00387d] group-hover:text-[#8a5200] transition-colors">
                       {committee.name}
                     </h3>
                     <p className="text-xs text-slate-600 line-clamp-2 mt-1 leading-relaxed">
@@ -138,7 +138,7 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
 
                     {/* Topics List Preview */}
                     <div className="mt-3 space-y-1 pt-3 border-t border-slate-200">
-                      <div className="text-[10px] font-bold uppercase tracking-wider text-amber-700">
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-[#8a5200]">
                         Primary Agenda Topic:
                       </div>
                       <div className="text-xs font-semibold text-slate-800 line-clamp-2">
@@ -152,11 +152,11 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
                     <div>
                       <div className="flex justify-between text-[11px] text-slate-500 mb-1">
                         <span>Delegate Capacity ({committee.assignedCount}/{committee.delegateCapacity})</span>
-                        <span className="font-bold text-blue-900">{percentage}% Assigned</span>
+                        <span className="font-bold text-[#00387d]">{percentage}% Assigned</span>
                       </div>
                       <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
                         <div
-                          className="h-full bg-blue-900 rounded-full"
+                          className="h-full bg-[#00387d] rounded-full"
                           style={{ width: `${percentage}%` }}
                         />
                       </div>
@@ -165,18 +165,18 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
                     <div className="flex items-center justify-between gap-2">
                       <button
                         onClick={() => setSelectedCommittee(committee)}
-                        className="flex-1 px-3 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 hover:border-blue-900 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                        className="flex-1 px-3 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-300 hover:border-[#00387d] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
                       >
-                        <BookOpen className="w-3.5 h-3.5 text-amber-600" />
+                        <BookOpen className="w-3.5 h-3.5 text-[#b56a00]" />
                         <span>Study Guide</span>
                       </button>
 
                       <button
                         onClick={() => onOpenRegisterWithChoice(committee.acronym, '')}
-                        className="px-3 py-2 rounded text-xs font-bold uppercase tracking-wider text-white bg-blue-900 hover:bg-blue-800 transition-colors flex items-center gap-1 cursor-pointer"
+                        className="px-3 py-2 rounded text-xs font-bold uppercase tracking-wider text-white bg-[#00387d] hover:bg-[#294a70] transition-colors flex items-center gap-1 cursor-pointer"
                       >
                         <span>Apply</span>
-                        <ChevronRight className="w-3.5 h-3.5 text-amber-400" />
+                        <ChevronRight className="w-3.5 h-3.5 text-[#f4a024]" />
                       </button>
                     </div>
                   </div>
@@ -191,11 +191,11 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
         <div className="mt-16 bg-white rounded-lg border border-slate-200 p-6 sm:p-8 shadow-sm">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-700 mb-1">
-                <Globe className="w-4 h-4 text-amber-600" />
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#8a5200] mb-1">
+                <Globe className="w-4 h-4 text-[#b56a00]" />
                 <span>Live Delegation Matrix</span>
               </div>
-              <h3 className="font-serif font-bold text-xl text-blue-900">
+              <h3 className="font-serif font-bold text-xl text-[#00387d]">
                 Country Allocations & Seat Availability
               </h3>
             </div>
@@ -210,7 +210,7 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
                     onClick={() => setMatrixRegionFilter(reg)}
                     className={`px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer ${
                       matrixRegionFilter === reg
-                        ? 'bg-blue-900 text-white'
+                        ? 'bg-[#00387d] text-white'
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                     }`}
                   >
@@ -225,26 +225,26 @@ export const CommitteesSection: React.FC<CommitteesSectionProps> = ({ onOpenRegi
             {filteredMatrix.map((item) => (
               <div
                 key={item.id}
-                className="p-3 bg-slate-50 rounded border border-slate-200 flex items-center justify-between hover:border-blue-900 transition-all"
+                className="p-3 bg-slate-50 rounded border border-slate-200 flex items-center justify-between hover:border-[#00387d] transition-all"
               >
                 <div className="flex items-center gap-3">
                   <span className="text-2xl">{item.flagEmoji}</span>
                   <div>
-                    <div className="text-xs font-bold text-blue-900">{item.country}</div>
-                    <div className="text-[10px] text-amber-700 font-bold uppercase tracking-wider">{item.committeeAcronym}</div>
+                    <div className="text-xs font-bold text-[#00387d]">{item.country}</div>
+                    <div className="text-[10px] text-[#8a5200] font-bold uppercase tracking-wider">{item.committeeAcronym}</div>
                   </div>
                 </div>
 
                 {item.status === 'available' ? (
                   <button
                     onClick={() => onOpenRegisterWithChoice(item.committeeAcronym, item.country)}
-                    className="px-2.5 py-1 rounded bg-amber-100 text-amber-900 border border-amber-300 hover:bg-blue-900 hover:text-white hover:border-blue-900 text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer"
+                    className="px-2.5 py-1 rounded bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] hover:bg-[#00387d] hover:text-white hover:border-[#00387d] text-[11px] font-bold uppercase tracking-wider transition-all cursor-pointer"
                   >
                     Select Seat
                   </button>
                 ) : (
                   <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
-                    item.status === 'assigned' ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-amber-100 text-amber-800 border border-amber-200'
+                    item.status === 'assigned' ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-[#fdeecd] text-amber-800 border border-[#fbdda1]'
                   }`}>
                     {item.status}
                   </span>
