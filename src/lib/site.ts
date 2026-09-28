@@ -12,20 +12,17 @@ export const SITE_URL =
 export const SITE_NAME = 'TiMUN — Trinity International Model United Nations';
 export const SITE_SHORT_NAME = 'TiMUN 2027';
 export const SITE_DESCRIPTION =
-  'TiMUN 2027 is the inaugural Trinity International Model United Nations conference: 500+ delegates, 8 committees (UNSC, AU-PSC, ECOWAS, NASS, DISEC, ECOSOC, UNHCR, WHO), study guides, rules of procedure, resolution builder, schedule and registration. Nov 12–14, 2027.';
+  'TiMUN 2027 is the inaugural Trinity International Model United Nations conference at Trinity University, Yaba, Lagos: youth diplomacy, delegate stories, venue and registration. Nov 12–14, 2027.';
 export const SITE_KEYWORDS = [
   'Model United Nations',
   'MUN Nigeria',
-  'MUN Africa',
+  'MUN Lagos',
+  'MUN Yaba',
   'TiMUN',
   'Trinity International Model United Nations',
-  'UNSC simulation',
-  'AU-PSC',
-  'ECOWAS youth',
+  'Trinity University Yaba',
   'delegate registration',
-  'study guides',
-  'rules of procedure',
-  'resolution writing',
+  'youth diplomacy Nigeria',
 ].join(', ');
 
 export const SITE_THEME_COLOR = '#00387d';

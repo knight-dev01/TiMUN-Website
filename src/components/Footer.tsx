@@ -3,7 +3,6 @@ import { Mail, MapPin, Send, CheckCircle2, Shield, Loader2 } from 'lucide-react'
 import { useConferenceData } from '../context/ConferenceContext';
 import { subscribeNewsletter } from '../lib/newsletter';
 import { fireConfetti } from './gallery/ConfettiBurst';
-import { Watermark } from './gallery/Watermark';
 import { LogoBadge } from './LogoBadge';
 
 interface FooterProps {
@@ -37,7 +36,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenRegister, onOpenResolution
 
   return (
     <footer id="bulletin" className="relative overflow-hidden bg-white text-xs border-t-2 border-slate-100">
-      <Watermark side="left" opacity={0.05} />
       <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
 

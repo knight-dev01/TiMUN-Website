@@ -1,11 +1,10 @@
 import React from 'react';
 
 /**
- * Persistent logo backdrop: one fixed TiMUN mark centered on the viewport,
+ * General fixed background: one TiMUN mark centered on the viewport,
  * faint enough to sit behind everything without touching readability.
- * Above section backgrounds, below text contrast thresholds, always
- * below nav (z-50), modals (z-50) and floating actions (z-40).
  * Static (no animation) so it costs nothing after first paint.
+ * Always below nav (z-50), modals (z-50) and floating actions (z-40).
  */
 export const PersistentBackdrop: React.FC = () => (
   <div

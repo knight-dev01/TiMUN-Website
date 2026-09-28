@@ -1,6 +1,6 @@
 {
   "name": "TiMUN 2027",
-  "description": "Official website for TiMUN 2027 featuring conference registration, committee study guides, rules of procedure, interactive resolution builder, country matrix, schedule, and Secretariat directory.",
+  "description": "Official website for TiMUN 2027 at Trinity University, Yaba, Lagos: about the conference, delegate stories and updates, venue, registration with NGN/USD checkout, FAQ and contact.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

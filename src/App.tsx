@@ -18,7 +18,6 @@ import { VerdictCta } from './components/gallery/VerdictCta';
 import { FlagMarquee } from './components/gallery/FlagMarquee';
 import { PersistentBackdrop } from './components/gallery/PersistentBackdrop';
 import { BackToTop } from './components/gallery/BackToTop';
-import { Watermark } from './components/gallery/Watermark';
 import { Reveal } from './components/gallery/Reveal';
 import { Footer } from './components/Footer';
 import { RegistrationModal } from './components/RegistrationModal';
@@ -83,33 +82,21 @@ function AppContent() {
         <FlagMarquee />
 
         <Reveal>
-          <div className="relative">
-            <Watermark side="right" />
-            <WelcomeSection onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
-          </div>
+          <WelcomeSection onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
         </Reveal>
 
         <Reveal>
-          <div className="relative">
-            <Watermark side="left" />
-            <MediaSection />
-          </div>
+          <MediaSection />
         </Reveal>
 
         <Reveal>
-          <div className="relative">
-            <Watermark side="right" />
-            <VenueSection />
-          </div>
+          <VenueSection />
         </Reveal>
 
         <ComingSoon />
 
-        <div className="relative">
-          <Watermark side="left" />
-          <FaqContactSection />
-          <VerdictCta onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
-        </div>
+        <FaqContactSection />
+        <VerdictCta onOpenRegister={() => handleOpenRegisterWithChoice('', '')} />
       </main>
 
       <BackToTop />
