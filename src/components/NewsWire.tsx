@@ -1,11 +1,14 @@
 import React from 'react';
 import { COUNTRY_MATRIX_SAMPLE } from '../data/conferenceData';
 import { useConferenceData } from '../context/ConferenceContext';
+import { FlagImg } from './gallery/FlagImg';
 
 const FLAGS = (() => {
-  const seen: string[] = [];
+  const seen: { code: string; emoji: string; country: string }[] = [];
   for (const c of COUNTRY_MATRIX_SAMPLE) {
-    if (!seen.includes(c.flagEmoji)) seen.push(c.flagEmoji);
+    if (!seen.some(f => f.code === c.flagCode)) {
+      seen.push({ code: c.flagCode, emoji: c.flagEmoji, country: c.country });
+    }
   }
   return seen.slice(0, 12);
 })();
@@ -40,9 +43,12 @@ export const NewsWire: React.FC = () => {
                 onClick={goStories}
                 className="flex items-center gap-2 px-6 py-2 text-[14px] font-semibold text-[#00387d] hover:text-[#dd0000] transition-colors cursor-pointer whitespace-nowrap"
               >
-                <span className="text-base leading-none" aria-hidden="true">
-                  {FLAGS[i % FLAGS.length]}
-                </span>
+                <FlagImg
+                  code={FLAGS[i % FLAGS.length].code}
+                  emoji={FLAGS[i % FLAGS.length].emoji}
+                  country={FLAGS[i % FLAGS.length].country}
+                  size="sm"
+                />
                 <span className="truncate max-w-[70vw] sm:max-w-md">{post.title}</span>
               </button>
             ))}

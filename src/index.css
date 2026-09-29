@@ -194,58 +194,6 @@
   animation: fadeIn 0.3s ease-out forwards;
 }
 
-/* ---- Nations cylinder: continuous 3D rotation, one GPU transform ---- */
-.cyl-stage {
-  --cyl-r: 235px;
-  perspective: 1200px;
-  height: 320px;
-  position: relative;
-}
-
-@media (min-width: 640px) {
-  .cyl-stage {
-    --cyl-r: 350px;
-    height: 340px;
-  }
-}
-
-.cyl-rotor {
-  position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  animation: cyl-spin 40s linear infinite;
-}
-
-.cyl-stage:hover .cyl-rotor {
-  animation-play-state: paused;
-}
-
-@keyframes cyl-spin {
-  from { transform: rotateY(0deg); }
-  to { transform: rotateY(360deg); }
-}
-
-.cyl-card {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 148px;
-  margin-left: -74px;
-  margin-top: -92px;
-  padding: 0.9rem 0.6rem;
-  text-align: center;
-  backface-visibility: hidden;
-  background: #fff;
-}
-
-@media (min-width: 640px) {
-  .cyl-card {
-    width: 200px;
-    margin-left: -100px;
-    margin-top: -95px;
-  }
-}
-
 /* ---- News ticker: continuous stream, one GPU transform ---- */
 .hall-ticker-track {
   animation: hall-ticker 32s linear infinite;
@@ -277,7 +225,6 @@
   }
 
   .animate-fadeIn,
-  .cyl-rotor,
   .twinkle,
   .hall-ticker-track {
     animation: none;
