@@ -60,8 +60,8 @@ export const NationsGrid: React.FC = () => {
                   style={{ transform: `rotateY(${i * step}deg) translateZ(var(--cyl-r))` }}
                 >
                   <FlagImg code={info.code} emoji={info.flag} country={country} />
-                  <div className="font-bold text-[#00387d] text-[15px] mt-2.5 leading-snug">{country}</div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#777777] mt-1">
+                  <div className="font-bold text-[#00387d] text-[13px] sm:text-[15px] mt-2 leading-snug">{country}</div>
+                  <div className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#777777] mt-1">
                     {info.committee}
                   </div>
                 </div>

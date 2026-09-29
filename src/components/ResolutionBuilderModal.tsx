@@ -318,7 +318,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                 </h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-xs font-sans bg-white p-4 rounded-xl border border-slate-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-sans bg-white p-4 rounded-xl border border-slate-200">
                 <div><strong className="text-[#00387d]">COMMITTEE:</strong> {draft.committeeName}</div>
                 <div><strong className="text-[#00387d]">TOPIC:</strong> {draft.topicTitle}</div>
                 <div className="col-span-2"><strong className="text-[#00387d]">SPONSORS:</strong> {draft.sponsors.join(', ')}</div>
