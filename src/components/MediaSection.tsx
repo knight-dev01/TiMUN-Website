@@ -46,6 +46,7 @@ export const MediaSection: React.FC = () => {
     () => (filter === 'all' ? mediaPosts : mediaPosts.filter(p => p.kind === filter)),
     [mediaPosts, filter]
   );
+  const featured = useMemo(() => mediaPosts.find(p => p.featured) || mediaPosts[0], [mediaPosts]);
   const slides = filtered.filter(p => !featured || p.id !== featured.id);
   const pageCount = Math.max(1, slides.length);
 
@@ -72,8 +73,6 @@ export const MediaSection: React.FC = () => {
   };
   const docRef = (id: string) =>
     `TIMUN/2027/${String(mediaPosts.findIndex(p => p.id === id) + 1).padStart(3, '0')}`;
-  const featured = useMemo(() => mediaPosts.find(p => p.featured) || mediaPosts[0], [mediaPosts]);
-
   const open = (post: MediaPost) => {
     setOpenPost(post);
     trackEvent('media_post_opened', { kind: post.kind, id: post.id });
