@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
-import { motion } from 'motion/react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { Newspaper, PlayCircle, Image as ImageIcon, Megaphone, X, Calendar, User, Tag, Clock } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { MediaKind, MediaPost } from '../types';
@@ -37,15 +37,42 @@ export const MediaSection: React.FC = () => {
   const { mediaPosts } = useConferenceData();
   const [filter, setFilter] = useState<'all' | MediaKind>('all');
   const [openPost, setOpenPost] = useState<MediaPost | null>(null);
+  const [paused, setPaused] = useState(false);
+  const [page, setPage] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   const filtered = useMemo(
     () => (filter === 'all' ? mediaPosts : mediaPosts.filter(p => p.kind === filter)),
     [mediaPosts, filter]
   );
+  const slides = filtered.filter(p => !featured || p.id !== featured.id);
+  const pageCount = Math.max(1, slides.length);
+
+  // Auto-play: glide side to side, loop back at the end
+  useEffect(() => {
+    if (reduceMotion || paused || pageCount < 2) return;
+    const t = setInterval(() => {
+      const el = trackRef.current;
+      if (!el) return;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 12;
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + el.clientWidth * 0.85, behavior: 'smooth' });
+    }, 4500);
+    return () => clearInterval(t);
+  }, [reduceMotion, paused, pageCount, filter]);
+
+  const onTrackScroll = () => {
+    const el = trackRef.current;
+    if (!el || el.clientWidth === 0) return;
+    setPage(Math.round(el.scrollLeft / el.clientWidth));
+  };
+
+  const goPage = (i: number) => {
+    trackRef.current?.scrollTo({ left: i * (trackRef.current?.clientWidth || 0), behavior: 'smooth' });
+  };
   const docRef = (id: string) =>
     `TIMUN/2027/${String(mediaPosts.findIndex(p => p.id === id) + 1).padStart(3, '0')}`;
   const featured = useMemo(() => mediaPosts.find(p => p.featured) || mediaPosts[0], [mediaPosts]);
-  const rest = useMemo(() => filtered.filter(p => featured && p.id !== featured.id), [filtered, featured]);
 
   const open = (post: MediaPost) => {
     setOpenPost(post);
@@ -131,13 +158,24 @@ export const MediaSection: React.FC = () => {
           </button>
         )}
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {(filter === 'all' ? rest : filtered.filter(p => !featured || p.id !== featured.id)).map(post => (
+        {/* Slider: auto-plays side to side, manual swipe anytime */}
+        <div
+          ref={trackRef}
+          onScroll={onTrackScroll}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
+          className="flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory pb-2 -mx-4 px-4 sm:mx-0 sm:px-0"
+          style={{ scrollbarWidth: 'none' }}
+        >
+          {slides.map(post => (
             <button
               key={post.id}
               onClick={() => open(post)}
-              className="text-left rounded-2xl overflow-hidden border border-slate-200 bg-white hover:border-slate-300 hover:shadow-lg transition-all cursor-pointer group"
+              className="snap-start shrink-0 w-[85%] sm:w-[46%] lg:w-[31.5%] text-left rounded-2xl overflow-hidden border border-slate-200 bg-white hover:border-slate-300 hover:shadow-lg transition-all cursor-pointer group"
             >
               <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
                 <SafeImage
@@ -173,6 +211,22 @@ export const MediaSection: React.FC = () => {
             </button>
           ))}
         </div>
+
+        {/* Slider dots */}
+        {pageCount > 1 && (
+          <div className="flex items-center justify-center gap-1.5 mt-5">
+            {Array.from({ length: pageCount }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goPage(i)}
+                aria-label={`Go to slide ${i + 1}`}
+                className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                  i === Math.min(page, pageCount - 1) ? 'w-5 bg-[#dd0000]' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
+                }`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Reader modal */}

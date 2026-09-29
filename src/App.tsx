@@ -92,7 +92,8 @@ function AppContent() {
           Hidden sections (committees, schedule, toolkit, secretariat)
           remain in the repo and return by re-adding them here. */}
       <main>
-        <div className="pt-[72px]">
+        <div className="pt-[72px]" />
+        <div className="sticky top-[72px] z-40 shadow-sm">
           <NewsWire />
         </div>
 

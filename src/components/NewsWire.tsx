@@ -1,10 +1,19 @@
 import React from 'react';
+import { COUNTRY_MATRIX_SAMPLE } from '../data/conferenceData';
 import { useConferenceData } from '../context/ConferenceContext';
 
+const FLAGS = (() => {
+  const seen: string[] = [];
+  for (const c of COUNTRY_MATRIX_SAMPLE) {
+    if (!seen.includes(c.flagEmoji)) seen.push(c.flagEmoji);
+  }
+  return seen.slice(0, 12);
+})();
+
 /**
- * TiMUN Wire — classic breaking-news ticker pinned to the top of the page.
- * Headlines stream continuously (marquee), pause on hover, click jumps
- * to Stories. Fed by published posts, so it updates itself.
+ * TiMUN Wire — classic breaking-news ticker. Headlines stream continuously
+ * past nation flags, pause on hover, click jumps to Stories.
+ * Fed by published posts, so it updates itself.
  */
 export const NewsWire: React.FC = () => {
   const { mediaPosts } = useConferenceData();
@@ -31,7 +40,9 @@ export const NewsWire: React.FC = () => {
                 onClick={goStories}
                 className="flex items-center gap-2 px-6 py-2 text-[14px] font-semibold text-[#00387d] hover:text-[#dd0000] transition-colors cursor-pointer whitespace-nowrap"
               >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#f4a024] shrink-0" aria-hidden="true" />
+                <span className="text-base leading-none" aria-hidden="true">
+                  {FLAGS[i % FLAGS.length]}
+                </span>
                 <span className="truncate max-w-[70vw] sm:max-w-md">{post.title}</span>
               </button>
             ))}
