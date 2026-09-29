@@ -12,7 +12,7 @@
   --color-tu-red: #dd0000;
   --color-tu-red-dark: #a80e0e;
   --color-tu-gold: #f4a024;
-  --color-tu-gold-dark: #b56a00;
+  --color-tu-gold-dark: #5f3a00;
   --color-tu-green: #54b77e;
   --color-tu-green-dark: #35794f;
   --color-tu-paper: #FFFDF7;
@@ -129,7 +129,7 @@
 .duo-btn-gold {
   background: #f4a024;
   color: #15305b;
-  border-color: #b56a00;
+  border-color: #5f3a00;
 }
 
 .duo-btn-ghost {

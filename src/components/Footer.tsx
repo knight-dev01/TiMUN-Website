@@ -44,7 +44,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResolutionBuilder, onOpenC
                 <div className="font-bold text-base text-[#00387d] tracking-wide uppercase" style={{ fontFamily: "'Nunito Sans', system-ui, sans-serif" }}>
                   {conferenceInfo.title || 'Trinity International MUN'}
                 </div>
-                <div className="text-[10px] text-[#b56a00] font-bold uppercase tracking-widest">
+                <div className="text-[10px] text-[#5f3a00] font-bold uppercase tracking-widest">
                   Knowledge • Exposure • Opportunity
                 </div>
               </div>
@@ -76,6 +76,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResolutionBuilder, onOpenC
               <li><a href="#media" className="hover:text-[#f4a024] transition-colors">Stories & Updates</a></li>
               <li><a href="#venue" className="hover:text-[#f4a024] transition-colors">Venue in Yaba, Lagos</a></li>
               <li><a href="#coming-soon" className="hover:text-[#f4a024] transition-colors">More Rooms (Pending)</a></li>
+              <li><a href="https://www.trinityuniversity.edu.ng/" target="_blank" rel="noopener noreferrer" className="hover:text-[#f4a024] transition-colors">Trinity University Website</a></li>
               <li><a href="#faq" className="hover:text-[#f4a024] transition-colors">Questions & Contact</a></li>
             </ul>
           </div>
@@ -97,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResolutionBuilder, onOpenC
                 <li className="pt-1">
                   <button
                     onClick={onOpenCms}
-                    className="text-[#b56a00] font-semibold hover:text-[#00387d] transition-colors text-left flex items-center gap-1.5 cursor-pointer"
+                    className="text-[#5f3a00] font-semibold hover:text-[#00387d] transition-colors text-left flex items-center gap-1.5 cursor-pointer"
                   >
                     <Shield className="w-3.5 h-3.5" />
                     <span>{isExecutive ? 'Executive Secretariat Portal' : 'Executive Secretariat Login'}</span>

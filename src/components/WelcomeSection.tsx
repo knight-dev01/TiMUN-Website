@@ -53,7 +53,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
       subtitle: "Witnessing Systems in Action",
       description: "Allowing participants to see how theoretical knowledge operates within real diplomatic institutions, governmental bodies, corporate workplaces, and multilateral assemblies.",
       icon: Globe,
-      color: "bg-[#fef6e7] text-[#5f3a00] border-[#fbdda1]"
+      color: "bg-[#fdeecd] text-[#5f3a00] border-[#fdeecd]"
     },
     {
       title: "Opportunity",
@@ -203,8 +203,8 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
             {/* Top Overview Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-xs">
               <div className="lg:col-span-7 space-y-4">
-                <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#8a5200]">
-                  <Gavel className="w-4 h-4 text-[#b56a00]" />
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#5f3a00]">
+                  <Gavel className="w-4 h-4 text-[#5f3a00]" />
                   <span>Our Foundational Charter</span>
                 </div>
                 <h3 className="font-serif font-bold text-2xl text-[#00387d] leading-tight">
@@ -216,7 +216,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                 <p className="text-slate-600 text-sm leading-relaxed">
                   The organization was established on the understanding that young people require more than academic knowledge to successfully navigate an increasingly complex world. While universities and schools provide essential theoretical foundations, young people must be equipped with practical skills, exposure to real-world systems, and platforms where they can develop confidence, leadership, and professional capabilities.
                 </p>
-                <div className="p-4 bg-slate-50 rounded-xl border-l-4 border-[#e08c0a] border border-slate-200">
+                <div className="p-4 bg-slate-50 rounded-xl border-l-4 border-[#f4a024] border border-slate-200">
                   <p className="text-xs text-slate-700 font-medium italic">
                     "Young people should not merely be prepared for the future; they should be equipped to participate in shaping it. Young people need more than opportunities to learn; they need opportunities to practise, connect, contribute, and lead."
                   </p>
@@ -239,7 +239,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                     </div>
                     <div className="flex justify-between">
                       <span className="text-[#777777]">Associate Institution:</span>
-                      <span className="font-semibold text-[#b56a00]">Trinity University</span>
+                      <span className="font-semibold text-[#5f3a00]">Trinity University</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-[#777777]">Scope:</span>
@@ -279,7 +279,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                 {beyondClassroom.map((item, idx) => (
                   <div key={idx} className="p-4 bg-slate-50 hover:bg-[#eef4fa]/50 rounded-xl border border-slate-200 transition-colors">
                     <div className="flex items-center gap-2 mb-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-[#5f3a00] shrink-0" />
                       <h5 className="font-bold text-xs uppercase tracking-tight text-[#00387d]">
                         {item.title}
                       </h5>
@@ -321,7 +321,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                         <h4 className="font-serif font-bold text-xl text-[#00387d] mt-0.5">
                           {pillar.title}
                         </h4>
-                        <div className="text-xs font-semibold text-[#8a5200] mt-0.5 mb-2">
+                        <div className="text-xs font-semibold text-[#5f3a00] mt-0.5 mb-2">
                           {pillar.subtitle}
                         </div>
                         <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -346,7 +346,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                   <p className="font-serif italic text-base sm:text-lg text-[#00387d] leading-relaxed">
                     "Knowledge gives youth an understanding of the world; Exposure shows how it operates in reality; Opportunity gives them the stage to lead."
                   </p>
-                  <span className="text-xs text-[#b56a00] font-semibold tracking-wider uppercase mt-1 block">
+                  <span className="text-xs text-[#5f3a00] font-semibold tracking-wider uppercase mt-1 block">
                     TiMUN Educational Philosophy
                   </span>
                 </div>
@@ -380,14 +380,14 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                   <div key={idx} className="bg-white p-6 rounded-xl border border-slate-200 shadow-xs flex flex-col justify-between hover:border-[#00387d]/30 transition-all">
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 rounded-xl bg-[#fef6e7] border border-[#fbdda1] flex items-center justify-center text-[#8a5200]">
+                        <div className="w-10 h-10 rounded-xl bg-[#fdeecd] border border-[#fdeecd] flex items-center justify-center text-[#5f3a00]">
                           <Icon className="w-5 h-5" />
                         </div>
-                        <span className="text-xs font-mono font-bold text-slate-400">
+                        <span className="text-xs font-bold text-slate-400">
                           {prog.number}
                         </span>
                       </div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-[#8a5200] mb-0.5">
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-[#5f3a00] mb-0.5">
                         {prog.category}
                       </div>
                       <h4 className="font-serif font-bold text-lg text-[#00387d] mb-2">
@@ -438,7 +438,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                       <div className="w-12 h-12 rounded-xl bg-[#eef4fa] border border-[#bcd3ea] flex items-center justify-center text-[#00387d] mb-4">
                         <Icon className="w-6 h-6" />
                       </div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#8a5200] px-2 py-0.5 bg-[#fef6e7] rounded-xl border border-[#fbdda1]">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#5f3a00] px-2 py-0.5 bg-[#fdeecd] rounded-xl border border-[#fdeecd]">
                         {item.badge}
                       </span>
                       <h4 className="font-serif font-bold text-xl text-[#00387d] mt-2 mb-2">
@@ -483,7 +483,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div className="lg:col-span-7 space-y-4">
                   <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#00387d]">
-                    <Building2 className="w-4 h-4 text-[#b56a00]" />
+                    <Building2 className="w-4 h-4 text-[#5f3a00]" />
                     <span>Governance & Institutional Structure</span>
                   </div>
                   <h3 className="font-serif font-bold text-2xl text-[#00387d]">
@@ -499,7 +499,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                     <span className="px-3 py-1 bg-slate-100 text-slate-700 rounded-xl text-xs font-semibold">
                       Independent Executive Governance
                     </span>
-                    <span className="px-3 py-1 bg-[#fef6e7] text-[#5f3a00] border border-[#fbdda1] rounded-xl text-xs font-semibold">
+                    <span className="px-3 py-1 bg-[#fdeecd] text-[#5f3a00] border border-[#fdeecd] rounded-xl text-xs font-semibold">
                       Trinity University Associate Institution
                     </span>
                   </div>
@@ -546,12 +546,12 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
                 />
               </div>
               <h3 className="font-serif font-bold text-lg text-[#00387d]">{sg.name}</h3>
-              <p className="text-xs font-bold text-[#8a5200] uppercase tracking-wider">{sg.role}</p>
+              <p className="text-xs font-bold text-[#5f3a00] uppercase tracking-wider">{sg.role}</p>
               <p className="text-xs text-slate-500 font-medium mt-0.5">TiMUN Executive Directorate</p>
             </div>
 
             <div className="lg:col-span-8 space-y-4 text-slate-700 text-sm sm:text-base leading-relaxed">
-              <div className="flex items-center gap-2 text-[#b56a00]">
+              <div className="flex items-center gap-2 text-[#5f3a00]">
                 <Quote className="w-8 h-8 opacity-70 shrink-0" />
                 <span className="font-serif font-semibold text-[#00387d] text-lg">
                   Distinguished Delegates, Advisors, and Esteemed Guests,

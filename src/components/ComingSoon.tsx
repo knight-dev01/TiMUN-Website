@@ -55,7 +55,7 @@ export const ComingSoon: React.FC = () => (
             </span>
             <h3 className="duo-section-title text-lg mt-3">{item.title}</h3>
             <p className="text-[13px] text-[#777777] mt-1 leading-relaxed">{item.hint}</p>
-            <span className="duo-chip mt-3 !border-[#f4a024] !text-[#b56a00]">
+            <span className="duo-chip mt-3 !border-[#f4a024] !text-[#5f3a00]">
               Pending
             </span>
           </div>

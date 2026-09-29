@@ -88,15 +88,15 @@ export const MediaSection: React.FC = () => {
   ];
 
   return (
-    <section id="media" className="py-12 sm:py-20 bg-white text-slate-900 border-b border-slate-100">
+    <section id="media" className="py-12 sm:py-20 bg-white text-[#00387d] border-b border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mb-10">
-          <div className="text-xs font-bold uppercase tracking-widest text-[#8a5200] mb-2">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#5f3a00] mb-2">
             Insights & Media
           </div>
           <TextReveal
             text="Stories, guides & moments"
-            className="text-3xl sm:text-4xl font-serif font-bold text-slate-900 tracking-tight"
+            className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight"
           />
           <p className="text-slate-500 mt-3 text-sm sm:text-base leading-relaxed">
             Articles and write-ups from the Secretariat, conference updates, briefing videos
@@ -113,7 +113,7 @@ export const MediaSection: React.FC = () => {
               className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer border ${
                 filter === f.id
                   ? 'bg-[#00387d] text-white border-[#00387d]'
-                  : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-slate-900'
+                  : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400 hover:text-[#00387d]'
               }`}
             >
               {f.label}
@@ -143,7 +143,7 @@ export const MediaSection: React.FC = () => {
             </div>
             <div className="p-8 flex flex-col justify-center">
               <KindBadge kind={featured.kind} />
-              <h3 className="font-serif font-bold text-2xl text-slate-900 mt-4 leading-tight">
+              <h3 className="font-serif font-bold text-2xl text-[#00387d] mt-4 leading-tight">
                 {featured.title}
               </h3>
               <p className="text-sm text-slate-500 mt-3 leading-relaxed line-clamp-3">
@@ -152,7 +152,7 @@ export const MediaSection: React.FC = () => {
               <div className="flex items-center gap-4 mt-5 text-xs text-slate-400">
                 <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5" />{featured.author}</span>
                 <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{featured.date}</span>
-                <span className="font-mono font-bold text-[#00387d]">{docRef(featured.id)}</span>
+                <span className="font-extrabold tracking-wide text-[#00387d]">{docRef(featured.id)}</span>
               </div>
             </div>
           </button>
@@ -188,13 +188,13 @@ export const MediaSection: React.FC = () => {
                 {post.kind === 'video' && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <span className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                      <PlayCircle className="w-7 h-7 text-slate-900" />
+                      <PlayCircle className="w-7 h-7 text-[#00387d]" />
                     </span>
                   </div>
                 )}
               </div>
               <div className="p-5">
-                <h3 className="font-serif font-bold text-lg text-slate-900 leading-snug line-clamp-2">
+                <h3 className="font-serif font-bold text-lg text-[#00387d] leading-snug line-clamp-2">
                   {post.title}
                 </h3>
                 <p className="text-[13px] text-slate-500 mt-2 leading-relaxed line-clamp-2">
@@ -205,7 +205,7 @@ export const MediaSection: React.FC = () => {
                   <span>•</span>
                   <span>{post.date}</span>
                   <span>•</span>
-                  <span className="font-mono font-bold text-[#00387d]">{docRef(post.id)}</span>
+                  <span className="font-extrabold tracking-wide text-[#00387d]">{docRef(post.id)}</span>
                 </div>
               </div>
             </button>
@@ -248,7 +248,7 @@ export const MediaSection: React.FC = () => {
               />
               <button
                 onClick={() => setOpenPost(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/90 text-slate-700 hover:text-slate-900 cursor-pointer"
+                className="absolute top-4 right-4 p-2 rounded-full bg-white/90 text-slate-700 hover:text-[#00387d] cursor-pointer"
                 aria-label="Close article"
               >
                 <X className="w-5 h-5" />
@@ -256,7 +256,7 @@ export const MediaSection: React.FC = () => {
             </div>
             <div className="p-6 sm:p-10">
               <KindBadge kind={openPost.kind} />
-              <h3 className="font-serif font-bold text-2xl sm:text-3xl text-slate-900 mt-4 leading-tight">
+              <h3 className="font-serif font-bold text-2xl sm:text-3xl text-[#00387d] mt-4 leading-tight">
                 {openPost.title}
               </h3>
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-3 text-xs text-slate-400">

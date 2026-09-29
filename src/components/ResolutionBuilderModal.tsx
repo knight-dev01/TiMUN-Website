@@ -117,13 +117,13 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
         {/* Header */}
         <div className="p-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#fdeecd] border border-[#f7b955] flex items-center justify-center text-[#5f3a00] font-bold shadow-xs">
-              <ScrollText className="w-5 h-5 text-[#8a5200]" />
+            <div className="w-10 h-10 rounded-xl bg-[#fdeecd] border border-[#f4a024] flex items-center justify-center text-[#5f3a00] font-bold shadow-xs">
+              <ScrollText className="w-5 h-5 text-[#5f3a00]" />
             </div>
             <div>
               <h3 className="font-serif font-bold text-lg text-[#00387d] flex items-center gap-2">
                 <span>Interactive UN Resolution Drafter</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-xl bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] font-mono font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded-xl bg-[#fdeecd] text-[#5f3a00] border border-[#f4a024] font-bold">
                   UN Format Standard
                 </span>
               </h3>
@@ -212,7 +212,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                             preambularClauses: prev.preambularClauses.map(p => p.id === clause.id ? { ...p, starter: val } : p)
                           }));
                         }}
-                        className="bg-white border border-slate-300 rounded-xl px-2.5 py-1 text-xs font-bold italic text-[#8a5200] shrink-0"
+                        className="bg-white border border-slate-300 rounded-xl px-2.5 py-1 text-xs font-bold italic text-[#5f3a00] shrink-0"
                       >
                         {PREAMBULAR_STARTERS.map(st => (
                           <option key={st} value={st}>{st}</option>
@@ -273,7 +273,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                               operativeClauses: prev.operativeClauses.map(o => o.id === clause.id ? { ...o, starter: val } : o)
                             }));
                           }}
-                          className="bg-white border border-slate-300 rounded-xl px-2 py-1 text-xs font-bold text-[#8a5200] shrink-0"
+                          className="bg-white border border-slate-300 rounded-xl px-2 py-1 text-xs font-bold text-[#5f3a00] shrink-0"
                         >
                           {OPERATIVE_STARTERS.map(st => (
                             <option key={st} value={st}>{st}</option>
@@ -308,8 +308,8 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
             </div>
           ) : (
             /* UN Paper Format Preview */
-            <div className="bg-[#fef6e7]/30 p-8 rounded-xl border border-[#fbdda1]/80 font-serif text-slate-900 space-y-6 animate-fadeIn shadow-xs">
-              <div className="text-center space-y-1 border-b border-[#fbdda1]/80 pb-4">
+            <div className="bg-[#fdeecd]/30 p-8 rounded-xl border border-[#fdeecd]/80 font-serif text-slate-900 space-y-6 animate-fadeIn shadow-xs">
+              <div className="text-center space-y-1 border-b border-[#fdeecd]/80 pb-4">
                 <div className="text-xs font-sans tracking-widest text-[#00387d] uppercase font-bold">
                   TRINITY UNIVERSITY MODEL UNITED NATIONS
                 </div>

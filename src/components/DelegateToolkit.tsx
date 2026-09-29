@@ -21,8 +21,8 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
-            <PenTool className="w-3.5 h-3.5 text-[#8a5200]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f4a024] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+            <PenTool className="w-3.5 h-3.5 text-[#5f3a00]" />
             <span>Academic & Diplomatic Preparation</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight">
@@ -107,7 +107,7 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
                       <td className="p-4 text-center font-bold">
                         <span className={`px-2.5 py-0.5 rounded-xl text-[10px] uppercase tracking-wider ${
                           item.interruption.startsWith('Yes')
-                            ? 'bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955]'
+                            ? 'bg-[#fdeecd] text-[#5f3a00] border border-[#f4a024]'
                             : 'bg-slate-100 text-slate-600 border border-slate-200'
                         }`}>
                           {item.interruption}
@@ -126,7 +126,7 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fadeIn">
             <div className="bg-white p-6 rounded-xl border border-slate-200 space-y-4 shadow-xs">
               <h3 className="font-serif font-bold text-lg text-[#00387d] flex items-center gap-2">
-                <FileCheck className="w-5 h-5 text-[#b56a00]" />
+                <FileCheck className="w-5 h-5 text-[#5f3a00]" />
                 <span>Required Structure (2 Pages Maximum)</span>
               </h3>
 
@@ -155,20 +155,20 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
 
               <ul className="space-y-3 text-xs text-slate-600 leading-relaxed">
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#5f3a00] shrink-0 mt-0.5" />
                   <span>Submitted via email to <strong>positionpapers@timun.org</strong> before the announced deadline.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#5f3a00] shrink-0 mt-0.5" />
                   <span>Formatted in Times New Roman 12pt, 1.15 line spacing, 1-inch margins.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#5f3a00] shrink-0 mt-0.5" />
                   <span>Includes full Chicago or APA citations for all facts and statistics cited.</span>
                 </li>
               </ul>
 
-              <div className="p-4 bg-[#fef6e7] border border-[#f7b955] rounded-xl text-xs text-[#5f3a00] font-semibold leading-relaxed">
+              <div className="p-4 bg-[#fdeecd] border border-[#f4a024] rounded-xl text-xs text-[#5f3a00] font-semibold leading-relaxed">
                 Note: Plagiarism checks are run on all submitted position papers. AI-assisted research must be verified and cited properly.
               </div>
             </div>
@@ -178,7 +178,7 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
         {/* Tab 3: Resolution Helper Promo */}
         {activeTab === 'resolution' && (
           <div className="bg-white p-8 rounded-xl border border-slate-200 text-center space-y-4 animate-fadeIn max-w-2xl mx-auto shadow-sm">
-            <div className="w-14 h-14 rounded-xl bg-[#fdeecd] border border-[#f7b955] text-[#8a5200] flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 rounded-xl bg-[#fdeecd] border border-[#f4a024] text-[#5f3a00] flex items-center justify-center mx-auto">
               <ScrollText className="w-7 h-7" />
             </div>
 

@@ -69,7 +69,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
     <div className="space-y-8">
       {/* Publish form */}
       <form onSubmit={handleAdd} className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
-        <h4 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
+        <h4 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] flex items-center gap-2">
           <Plus className="w-4 h-4" />
           <span>Publish: article / update / video / photos</span>
         </h4>
@@ -98,7 +98,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
           <input type="checkbox" checked={form.featured} onChange={e => set('featured', e.target.checked)} className="rounded-xl" />
           <span>Feature this story at the top of Insights & Media</span>
         </label>
-        <button type="submit" className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer">
+        <button type="submit" className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer">
           Publish story
         </button>
       </form>
@@ -115,7 +115,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
             <button
               onClick={() => { updateMediaPost(p.id, { featured: !p.featured }); notify('success', p.featured ? 'Unfeatured.' : 'Set as featured story.'); }}
               title="Toggle featured"
-              className={`p-2 rounded-xl cursor-pointer ${p.featured ? 'text-[#b56a00] bg-[#f4a024]/10' : 'text-slate-500 hover:text-[#b56a00]'}`}
+              className={`p-2 rounded-xl cursor-pointer ${p.featured ? 'text-[#5f3a00] bg-[#f4a024]/10' : 'text-slate-500 hover:text-[#5f3a00]'}`}
             >
               <Star className="w-4 h-4" fill={p.featured ? 'currentColor' : 'none'} />
             </button>
@@ -132,7 +132,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
       {/* Newsletter subscribers */}
       <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] flex items-center gap-2">
             <Mail className="w-4 h-4" />
             <span>Bulletin subscribers ({subscribers.length})</span>
           </h4>
@@ -140,7 +140,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
             <button onClick={() => { refreshSubscribers(); notify('success', 'Subscriber list refreshed.'); }} className="px-3 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-xs font-bold cursor-pointer">
               Refresh
             </button>
-            <button onClick={downloadSubs} className="px-3 py-1.5 rounded-xl bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+            <button onClick={downloadSubs} className="px-3 py-1.5 rounded-xl bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
               <Download className="w-3.5 h-3.5" />
               <span>Export CSV</span>
             </button>

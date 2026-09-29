@@ -19,8 +19,8 @@ export const SecretariatSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
-            <Award className="w-3.5 h-3.5 text-[#8a5200]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f4a024] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+            <Award className="w-3.5 h-3.5 text-[#5f3a00]" />
             <span>Executive Board & Leadership</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-serif font-bold text-[#00387d] tracking-tight">
@@ -65,7 +65,7 @@ export const SecretariatSection: React.FC = () => {
                 />
               </div>
 
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xl bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] mb-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xl bg-[#fdeecd] text-[#5f3a00] border border-[#f4a024] mb-2">
                 {member.department}
               </span>
 
@@ -73,7 +73,7 @@ export const SecretariatSection: React.FC = () => {
                 {member.name}
               </h3>
 
-              <p className="text-xs font-bold text-[#8a5200] uppercase tracking-wider mt-0.5">
+              <p className="text-xs font-bold text-[#5f3a00] uppercase tracking-wider mt-0.5">
                 {member.role}
               </p>
 
@@ -86,7 +86,7 @@ export const SecretariatSection: React.FC = () => {
                   href={`mailto:${member.email}`}
                   className="text-xs text-slate-600 hover:text-[#00387d] flex items-center gap-1.5 font-medium transition-colors"
                 >
-                  <Mail className="w-3.5 h-3.5 text-[#b56a00]" />
+                  <Mail className="w-3.5 h-3.5 text-[#5f3a00]" />
                   <span>{member.email}</span>
                 </a>
               </div>

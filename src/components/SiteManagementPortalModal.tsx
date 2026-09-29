@@ -369,7 +369,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
             <div>
               <h2 className="text-lg font-serif font-bold text-slate-800 flex items-center gap-2">
                 <span>{isExecutive ? 'Secretariat Content & Site Manager' : 'Executive Portal Login'}</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-xl bg-[#f4a024]/20 text-[#b56a00] font-sans uppercase font-bold border border-[#f4a024]/30">
+                <span className="text-[10px] px-2 py-0.5 rounded-xl bg-[#f4a024]/20 text-[#5f3a00] font-sans uppercase font-bold border border-[#f4a024]/30">
                   {isExecutive ? 'Executive Directorate' : 'Restricted Access'}
                 </span>
               </h2>
@@ -384,10 +384,10 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
           <div className="flex items-center gap-3">
             {isExecutive && (
               <div className="flex items-center gap-2">
-                <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-[#f4a024]/10 border border-[#f4a024]/30 rounded-xl text-xs text-[#b56a00]">
+                <div className="hidden sm:flex items-center gap-2 px-3 py-1 bg-[#f4a024]/10 border border-[#f4a024]/30 rounded-xl text-xs text-[#5f3a00]">
                   <UserCheck className="w-3.5 h-3.5 text-[#f4a024]" />
                   <span className="font-semibold">{executiveUser?.name || 'Executive Secretariat'}</span>
-                  <span className="text-[10px] opacity-75 font-mono">({executiveUser?.role || 'Director'})</span>
+                  <span className="text-[10px] opacity-75">({executiveUser?.role || 'Director'})</span>
                 </div>
                 <button
                   onClick={() => {
@@ -426,7 +426,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
           /* Executive Login Screen */
           <div className="p-8 space-y-6 max-w-md mx-auto w-full my-auto animate-fadeIn">
             <div className="text-center space-y-2">
-              <div className="w-16 h-16 bg-[#00387d]/80 border-2 border-[#f4a024]/80 text-[#b56a00] rounded-full flex items-center justify-center mx-auto shadow-xl">
+              <div className="w-16 h-16 bg-[#00387d]/80 border-2 border-[#f4a024]/80 text-[#5f3a00] rounded-full flex items-center justify-center mx-auto shadow-xl">
                 <Shield className="w-8 h-8" />
               </div>
               <h3 className="font-serif font-bold text-2xl text-[#00387d]">Executive Login</h3>
@@ -476,7 +476,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               <div className="pt-2 space-y-2">
                 <button
                   type="submit"
-                  className="w-full bg-[#f4a024] text-slate-950 font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider hover:bg-[#f7b955] transition-colors shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full bg-[#f4a024] text-slate-950 font-bold py-2.5 rounded-xl text-xs uppercase tracking-wider hover:bg-[#f4a024] transition-colors shadow-md flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <UserCheck className="w-4 h-4" />
                   <span>Authenticate Executive Access</span>
@@ -485,7 +485,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                 <button
                   type="button"
                   onClick={handleQuickDemoLogin}
-                  className="w-full bg-slate-100 text-[#b56a00] border border-slate-300 hover:bg-slate-200 font-semibold py-2 rounded-xl text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full bg-slate-100 text-[#5f3a00] border border-slate-300 hover:bg-slate-200 font-semibold py-2 rounded-xl text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Shield className="w-3.5 h-3.5 text-[#f4a024]" />
                   <span>Quick Demo Executive Sign-In</span>
@@ -494,7 +494,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
 
               <div className="pt-3 border-t border-slate-200/80 text-center">
                 <p className="text-[11px] text-slate-500">
-                  Demo Passcode: <code className="text-[#b56a00] bg-slate-100 px-1.5 py-0.5 rounded-xl font-mono">timun2027</code>
+                  Demo Passcode: <code className="text-[#5f3a00] bg-slate-100 px-1.5 py-0.5 rounded-xl">timun2027</code>
                 </p>
               </div>
             </form>
@@ -616,7 +616,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
           {activeTab === 'info' && (
             <form onSubmit={handleSaveInfo} className="space-y-6">
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[#b56a00] mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-[#5f3a00] mb-4 flex items-center gap-2">
                   <FileText className="w-4 h-4" />
                   <span>Conference Identity & Dates</span>
                 </h3>
@@ -675,7 +675,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               </div>
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[#b56a00] mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-[#5f3a00] mb-4 flex items-center gap-2">
                   <Settings className="w-4 h-4" />
                   <span>Venue & Registration Details</span>
                 </h3>
@@ -734,7 +734,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               </div>
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[#b56a00] mb-1 flex items-center gap-2">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-[#5f3a00] mb-1 flex items-center gap-2">
                   <Settings className="w-4 h-4" />
                   <span>Registration Fees (live on checkout)</span>
                 </h3>
@@ -791,7 +791,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               </div>
 
               <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-[#b56a00] mb-4 flex items-center gap-2">
+                <h3 className="text-sm font-bold uppercase tracking-wider text-[#5f3a00] mb-4 flex items-center gap-2">
                   <Settings className="w-4 h-4" />
                   <span>Hero Numbers</span>
                 </h3>
@@ -832,7 +832,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="submit"
-                  className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md transition-all flex items-center gap-2 cursor-pointer"
                 >
                   <Save className="w-4 h-4" />
                   <span>Save General Changes</span>
@@ -847,7 +847,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               
               {/* Add Committee Form */}
               <form onSubmit={handleAddCommitteeSubmit} className="bg-white p-4 rounded-xl border border-slate-200 space-y-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] flex items-center gap-2">
                   <Plus className="w-4 h-4" />
                   <span>Add New Committee / Council</span>
                 </h3>
@@ -973,7 +973,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                 <div className="flex justify-end pt-2">
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Committee</span>
@@ -997,7 +997,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                       <div key={comm.id} className="bg-white p-3.5 rounded-xl border border-slate-200 flex justify-between items-start text-xs">
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className="px-2 py-0.5 rounded-xl bg-[#00387d]/80 text-[#b56a00] font-mono font-bold text-[10px]">
+                            <span className="px-2 py-0.5 rounded-xl bg-[#00387d]/80 text-[#5f3a00] font-bold text-[10px]">
                               {comm.acronym}
                             </span>
                             <span className="font-bold text-slate-800">{comm.name}</span>
@@ -1033,7 +1033,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               
               {/* Add Secretariat Form */}
               <form onSubmit={handleAddSecretariatSubmit} className="bg-white p-4 rounded-xl border border-slate-200 space-y-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] flex items-center gap-2">
                   <Plus className="w-4 h-4" />
                   <span>Add Secretariat Member</span>
                 </h3>
@@ -1126,7 +1126,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                 <div className="flex justify-end pt-2">
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Member</span>
@@ -1152,7 +1152,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                           <img src={mem.image} alt={mem.name} className="w-10 h-10 rounded-full object-cover border border-[#f4a024]" />
                           <div>
                             <div className="font-bold text-slate-800">{mem.name}</div>
-                            <div className="text-[10px] text-[#b56a00] font-medium">{mem.role}</div>
+                            <div className="text-[10px] text-[#5f3a00] font-medium">{mem.role}</div>
                             <div className="text-[10px] text-slate-500">{mem.department}</div>
                           </div>
                         </div>
@@ -1180,7 +1180,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               
               {/* Add Schedule Item */}
               <form onSubmit={handleAddScheduleSubmit} className="bg-white p-4 rounded-xl border border-slate-200 space-y-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] flex items-center gap-2">
                   <Plus className="w-4 h-4" />
                   <span>Add Itinerary Event</span>
                 </h3>
@@ -1253,7 +1253,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                 <div className="flex justify-end pt-2">
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Event</span>
@@ -1265,7 +1265,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               <div className="space-y-4">
                 {schedule.map((day) => (
                   <div key={day.dayNumber} className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] mb-3">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] mb-3">
                       Day {day.dayNumber}: {day.dayName} ({day.date})
                     </h4>
 
@@ -1277,7 +1277,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                           <div key={idx} className="bg-white p-2.5 rounded-xl border border-slate-200 flex justify-between items-center text-xs">
                             <div>
                               <div className="font-bold text-slate-800 flex items-center gap-2">
-                                <span className="text-[10px] text-[#f4a024] font-mono">{item.time}</span>
+                                <span className="text-[10px] text-[#f4a024]">{item.time}</span>
                                 <span>{item.title}</span>
                               </div>
                               <div className="text-[10px] text-slate-500 mt-0.5">{item.location}</div>
@@ -1308,7 +1308,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               
               {/* Add FAQ Form */}
               <form onSubmit={handleAddFaqSubmit} className="bg-white p-4 rounded-xl border border-slate-200 space-y-4">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] flex items-center gap-2">
                   <Plus className="w-4 h-4" />
                   <span>Add FAQ Item</span>
                 </h3>
@@ -1354,7 +1354,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                 <div className="flex justify-end pt-2">
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
+                    className="px-4 py-2 bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-1.5 cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add FAQ</span>
@@ -1372,7 +1372,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                   {faqs.map(faq => (
                     <div key={faq.id} className="bg-white p-3 rounded-xl border border-slate-200 flex justify-between items-start text-xs">
                       <div>
-                        <span className="text-[10px] uppercase font-bold text-[#b56a00] px-1.5 py-0.5 rounded-xl bg-[#f4a024]/10 border border-[#f4a024]/20">
+                        <span className="text-[10px] uppercase font-bold text-[#5f3a00] px-1.5 py-0.5 rounded-xl bg-[#f4a024]/10 border border-[#f4a024]/20">
                           {faq.category}
                         </span>
                         <div className="font-bold text-slate-800 mt-1">{faq.question}</div>
@@ -1401,7 +1401,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
               
               {/* File Upload Box */}
               <div className="bg-white p-6 rounded-xl border border-slate-200 text-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-[#f4a024]/20 text-[#b56a00] flex items-center justify-center mx-auto">
+                <div className="w-12 h-12 rounded-full bg-[#f4a024]/20 text-[#5f3a00] flex items-center justify-center mx-auto">
                   <Upload className="w-6 h-6" />
                 </div>
 
@@ -1410,7 +1410,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                     Upload & Import Site Configuration
                   </h3>
                   <p className="text-xs text-slate-500 max-w-md mx-auto mt-1 leading-relaxed">
-                    Upload a custom <code className="text-[#b56a00] bg-slate-100 px-1.5 py-0.5 rounded-xl">.json</code> conference data file to populate all committees, secretariat rosters, themes, and schedules instantly.
+                    Upload a custom <code className="text-[#5f3a00] bg-slate-100 px-1.5 py-0.5 rounded-xl">.json</code> conference data file to populate all committees, secretariat rosters, themes, and schedules instantly.
                   </p>
                 </div>
 
@@ -1425,7 +1425,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
 
                   <button
                     onClick={() => fileInputRef.current?.click()}
-                    className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                    className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer"
                   >
                     <Upload className="w-4 h-4" />
                     <span>Select JSON File to Upload</span>
@@ -1465,7 +1465,7 @@ export const SiteManagementPortalModal: React.FC<SiteManagementPortalModalProps>
                 </div>
 
                 <div className="bg-slate-100 p-4 rounded-xl border border-slate-200 space-y-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] flex items-center gap-2">
                     <RotateCcw className="w-4 h-4" />
                     <span>Restore Starter Sample Template</span>
                   </h4>

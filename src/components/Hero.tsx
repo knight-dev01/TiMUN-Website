@@ -57,7 +57,7 @@ export const Hero: React.FC<HeroProps> = ({
             <p className="mt-5 text-[15px] font-bold uppercase tracking-widest text-[#dd0000]">
               {conferenceInfo.dates} · Yaba, Lagos
             </p>
-            <h1 className="duo-section-title text-4xl sm:text-5xl leading-tight mt-2">
+            <h1 className="duo-section-title text-[2.75rem] sm:text-6xl leading-[1.05] mt-2">
               Walk into the hall where youth run the world.
             </h1>
             <p className="text-[#777777] text-[17px] leading-relaxed mt-4 max-w-md">
@@ -120,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({
                 </div>
               ))}
             </div>
-            <div className="rounded-xl border-2 border-[#f4a024] bg-[#fef6e7] px-4 py-3 mt-4 text-center">
+            <div className="rounded-xl border-2 border-[#f4a024] bg-[#fdeecd] px-4 py-3 mt-4 text-center">
               <p className="text-[13px] font-bold uppercase tracking-widest text-[#5f3a00]">
                 Dates announced soon
               </p>
@@ -133,7 +133,7 @@ export const Hero: React.FC<HeroProps> = ({
       </div>
 
       {/* Gold ticker */}
-      <div className="bg-[#f4a024] border-y-2 border-[#b56a00]">
+      <div className="bg-[#f4a024] border-y-2 border-[#5f3a00]">
         <p className="max-w-[1200px] mx-auto px-4 sm:px-6 py-2.5 text-center text-[13px] font-bold uppercase tracking-widest text-[#15305b]">
           Registration opens soon — join the bulletin to pick your country first
         </p>

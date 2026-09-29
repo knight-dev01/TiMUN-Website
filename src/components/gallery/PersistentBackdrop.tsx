@@ -15,7 +15,7 @@ export const PersistentBackdrop: React.FC = () => (
       src="/logo.png"
       alt=""
       loading="lazy"
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[130vmin] max-w-none h-auto object-contain opacity-[0.035]"
+      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vmin] max-w-none h-auto object-contain opacity-[0.05]"
       onError={e => {
         e.currentTarget.style.display = 'none';
       }}

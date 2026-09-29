@@ -29,7 +29,7 @@ export const VenueSection: React.FC = () => {
           {/* Left: map + location */}
           <div className="lg:col-span-7 duo-card p-6 space-y-6">
             <div className="space-y-1">
-              <span className="text-[13px] font-bold uppercase tracking-widest text-[#b56a00]">
+              <span className="text-[13px] font-bold uppercase tracking-widest text-[#5f3a00]">
                 Primary Conference Center
               </span>
               <h3 className="duo-section-title text-2xl">
@@ -38,6 +38,15 @@ export const VenueSection: React.FC = () => {
               <p className="text-sm text-[#777777]">
                 Trinity University City Campus, Off Alara Street (Near Queens College), Yaba, Lagos
               </p>
+              <a
+                href="https://www.trinityuniversity.edu.ng/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[13px] font-bold text-[#00387d] hover:text-[#dd0000] transition-colors"
+              >
+                <span>Visit trinityuniversity.edu.ng</span>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
 
             {/* Stylized campus map */}
@@ -48,7 +57,7 @@ export const VenueSection: React.FC = () => {
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#f4a024] text-[#15305b] px-4 py-2 rounded-xl font-bold text-[13px] border-2 border-[#b56a00] flex items-center gap-1.5 shadow-lg">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#f4a024] text-[#15305b] px-4 py-2 rounded-xl font-bold text-[13px] border-2 border-[#5f3a00] flex items-center gap-1.5 shadow-lg">
                 <MapPin className="w-4 h-4" />
                 <span>Main Auditorium (TiMUN HQ)</span>
               </div>
@@ -96,7 +105,7 @@ export const VenueSection: React.FC = () => {
           <div className="lg:col-span-5 duo-card p-6 space-y-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-[#00387d] font-bold text-[15px]">
-                <Hotel className="w-5 h-5 text-[#b56a00]" />
+                <Hotel className="w-5 h-5 text-[#5f3a00]" />
                 <span>Partner Hotel Discounts</span>
               </div>
               <span className="duo-chip !border-[#54b77e] !text-[#35794f]">
@@ -122,7 +131,7 @@ export const VenueSection: React.FC = () => {
                 <div key={hotel.name} className="p-4 bg-slate-50 rounded-xl border-2 border-slate-100 space-y-2">
                   <div className="flex justify-between items-start gap-2">
                     <h4 className="duo-section-title text-[15px]">{hotel.name}</h4>
-                    <span className="font-bold text-[#b56a00] text-[13px] whitespace-nowrap">{hotel.rate}</span>
+                    <span className="font-bold text-[#5f3a00] text-[13px] whitespace-nowrap">{hotel.rate}</span>
                   </div>
                   <p className="text-[13px] text-[#777777] leading-relaxed">{hotel.desc}</p>
                   <div className="text-[11px] text-[#afafaf] font-bold uppercase tracking-wider">{hotel.dist}</div>
@@ -130,7 +139,7 @@ export const VenueSection: React.FC = () => {
               ))}
             </div>
 
-            <div className="p-4 bg-[#fef6e7] rounded-xl border-2 border-[#f4a024] text-[13px] text-[#5f3a00] space-y-1.5 leading-relaxed">
+            <div className="p-4 bg-[#fdeecd] rounded-xl border-2 border-[#f4a024] text-[13px] text-[#5f3a00] space-y-1.5 leading-relaxed">
               <div className="font-bold uppercase tracking-wider">How to book:</div>
               <p>
                 Mention <strong>"TiMUN 2027 delegate block"</strong> when reserving, or use

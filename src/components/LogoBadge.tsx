@@ -20,7 +20,7 @@ export const LogoBadge: React.FC<LogoBadgeProps> = ({
   subline = 'Youth Diplomacy & Leadership',
   onDark = false,
 }) => {
-  const heights = { sm: 'h-8', md: 'h-10', lg: 'h-14', xl: 'h-24' };
+  const heights = { sm: 'h-8', md: 'h-10', lg: 'h-16', xl: 'h-28' };
   return (
     <span className="inline-flex items-center gap-3">
       <span

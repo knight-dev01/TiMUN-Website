@@ -202,8 +202,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
         {/* Header */}
         <div className="p-6 bg-slate-50 border-b border-slate-200 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#fdeecd] border border-[#f7b955] flex items-center justify-center text-[#5f3a00] font-bold shadow-xs">
-              <ShieldCheck className="w-5 h-5 text-[#8a5200]" />
+            <div className="w-10 h-10 rounded-xl bg-[#fdeecd] border border-[#f4a024] flex items-center justify-center text-[#5f3a00] font-bold shadow-xs">
+              <ShieldCheck className="w-5 h-5 text-[#5f3a00]" />
             </div>
             <div>
               <h3 className="font-serif font-bold text-lg text-[#00387d]">
@@ -235,7 +235,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     step === st.s
                       ? 'bg-[#00387d] text-white shadow-xs'
                       : step > st.s
-                      ? 'bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955]'
+                      ? 'bg-[#fdeecd] text-[#5f3a00] border border-[#f4a024]'
                       : 'bg-slate-100 text-slate-500 border border-slate-200'
                   }`}>
                     {step > st.s ? '✓' : st.s}
@@ -268,13 +268,13 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                         onClick={() => setFormData(prev => ({ ...prev, type: option.id as any }))}
                         className={`p-4 rounded-xl border cursor-pointer transition-all ${
                           selected
-                            ? 'bg-[#fef6e7]/80 border-[#00387d] shadow-xs ring-1 ring-[#00387d]'
+                            ? 'bg-[#fdeecd]/80 border-[#00387d] shadow-xs ring-1 ring-[#00387d]'
                             : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                         }`}
                       >
                         <div className="flex justify-between items-center mb-2">
                           <Icon className={`w-5 h-5 ${selected ? 'text-[#00387d]' : 'text-slate-500'}`} />
-                          <span className="text-xs font-extrabold text-[#8a5200]">{option.fee}</span>
+                          <span className="text-xs font-extrabold text-[#5f3a00]">{option.fee}</span>
                         </div>
                         <div className="font-serif font-bold text-[#00387d] text-sm">{option.title}</div>
                         <div className="text-[11px] text-slate-600 mt-1 leading-relaxed">{option.desc}</div>
@@ -481,7 +481,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
             {/* STEP 4: Payment */}
             {step === 4 && (
               <div className="space-y-4 animate-fadeIn">
-                <div className="p-4 bg-[#fef6e7] rounded-xl border border-[#f7b955]">
+                <div className="p-4 bg-[#fdeecd] rounded-xl border border-[#f4a024]">
                   <div className="flex flex-wrap justify-between items-center gap-3">
                     <div>
                       <div className="font-bold text-[#00387d]">Total due:</div>
@@ -620,7 +620,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
             </div>
 
             <div>
-              <span className="px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-xs font-mono font-bold">
+              <span className="px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f4a024] text-[#5f3a00] text-xs font-bold">
                 REGISTRATION REF: {registrationId}
               </span>
               <h3 className="font-serif font-bold text-2xl text-[#00387d] mt-3">
@@ -639,7 +639,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               )}
             </div>
 
-            <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 text-left text-xs space-y-2 max-w-md mx-auto font-mono">
+            <div className="bg-slate-50 p-5 rounded-xl border border-slate-200 text-left text-xs space-y-2 max-w-md mx-auto">
               <div className="flex justify-between border-b border-slate-200 pb-2">
                 <span className="text-slate-500">Applicant:</span>
                 <span className="text-slate-900 font-bold">{formData.fullName}</span>

@@ -68,7 +68,7 @@ export const ExecutiveOverview: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {cards.map((c, i) => (
           <div key={i} className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-            <div className="flex items-center gap-2 text-[#b56a00] text-xs font-bold uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-[#5f3a00] text-xs font-bold uppercase tracking-wider">
               <c.icon className="w-4 h-4" />
               <span>{c.label}</span>
             </div>
@@ -80,7 +80,7 @@ export const ExecutiveOverview: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] mb-3">Registrations by committee</h4>
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00] mb-3">Registrations by committee</h4>
           {byCommittee.length === 0 && <p className="text-xs text-slate-500">No registrations yet. Share the registration link to start filling committees.</p>}
           <div className="space-y-2">
             {byCommittee.map(([name, v]) => (
@@ -97,7 +97,7 @@ export const ExecutiveOverview: React.FC = () => {
 
         <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
           <div className="flex items-center justify-between mb-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#b56a00]">Site activity (last 14 days)</h4>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#5f3a00]">Site activity (last 14 days)</h4>
             <button
               onClick={() => { clearAnalyticsEvents(); force(x => x + 1); }}
               className="text-[11px] text-slate-500 hover:text-rose-300 cursor-pointer"
@@ -110,7 +110,7 @@ export const ExecutiveOverview: React.FC = () => {
             {summary.byDay.map(d => (
               <div key={d.day} className="flex-1 flex flex-col items-center gap-1" title={`${d.day}: ${d.count}`}>
                 <div className="w-full rounded-t bg-[#eef4fa]0/70" style={{ height: `${Math.max(4, (d.count / maxDay) * 80)}px` }} />
-                <span className="text-[9px] text-slate-500 font-mono">{d.day.slice(5)}</span>
+                <span className="text-[9px] text-slate-500">{d.day.slice(5)}</span>
               </div>
             ))}
           </div>
@@ -161,7 +161,7 @@ export const RegistrationsManager: React.FC<{ notify: (t: 'success' | 'error', m
         </select>
         <button
           onClick={() => { download(`timun-registrations-${new Date().toISOString().slice(0,10)}.csv`, toCsv(filtered)); notify('success', `Exported ${filtered.length} registrations to CSV.`); }}
-          className="px-4 py-2 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 text-xs font-bold uppercase tracking-wider rounded-xl flex items-center gap-2 cursor-pointer"
+          className="px-4 py-2 bg-[#f4a024] hover:bg-[#f4a024] text-slate-950 text-xs font-bold uppercase tracking-wider rounded-xl flex items-center gap-2 cursor-pointer"
         >
           <Download className="w-4 h-4" />
           <span>Export CSV</span>
@@ -178,15 +178,15 @@ export const RegistrationsManager: React.FC<{ notify: (t: 'success' | 'error', m
         {filtered.map(r => (
           <div key={r.id} className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-wrap gap-3 items-center text-xs">
             <div className="min-w-[200px] flex-1">
-              <div className="font-bold text-slate-800">{r.fullName} <span className="text-slate-500 font-mono">• {r.id}</span></div>
+              <div className="font-bold text-slate-800">{r.fullName} <span className="text-slate-500">• {r.id}</span></div>
               <div className="text-slate-500">{r.email} • {r.institution} • {r.type} • {r.firstChoiceCommittee}</div>
-              <div className="text-slate-500 font-mono mt-0.5">
+              <div className="text-slate-500 mt-0.5">
                 {formatMoney(r.feeCharged, r.feeCurrency)} ({r.feeCurrency}) • {r.paymentMethod} • {new Date(r.createdAt).toLocaleString()}
               </div>
             </div>
             <span className={`px-2 py-1 rounded-xl text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 ${
               r.paymentStatus === 'paid' ? 'bg-[#1f4a32]/60 text-[#9adbb5] border border-[#35794f]'
-              : r.paymentStatus === 'pending' ? 'bg-[#5f3a00]/40 text-[#b56a00] border border-[#8a5200]'
+              : r.paymentStatus === 'pending' ? 'bg-[#5f3a00]/40 text-[#5f3a00] border border-[#5f3a00]'
               : r.paymentStatus === 'waived' ? 'bg-[#00387d]/50 text-[#8fb0d8] border border-blue-700'
               : 'bg-[#fde2e2] text-rose-300 border border-[#f8bcbc]'
             }`}>

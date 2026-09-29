@@ -40,8 +40,8 @@ export const FaqContactSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
-            <HelpCircle className="w-3.5 h-3.5 text-[#8a5200]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f4a024] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+            <HelpCircle className="w-3.5 h-3.5 text-[#5f3a00]" />
             <span>Support & Delegate Inquiries</span>
           </div>
           <TextReveal
@@ -84,10 +84,10 @@ export const FaqContactSection: React.FC = () => {
                 >
                   <button
                     onClick={() => setOpenFaqId(isOpen ? null : faq.id)}
-                    className="w-full p-4 text-left font-serif font-bold text-sm text-[#00387d] flex justify-between items-center gap-4 hover:text-[#8a5200] transition-colors cursor-pointer"
+                    className="w-full p-4 text-left font-serif font-bold text-sm text-[#00387d] flex justify-between items-center gap-4 hover:text-[#5f3a00] transition-colors cursor-pointer"
                   >
                     <span>{faq.question}</span>
-                    {isOpen ? <ChevronUp className="w-4 h-4 text-[#b56a00] shrink-0" /> : <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />}
+                    {isOpen ? <ChevronUp className="w-4 h-4 text-[#5f3a00] shrink-0" /> : <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />}
                   </button>
 
                   {isOpen && (
@@ -103,7 +103,7 @@ export const FaqContactSection: React.FC = () => {
           {/* Contact Secretariat Form Column */}
           <div className="lg:col-span-5 bg-white p-6 rounded-xl border border-slate-200 space-y-4 shadow-xs">
             <div className="flex items-center gap-2 text-[#00387d] font-bold text-sm">
-              <MessageSquare className="w-5 h-5 text-[#b56a00]" />
+              <MessageSquare className="w-5 h-5 text-[#5f3a00]" />
               <span>Contact Secretariat Directly</span>
             </div>
 
