@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, useReducedMotion } from 'motion/react';
 import { X, Plus, Trash2, Copy, Check, Download, ScrollText, FileText, Globe } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { OPERATIVE_STARTERS, PREAMBULAR_STARTERS } from '../data/conferenceData';
@@ -11,7 +12,6 @@ interface ResolutionBuilderModalProps {
 
 export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ isOpen, onClose }) => {
   const { committees } = useConferenceData();
-  if (!isOpen) return null;
 
   const [copied, setCopied] = useState(false);
   const [activeTab, setActiveTab] = useState<'editor' | 'preview'>('editor');
@@ -101,9 +101,18 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
     setTimeout(() => setCopied(false), 3000);
   };
 
+  const reduceMotion = useReducedMotion();
+
+  if (!isOpen) return null;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fadeIn">
-      <div className="bg-white border border-slate-200 rounded max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-xl relative flex flex-col text-slate-900">
+      <motion.div
+        initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 44, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+        className="bg-white border-2 border-slate-200 rounded-[20px] max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-xl relative flex flex-col text-slate-900"
+      >
         
         {/* Header */}
         <div className="p-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between sticky top-0 z-20">
@@ -119,7 +128,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                 </span>
               </h3>
               <p className="text-xs text-slate-600">
-                Build preambular and operative clauses formatted for TUMUN committee floor action.
+                Build preambular and operative clauses formatted for TiMUN committee floor action.
               </p>
             </div>
           </div>
@@ -127,7 +136,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
           <div className="flex items-center gap-2">
             <button
               onClick={() => setActiveTab(activeTab === 'editor' ? 'preview' : 'editor')}
-              className="px-3 py-1.5 rounded text-xs font-bold uppercase tracking-wider bg-slate-100 text-[#00387d] border border-slate-200 hover:bg-slate-200 cursor-pointer"
+              className="duo-btn duo-btn-ghost !py-1.5 !px-3"
             >
               {activeTab === 'editor' ? 'Switch to UN Paper View' : 'Back to Editor'}
             </button>
@@ -155,7 +164,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                   <select
                     value={draft.committeeName}
                     onChange={(e) => setDraft(prev => ({ ...prev, committeeName: e.target.value }))}
-                    className="w-full bg-white border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
+                    className="duo-input !text-xs"
                   >
                     {committees.map(c => (
                       <option key={c.id} value={c.acronym}>{c.acronym} — {c.name}</option>
@@ -171,7 +180,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                     type="text"
                     value={draft.topicTitle}
                     onChange={(e) => setDraft(prev => ({ ...prev, topicTitle: e.target.value }))}
-                    className="w-full bg-white border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
+                    className="duo-input !text-xs"
                   />
                 </div>
               </div>
@@ -184,9 +193,9 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                   </h4>
                   <button
                     onClick={handleAddPreambular}
-                    className="px-2.5 py-1 rounded bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] hover:bg-[#fbdda1] text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer"
+                    className="duo-btn duo-btn-gold !py-1 !px-2.5"
                   >
-                    <Plus className="w-3.5 h-3.5 text-[#8a5200]" />
+                    <Plus className="w-3.5 h-3.5" />
                     <span>Add Preambular</span>
                   </button>
                 </div>
@@ -242,9 +251,9 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                   </h4>
                   <button
                     onClick={handleAddOperative}
-                    className="px-2.5 py-1 rounded bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] hover:bg-[#fbdda1] text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer"
+                    className="duo-btn duo-btn-gold !py-1 !px-2.5"
                   >
-                    <Plus className="w-3.5 h-3.5 text-[#8a5200]" />
+                    <Plus className="w-3.5 h-3.5" />
                     <span>Add Operative</span>
                   </button>
                 </div>
@@ -352,14 +361,14 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
         <div className="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center rounded-b">
           <button
             onClick={() => setActiveTab(activeTab === 'editor' ? 'preview' : 'editor')}
-            className="px-4 py-2 rounded text-xs font-bold uppercase tracking-wider text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 cursor-pointer"
+            className="duo-btn duo-btn-ghost"
           >
             {activeTab === 'editor' ? 'Preview Official Document' : 'Back to Editing'}
           </button>
 
           <button
             onClick={handleCopy}
-            className="px-5 py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs"
+            className="duo-btn duo-btn-navy"
           >
             {copied ? (
               <>
@@ -375,7 +384,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
           </button>
         </div>
 
-      </div>
+      </motion.div>
     </div>
   );
 };

@@ -42,6 +42,8 @@ export const MediaSection: React.FC = () => {
     () => (filter === 'all' ? mediaPosts : mediaPosts.filter(p => p.kind === filter)),
     [mediaPosts, filter]
   );
+  const docRef = (id: string) =>
+    `TIMUN/2027/${String(mediaPosts.findIndex(p => p.id === id) + 1).padStart(3, '0')}`;
   const featured = useMemo(() => mediaPosts.find(p => p.featured) || mediaPosts[0], [mediaPosts]);
   const rest = useMemo(() => filtered.filter(p => featured && p.id !== featured.id), [filtered, featured]);
 
@@ -123,6 +125,7 @@ export const MediaSection: React.FC = () => {
               <div className="flex items-center gap-4 mt-5 text-xs text-slate-400">
                 <span className="flex items-center gap-1.5"><User className="w-3.5 h-3.5" />{featured.author}</span>
                 <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" />{featured.date}</span>
+                <span className="font-mono font-bold text-[#00387d]">{docRef(featured.id)}</span>
               </div>
             </div>
           </button>
@@ -163,6 +166,8 @@ export const MediaSection: React.FC = () => {
                   <span>{post.author}</span>
                   <span>•</span>
                   <span>{post.date}</span>
+                  <span>•</span>
+                  <span className="font-mono font-bold text-[#00387d]">{docRef(post.id)}</span>
                 </div>
               </div>
             </button>

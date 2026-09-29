@@ -15,12 +15,13 @@ import { MediaSection } from './components/MediaSection';
 import { FaqContactSection } from './components/FaqContactSection';
 import { ComingSoon } from './components/ComingSoon';
 import { NationsGrid } from './components/NationsGrid';
+import { NewsWire } from './components/NewsWire';
 import { VerdictCta } from './components/gallery/VerdictCta';
 import { PersistentBackdrop } from './components/gallery/PersistentBackdrop';
 import { Reveal } from './components/gallery/Reveal';
 import { Footer } from './components/Footer';
 import { ResolutionBuilderModal } from './components/ResolutionBuilderModal';
-import { SiteManagementPortalModal } from './components/SiteManagementPortalModal';
+import { AdminPage } from './components/AdminPage';
 
 // NOTE: Registration is parked until required. RegistrationModal.tsx stays
 // in the repo untouched — re-add its import, state and buttons to relaunch.
@@ -28,7 +29,18 @@ import { SiteManagementPortalModal } from './components/SiteManagementPortalModa
 function AppContent() {
   const [activeSection, setActiveSection] = useState('hero');
   const [resolutionBuilderOpen, setResolutionBuilderOpen] = useState(false);
-  const [cmsModalOpen, setCmsModalOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(
+    () => typeof window !== 'undefined' && window.location.hash.startsWith('#/admin')
+  );
+
+  const openAdmin = () => {
+    window.location.hash = '#/admin';
+  };
+
+  const exitAdmin = () => {
+    window.location.hash = '#';
+    setActiveSection('hero');
+  };
 
   const goBulletin = () => {
     setActiveSection('bulletin');
@@ -42,6 +54,9 @@ function AppContent() {
 
   useEffect(() => {
     trackPageView('landing');
+    const onHash = () => setIsAdmin(window.location.hash.startsWith('#/admin'));
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
   useEffect(() => {
@@ -49,8 +64,17 @@ function AppContent() {
   }, [resolutionBuilderOpen]);
 
   useEffect(() => {
-    if (cmsModalOpen) trackEvent('executive_portal_opened');
-  }, [cmsModalOpen]);
+    if (isAdmin) trackEvent('executive_portal_opened');
+  }, [isAdmin]);
+
+  if (isAdmin) {
+    return (
+      <div className="min-h-screen bg-white font-sans antialiased" style={{ color: '#4b4b4b' }}>
+        <SEO />
+        <AdminPage onExit={exitAdmin} />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white font-sans antialiased selection:bg-[#f4a024] selection:text-[#15305b]" style={{ color: '#4b4b4b' }}>
@@ -78,6 +102,8 @@ function AppContent() {
           <WelcomeSection onJoinBulletin={goBulletin} />
         </Reveal>
 
+        <NewsWire />
+
         <Reveal>
           <NationsGrid />
         </Reveal>
@@ -98,17 +124,12 @@ function AppContent() {
 
       <Footer
         onOpenResolutionBuilder={() => setResolutionBuilderOpen(true)}
-        onOpenCms={() => setCmsModalOpen(true)}
+        onOpenCms={openAdmin}
       />
 
       <ResolutionBuilderModal
         isOpen={resolutionBuilderOpen}
         onClose={() => setResolutionBuilderOpen(false)}
-      />
-
-      <SiteManagementPortalModal
-        isOpen={cmsModalOpen}
-        onClose={() => setCmsModalOpen(false)}
       />
     </div>
   );

@@ -72,7 +72,7 @@ export const COMMITTEES: Committee[] = [
     delegateCapacity: 30,
     assignedCount: 22,
     description: "Simulating the African Union's standing decision-making organ for the prevention, management, and resolution of conflicts under the African Peace and Security Architecture (APSA).",
-    roomLocation: "Chapman Center Hall B",
+    roomLocation: "Arts Block Hall B",
     bgImage: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=80",
     studyGuideUrl: "#",
     topics: [
@@ -140,7 +140,7 @@ export const COMMITTEES: Committee[] = [
     delegateCapacity: 40,
     assignedCount: 28,
     description: "Legislative and national governance simulation where delegates act as distinguished legislators, debating national foreign policy bills, youth empowerment funding, and international treaty ratification.",
-    roomLocation: "Marrs McLean Parliamentary Chamber",
+    roomLocation: "Parliamentary Chamber",
     bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
     studyGuideUrl: "#",
     topics: [
@@ -208,7 +208,7 @@ export const COMMITTEES: Committee[] = [
     delegateCapacity: 50,
     assignedCount: 38,
     description: "Coordinates multilateral economic and social development, debt relief frameworks for developing nations, and SDG Agenda 2030 implementation.",
-    roomLocation: "Chapman Center 204",
+    roomLocation: "Science Block 204",
     bgImage: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
     studyGuideUrl: "#",
     topics: [
@@ -242,7 +242,7 @@ export const COMMITTEES: Committee[] = [
     delegateCapacity: 45,
     assignedCount: 30,
     description: "Dedicated to protecting rights, international legal protections, and long-term socio-economic inclusion for refugees and displaced communities.",
-    roomLocation: "Holmgren Center 110",
+    roomLocation: "Humanities Block 110",
     bgImage: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80",
     studyGuideUrl: "#",
     topics: [
@@ -276,7 +276,7 @@ export const COMMITTEES: Committee[] = [
     delegateCapacity: 50,
     assignedCount: 35,
     description: "Directing international public health standards, global pathogen surveillance, equitable vaccine technology transfer, and health system resilience.",
-    roomLocation: "Science Innovation Hub 302",
+    roomLocation: "Science Complex 302",
     bgImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
     studyGuideUrl: "#",
     topics: [
@@ -330,8 +330,8 @@ export const SCHEDULE: DaySchedule[] = [
     items: [
       { time: "09:00 - 11:30", title: "Delegate Accreditation & Conference Pack Collection", location: "Main Auditorium Foyer", description: "Accreditation, credentials validation, TiMUN delegate folders, handbook, and badge collection.", type: "ceremony" },
       { time: "11:30 - 13:00", title: "Inaugural Opening Ceremony & Diplomatic Keynotes", location: "Main Auditorium Stage", description: "Addresses by the Founders & Executive Directorate, Trinity University leadership, and Distinguished Guest Diplomats.", type: "ceremony", dressCode: "Western Business / Official National Attire" },
-      { time: "13:00 - 14:15", title: "Executive Welcome Luncheon & Networking", location: "Campus Banquet Atrium", description: "Catered networking lunch connecting delegates, faculty advisors, and institutional partners.", type: "meal" },
-      { time: "14:30 - 16:00", title: "First-Time Delegate Workshop & Rules of Procedure (ROP) Masterclass", location: "Chapman Hall 102", description: "Interactive session on parliamentary procedure, caucus navigation, points & motions, and resolution formulation.", type: "workshop" },
+      { time: "13:00 - 14:15", title: "Executive Welcome Luncheon & Networking", location: "University Banquet Hall", description: "Catered networking lunch connecting delegates, faculty advisors, and institutional partners.", type: "meal" },
+      { time: "14:30 - 16:00", title: "First-Time Delegate Workshop & Rules of Procedure (ROP) Masterclass", location: "Lecture Theatre 2", description: "Interactive session on parliamentary procedure, caucus navigation, points & motions, and resolution formulation.", type: "workshop" },
       { time: "16:15 - 19:30", title: "Committee Session I — Setting the Agenda, Roll Call & Opening Statements", location: "Respective Committee Rooms", description: "Formal opening speeches, establishing speakers' lists, setting agenda priority, and initial moderated debate.", type: "session", dressCode: "Western Business Attire" },
       { time: "19:45 - 21:30", title: "Diplomatic Icebreaker & Youth Leadership Mixer", location: "Campus Courtyard Terrace", description: "Informal networking, music, light refreshments, and inter-delegation cultural exchange.", type: "social" }
     ]
@@ -341,7 +341,7 @@ export const SCHEDULE: DaySchedule[] = [
     date: "Day Two",
     dayName: "Debate — Practical Workshops, Blocs & Resolution Drafting",
     items: [
-      { time: "08:30 - 09:00", title: "Morning Tea & Chair Strategy Briefings", location: "Chapman Atrium", description: "Morning refreshments and committee dais briefings.", type: "meal" },
+      { time: "08:30 - 09:00", title: "Morning Tea & Chair Strategy Briefings", location: "Campus Atrium", description: "Morning refreshments and committee dais briefings.", type: "meal" },
       { time: "09:00 - 12:30", title: "Committee Session II — Working Papers, Unmoderated Caucuses & Blocs", location: "Respective Committee Rooms", description: "Coalition building, working paper drafting, and substantive debate on core agenda items.", type: "session", dressCode: "Western Business Attire" },
       { time: "12:30 - 14:00", title: "Practical Professional Development & Policy Workshop", location: "Science Innovation Auditorium", description: "Interactive masterclass on Career Readiness, Public Policy Formulation, and Multilateral Negotiation.", type: "workshop" },
       { time: "14:00 - 17:30", title: "Committee Session III — Review of Draft Resolutions & Amendments", location: "Respective Committee Rooms", description: "Formal review of draft resolutions, introducing amendments, and crisis developments.", type: "session", dressCode: "Western Business Attire" },
