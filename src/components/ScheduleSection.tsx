@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar, Clock, MapPin, Shirt, Sparkles, Filter, Download } from 'lucide-react';
+import { Calendar, Clock, MapPin, Shirt, Filter, Download } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 
 export const ScheduleSection: React.FC = () => {

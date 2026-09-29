@@ -36,7 +36,7 @@ export function applySeo(opts?: {
   const title = opts?.title || `${SITE_NAME} 2027 | Nov 12–14, 2027`;
   const description = opts?.description || SITE_DESCRIPTION;
   const url = `${SITE_URL}${opts?.path || '/'}`;
-  const image = opts?.image || `${SITE_URL}/logo.png`;
+  const image = opts?.image || `${SITE_URL}/og-image.png`;
 
   document.title = title;
   upsertMeta('name', 'description', description);

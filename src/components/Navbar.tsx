@@ -12,9 +12,9 @@ interface NavbarProps {
 
 const NAV_LINKS = [
   { id: 'overview', label: 'ABOUT' },
+  { id: 'nations', label: 'NATIONS' },
   { id: 'media', label: 'STORIES' },
   { id: 'venue', label: 'VENUE' },
-  { id: 'coming-soon', label: 'MORE' },
   { id: 'faq', label: 'FAQS' },
 ];
 

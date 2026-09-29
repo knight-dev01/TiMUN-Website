@@ -7,7 +7,7 @@ import {
   Award, 
   Globe, 
   BookOpen, 
-  Sparkles, 
+  Gavel, 
   Building2, 
   ChevronRight, 
   Layers, 
@@ -96,7 +96,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
       category: "Empowerment",
       description: "Intensive training designed to build leadership capacity—encouraging young people to take initiative, lead collaborative teams, navigate crises, and exercise ethical decision-making in public and private spheres.",
       skills: ["Strategic Thinking", "Team Mobilization", "Crisis Management", "Ethical Governance"],
-      icon: Sparkles
+      icon: Gavel
     },
     {
       number: "05",
@@ -204,7 +204,7 @@ export const WelcomeSection: React.FC<WelcomeSectionProps> = ({ onJoinBulletin }
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-6 sm:p-8 rounded-xl border border-slate-200 shadow-xs">
               <div className="lg:col-span-7 space-y-4">
                 <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#8a5200]">
-                  <Sparkles className="w-4 h-4 text-[#b56a00]" />
+                  <Gavel className="w-4 h-4 text-[#b56a00]" />
                   <span>Our Foundational Charter</span>
                 </div>
                 <h3 className="font-serif font-bold text-2xl text-[#00387d] leading-tight">

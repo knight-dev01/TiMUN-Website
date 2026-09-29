@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PenTool, HelpCircle, FileCheck, Sparkles, Search, BookOpen, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { PenTool, HelpCircle, FileCheck, ScrollText, Search, BookOpen, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { ROP_CHEAT_SHEET } from '../data/conferenceData';
 
 interface DelegateToolkitProps {
@@ -179,7 +179,7 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
         {activeTab === 'resolution' && (
           <div className="bg-white p-8 rounded border border-slate-200 text-center space-y-4 animate-fadeIn max-w-2xl mx-auto shadow-sm">
             <div className="w-14 h-14 rounded bg-[#fdeecd] border border-[#f7b955] text-[#8a5200] flex items-center justify-center mx-auto">
-              <Sparkles className="w-7 h-7" />
+              <ScrollText className="w-7 h-7" />
             </div>
 
             <h3 className="font-serif font-bold text-2xl text-[#00387d]">

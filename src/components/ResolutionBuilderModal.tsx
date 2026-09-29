@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Plus, Trash2, Copy, Check, Download, Sparkles, FileText, Globe } from 'lucide-react';
+import { X, Plus, Trash2, Copy, Check, Download, ScrollText, FileText, Globe } from 'lucide-react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { OPERATIVE_STARTERS, PREAMBULAR_STARTERS } from '../data/conferenceData';
 import { OperativeClause, PreambularClause, ResolutionDraft } from '../types';
@@ -109,7 +109,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
         <div className="p-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded bg-[#fdeecd] border border-[#f7b955] flex items-center justify-center text-[#5f3a00] font-bold shadow-xs">
-              <Sparkles className="w-5 h-5 text-[#8a5200]" />
+              <ScrollText className="w-5 h-5 text-[#8a5200]" />
             </div>
             <div>
               <h3 className="font-serif font-bold text-lg text-[#00387d] flex items-center gap-2">

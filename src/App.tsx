@@ -14,6 +14,7 @@ import { VenueSection } from './components/VenueSection';
 import { MediaSection } from './components/MediaSection';
 import { FaqContactSection } from './components/FaqContactSection';
 import { ComingSoon } from './components/ComingSoon';
+import { NationsGrid } from './components/NationsGrid';
 import { VerdictCta } from './components/gallery/VerdictCta';
 import { PersistentBackdrop } from './components/gallery/PersistentBackdrop';
 import { Reveal } from './components/gallery/Reveal';
@@ -75,6 +76,10 @@ function AppContent() {
 
         <Reveal>
           <WelcomeSection onJoinBulletin={goBulletin} />
+        </Reveal>
+
+        <Reveal>
+          <NationsGrid />
         </Reveal>
 
         <Reveal>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, BookOpen, Users, MapPin, Download, CheckCircle, ShieldAlert, Sparkles, FileText, ArrowRight } from 'lucide-react';
+import { X, BookOpen, Users, MapPin, Download, CheckCircle, ShieldAlert, FileText, ArrowRight } from 'lucide-react';
 import { Committee, CountryMatrixItem } from '../types';
 import { COUNTRY_MATRIX_SAMPLE } from '../data/conferenceData';
 

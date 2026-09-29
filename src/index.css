@@ -27,9 +27,22 @@
 
   body {
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    background-color: #ffffff;
+    background-color: #FDFCF9;
     color: #4b4b4b;
+    font-size: 17px;
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid #f4a024;
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 
   h1, h2, h3, .font-serif {
