@@ -7,7 +7,7 @@
 
 export const SITE_URL =
   (import.meta as any)?.env?.VITE_SITE_URL?.replace(/\/$/, '') ||
-  'https://timun.org';
+  'https://ti-mun-website.vercel.app';
 
 export const SITE_NAME = 'TiMUN — Trinity International Model United Nations';
 export const SITE_SHORT_NAME = 'TiMUN 2027';

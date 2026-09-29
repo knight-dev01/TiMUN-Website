@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# Replace timun.org with the production domain once DNS is live
-Sitemap: https://timun.org/sitemap.xml
+# Production sitemap — update if the domain ever changes
+Sitemap: https://ti-mun-website.vercel.app/sitemap.xml
