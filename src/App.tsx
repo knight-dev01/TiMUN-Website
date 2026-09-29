@@ -107,12 +107,6 @@ function AppContent() {
           <NationsGrid />
         </Reveal>
 
-        <NewsWire />
-
-        <Reveal>
-          <NationsGrid />
-        </Reveal>
-
         <Reveal>
           <MediaSection />
         </Reveal>

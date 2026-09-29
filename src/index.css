@@ -208,6 +208,58 @@
   to { transform: translateX(-50%); }
 }
 
+/* ---- Nations cylinder: continuous 3D rotation, one GPU transform ---- */
+.cyl-stage {
+  --cyl-r: 235px;
+  perspective: 1200px;
+  height: 320px;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .cyl-stage {
+    --cyl-r: 350px;
+    height: 340px;
+  }
+}
+
+.cyl-rotor {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: cyl-spin 40s linear infinite;
+}
+
+.cyl-stage:hover .cyl-rotor {
+  animation-play-state: paused;
+}
+
+@keyframes cyl-spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.cyl-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 148px;
+  margin-left: -74px;
+  margin-top: -92px;
+  padding: 0.9rem 0.6rem;
+  text-align: center;
+  backface-visibility: hidden;
+  background: #fff;
+}
+
+@media (min-width: 640px) {
+  .cyl-card {
+    width: 200px;
+    margin-left: -100px;
+    margin-top: -95px;
+  }
+}
+
 /* ---- Twinkling sparkles (hero accents, transform/opacity only) ---- */
 @keyframes twinkle {
   0%, 100% { opacity: 0.15; transform: scale(0.8) rotate(0deg); }
@@ -225,6 +277,7 @@
   }
 
   .animate-fadeIn,
+  .cyl-rotor,
   .twinkle,
   .hall-ticker-track {
     animation: none;
