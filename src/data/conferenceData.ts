@@ -4,12 +4,12 @@ export const CONFERENCE_INFO = {
   title: "Trinity International Model United Nations",
   acronym: "TiMUN 2027",
   edition: "Annual International Youth Diplomacy & Leadership Conference",
-  dates: "November 12 – 14, 2027",
+  dates: "2027",
   location: "Trinity University, Yaba • Lagos, Nigeria",
   venue: "Main Auditorium & Senate Hall Complex",
   theme: "Beyond the Classroom: Equipping Youth to Lead in Diplomacy, Governance & Global Affairs",
-  registrationDeadline: "October 25, 2027",
-  earlyBirdDeadline: "September 20, 2027",
+  registrationDeadline: "To be announced",
+  earlyBirdDeadline: "To be announced",
   delegateFee: "$65",
   delegationFee: "$110",
   contactEmail: "secretariat@timun.org",
@@ -325,8 +325,8 @@ export const COUNTRY_MATRIX_SAMPLE: CountryMatrixItem[] = [
 export const SCHEDULE: DaySchedule[] = [
   {
     dayNumber: 1,
-    date: "November 12, 2027",
-    dayName: "Friday — Accreditation, Opening Ceremony & Simulation Commencement",
+    date: "Day One",
+    dayName: "Arrival — Accreditation, Opening Ceremony & Simulation Commencement",
     items: [
       { time: "09:00 - 11:30", title: "Delegate Accreditation & Conference Pack Collection", location: "Main Auditorium Foyer", description: "Accreditation, credentials validation, TiMUN delegate folders, handbook, and badge collection.", type: "ceremony" },
       { time: "11:30 - 13:00", title: "Inaugural Opening Ceremony & Diplomatic Keynotes", location: "Main Auditorium Stage", description: "Addresses by the Founders & Executive Directorate, Trinity University leadership, and Distinguished Guest Diplomats.", type: "ceremony", dressCode: "Western Business / Official National Attire" },
@@ -338,8 +338,8 @@ export const SCHEDULE: DaySchedule[] = [
   },
   {
     dayNumber: 2,
-    date: "November 13, 2027",
-    dayName: "Saturday — Debate, Practical Workshops, Blocs & Resolution Drafting",
+    date: "Day Two",
+    dayName: "Debate — Practical Workshops, Blocs & Resolution Drafting",
     items: [
       { time: "08:30 - 09:00", title: "Morning Tea & Chair Strategy Briefings", location: "Chapman Atrium", description: "Morning refreshments and committee dais briefings.", type: "meal" },
       { time: "09:00 - 12:30", title: "Committee Session II — Working Papers, Unmoderated Caucuses & Blocs", location: "Respective Committee Rooms", description: "Coalition building, working paper drafting, and substantive debate on core agenda items.", type: "session", dressCode: "Western Business Attire" },
@@ -350,8 +350,8 @@ export const SCHEDULE: DaySchedule[] = [
   },
   {
     dayNumber: 3,
-    date: "November 14, 2027",
-    dayName: "Sunday — Voting Procedure, Plenary Action & Awards Ceremony",
+    date: "Day Three",
+    dayName: "Verdict — Voting Procedure, Plenary Action & Awards Ceremony",
     items: [
       { time: "09:00 - 11:30", title: "Committee Session IV — Final Voting Procedure on Resolutions", location: "Respective Committee Rooms", description: "Roll call votes, division of question, clause-by-clause voting, and committee concluding statements.", type: "session", dressCode: "Western Business Attire" },
       { time: "11:45 - 13:00", title: "General Assembly Plenary Session", location: "Main Auditorium", description: "Plenary ratification of committee outcomes and presentation of adopted resolutions.", type: "session" },

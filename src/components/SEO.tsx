@@ -8,7 +8,7 @@ export const SEO: React.FC = () => {
 
   useEffect(() => {
     applySeo({
-      title: `${conferenceInfo.acronym || 'TiMUN 2027'} | ${conferenceInfo.title || 'Trinity International Model United Nations'} — ${conferenceInfo.dates || 'Nov 12–14, 2027'}`,
+      title: `${conferenceInfo.acronym || 'TiMUN 2027'} | ${conferenceInfo.title || 'Trinity International Model United Nations'} — ${conferenceInfo.dates || '2027'}`,
       description: `${conferenceInfo.acronym || 'TiMUN 2027'}: ${conferenceInfo.theme || 'youth diplomacy & leadership conference'}. ${conferenceInfo.dates || ''} • ${conferenceInfo.location || ''}. Committees, registration, schedule, study guides and resolution builder.`,
       path: '/',
     });
@@ -16,8 +16,8 @@ export const SEO: React.FC = () => {
       'timun-conference',
       conferenceJsonLd({
         name: `${conferenceInfo.acronym || 'TiMUN 2027'} — ${conferenceInfo.title || ''}`,
-        startDate: '2027-11-12',
-        endDate: '2027-11-14',
+        startDate: '2027',
+        endDate: '2027',
         locationName: conferenceInfo.location || 'Trinity University, Yaba, Lagos',
         description: conferenceInfo.theme || '',
       })

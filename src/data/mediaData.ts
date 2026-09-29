@@ -39,10 +39,10 @@ export const MEDIA_POSTS: MediaPost[] = [
   {
     id: 'post-earlybird',
     kind: 'update',
-    title: 'Early-bird registration is open for TiMUN 2027',
+    title: 'Registration is coming to TiMUN 2027',
     excerpt:
-      'Secure your committee and country assignment before September 20, 2027. Individual and delegation passes include all sessions, workshops, the icebreaker and the gala dinner.',
-    body: 'Early-bird registration for the inaugural Trinity International Model United Nations is officially open.\n\nDelegates who register before September 20, 2027 get priority country allocation across all eight committees — UNSC, AU-PSC, ECOWAS, NASS Joint Committee, DISEC, ECOSOC, UNHCR and WHO.\n\nYour pass covers all four committee sessions, the plenary, ROP masterclasses, leadership workshops, the diplomatic icebreaker and the Saturday gala buffet dinner. Pay online in Naira or Dollars via Paystack, or by bank transfer.',
+      'Join the bulletin to secure your committee and country assignment the moment registration opens. Passes will cover all sessions, workshops, the icebreaker and the gala dinner.',
+    body: 'Registration for the inaugural Trinity International Model United Nations opens soon.\n\nDelegates who join the bulletin first will get priority country allocation across all eight committees — UNSC, AU-PSC, ECOWAS, NASS Joint Committee, DISEC, ECOSOC, UNHCR and WHO.\n\nYour pass will cover all four committee sessions, the plenary, ROP masterclasses, leadership workshops, the diplomatic icebreaker and the Saturday gala buffet dinner. Pay online in Naira or Dollars via Paystack, or by bank transfer.',
     coverImage: NIGERIAN_PHOTOS.conference.src,
     videoUrl: '',
     gallery: [],

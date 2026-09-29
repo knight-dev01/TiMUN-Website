@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { useConferenceData } from '../context/ConferenceContext';
 import { LogoBadge } from './LogoBadge';
@@ -18,25 +18,7 @@ export const Hero: React.FC<HeroProps> = ({
   const { conferenceInfo, committees } = useConferenceData();
   const reduceMotion = useReducedMotion();
 
-  const targetDate = new Date('2027-11-12T09:00:00').getTime();
-  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-  useEffect(() => {
-    const updateCountdown = () => {
-      const difference = targetDate - new Date().getTime();
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000)
-        });
-      }
-    };
-    updateCountdown();
-    const interval = setInterval(updateCountdown, 1000);
-    return () => clearInterval(interval);
-  }, [targetDate]);
 
   return (
     <section id="hero" className="relative bg-white overflow-hidden">
@@ -116,24 +98,14 @@ export const Hero: React.FC<HeroProps> = ({
                 </div>
               ))}
             </div>
-            <div className="grid grid-cols-4 gap-2 mt-4">
-              {[
-                { label: 'Days', value: timeLeft.days },
-                { label: 'Hrs', value: timeLeft.hours },
-                { label: 'Min', value: timeLeft.minutes },
-                { label: 'Sec', value: timeLeft.seconds },
-              ].map(item => (
-                <div key={item.label} className="rounded-xl border-2 border-[#f4a024] bg-[#fef6e7] py-2 text-center">
-                  <div className="font-bold text-lg text-[#00387d] font-mono">
-                    {String(item.value).padStart(2, '0')}
-                  </div>
-                  <div className="text-[10px] font-bold uppercase text-[#777777]">{item.label}</div>
-                </div>
-              ))}
+            <div className="rounded-xl border-2 border-[#f4a024] bg-[#fef6e7] px-4 py-3 mt-4 text-center">
+              <p className="text-[13px] font-bold uppercase tracking-widest text-[#5f3a00]">
+                Dates announced soon
+              </p>
+              <p className="text-[13px] text-[#777777] mt-1">
+                The gavel falls at {conferenceInfo.venue} — join the bulletin to hear first.
+              </p>
             </div>
-            <p className="text-[13px] text-[#777777] mt-4">
-              The gavel falls {conferenceInfo.dates} at {conferenceInfo.venue}.
-            </p>
           </motion.div>
         </div>
       </div>
@@ -141,7 +113,7 @@ export const Hero: React.FC<HeroProps> = ({
       {/* Gold ticker */}
       <div className="bg-[#f4a024] border-y-2 border-[#b56a00]">
         <p className="max-w-[1200px] mx-auto px-4 sm:px-6 py-2.5 text-center text-[13px] font-bold uppercase tracking-widest text-[#15305b]">
-          Early-bird ends {conferenceInfo.earlyBirdDeadline} — first to register pick their countries first
+          Registration opens soon — join the bulletin to pick your country first
         </p>
       </div>
     </section>

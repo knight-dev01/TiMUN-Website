@@ -472,7 +472,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     className="rounded text-[#00387d] focus:ring-[#00387d] bg-slate-50 border-slate-300"
                   />
                   <label htmlFor="positionPaperAgree" className="text-xs text-slate-600">
-                    I agree to submit my 2-page Position Paper by October 31, 2026 to be eligible for conference awards.
+                    I agree to submit my 2-page Position Paper before the announced deadline to be eligible for conference awards.
                   </label>
                 </div>
               </div>

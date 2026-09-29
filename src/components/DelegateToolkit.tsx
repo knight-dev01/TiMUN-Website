@@ -156,7 +156,7 @@ export const DelegateToolkit: React.FC<DelegateToolkitProps> = ({ onOpenResoluti
               <ul className="space-y-3 text-xs text-slate-600 leading-relaxed">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0 mt-0.5" />
-                  <span>Submitted via email to <strong>positionpapers@timun.org</strong> by October 31, 2026.</span>
+                  <span>Submitted via email to <strong>positionpapers@timun.org</strong> before the announced deadline.</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#b56a00] shrink-0 mt-0.5" />

@@ -433,14 +433,18 @@ export const ConferenceDataProvider: React.FC<{ children: React.ReactNode }> = (
       title: "Trinity International Model United Nations",
       acronym: "TiMUN 2027",
       edition: "Inaugural Edition • 1st Annual Conference",
-      dates: "November 12 – 14, 2027",
+      dates: "2027",
       location: "Trinity University, Yaba • Lagos, Nigeria",
       venue: "Main Auditorium & Senate Hall Complex",
       theme: "Enter Your Conference Theme Here",
-      registrationDeadline: "October 25, 2027",
-      earlyBirdDeadline: "September 20, 2027",
+      registrationDeadline: "To be announced",
+      earlyBirdDeadline: "To be announced",
       delegateFee: "$65",
       delegationFee: "$110",
+      feeIndividualUsd: 65,
+      feeDelegationBaseUsd: 110,
+      feePerDelegateUsd: 55,
+      ngnPerUsd: 1500,
       contactEmail: "secretariat@timun.org",
       stats: {
         delegates: "0",
@@ -452,9 +456,9 @@ export const ConferenceDataProvider: React.FC<{ children: React.ReactNode }> = (
     setCommittees([]);
     setSecretariatTeam([]);
     setSchedule([
-      { dayNumber: 1, date: "Nov 12, 2027", dayName: "Friday", items: [] },
-      { dayNumber: 2, date: "Nov 13, 2027", dayName: "Saturday", items: [] },
-      { dayNumber: 3, date: "Nov 14, 2027", dayName: "Sunday", items: [] }
+      { dayNumber: 1, date: "Day One", dayName: "Arrival", items: [] },
+      { dayNumber: 2, date: "Day Two", dayName: "Debate", items: [] },
+      { dayNumber: 3, date: "Day Three", dayName: "Verdict", items: [] }
     ]);
     setFaqs([]);
   };

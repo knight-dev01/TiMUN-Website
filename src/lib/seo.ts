@@ -33,7 +33,7 @@ export function applySeo(opts?: {
   image?: string;
 }) {
   if (typeof document === 'undefined') return;
-  const title = opts?.title || `${SITE_NAME} 2027 | Nov 12–14, 2027`;
+  const title = opts?.title || `${SITE_NAME} 2027 | Yaba, Lagos`;
   const description = opts?.description || SITE_DESCRIPTION;
   const url = `${SITE_URL}${opts?.path || '/'}`;
   const image = opts?.image || `${SITE_URL}/og-image.png`;
@@ -79,8 +79,8 @@ export function conferenceJsonLd(opts: {
         '@type': 'Event',
         name: opts.name || 'TiMUN 2027',
         description: opts.description || SITE_DESCRIPTION,
-        startDate: opts.startDate || '2027-11-12',
-        endDate: opts.endDate || '2027-11-14',
+        startDate: opts.startDate || '2027',
+        endDate: opts.endDate || '2027',
         eventStatus: 'https://schema.org/EventScheduled',
         eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
         location: {
