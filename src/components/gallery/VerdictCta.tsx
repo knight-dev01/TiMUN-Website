@@ -51,7 +51,7 @@ export const VerdictCta: React.FC<VerdictCtaProps> = ({ onJoinBulletin }) => {
           <p className="text-[15px] font-bold uppercase tracking-widest text-[#dd0000]">
             The record will show —
           </p>
-          <h2 className="text-3xl sm:text-5xl font-bold mt-4 leading-tight" style={{ fontFamily: "Georgia, 'Times New Roman', serif", color: '#00387d' }}>
+          <h2 className="text-3xl sm:text-5xl font-bold mt-4 leading-tight" style={{ fontFamily: "'Nunito Sans', system-ui, sans-serif", color: '#00387d' }}>
             8 councils deliberated.
             <br />
             Every delegate <Circled>verified</Circled>.

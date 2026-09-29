@@ -63,12 +63,12 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
     URL.revokeObjectURL(url);
   };
 
-  const inputCls = 'w-full bg-white border-slate-300 rounded p-2 text-xs text-slate-800 focus:border-[#f4a024] outline-none';
+  const inputCls = 'w-full bg-white border-slate-300 rounded-xl p-2 text-xs text-slate-800 focus:border-[#f4a024] outline-none';
 
   return (
     <div className="space-y-8">
       {/* Publish form */}
-      <form onSubmit={handleAdd} className="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+      <form onSubmit={handleAdd} className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
         <h4 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
           <Plus className="w-4 h-4" />
           <span>Publish: article / update / video / photos</span>
@@ -95,10 +95,10 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
           <input value={form.tags} onChange={e => set('tags', e.target.value)} placeholder="Tags (comma separated)" className={inputCls} />
         </div>
         <label className="flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
-          <input type="checkbox" checked={form.featured} onChange={e => set('featured', e.target.checked)} className="rounded" />
+          <input type="checkbox" checked={form.featured} onChange={e => set('featured', e.target.checked)} className="rounded-xl" />
           <span>Feature this story at the top of Insights & Media</span>
         </label>
-        <button type="submit" className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 font-bold text-xs uppercase tracking-wider rounded cursor-pointer">
+        <button type="submit" className="px-5 py-2.5 bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer">
           Publish story
         </button>
       </form>
@@ -107,7 +107,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
       <div className="space-y-2">
         <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600">Published ({mediaPosts.length})</h4>
         {mediaPosts.map(p => (
-          <div key={p.id} className="bg-slate-50 border border-slate-200 rounded p-3 flex flex-wrap items-center gap-3 text-xs">
+          <div key={p.id} className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-wrap items-center gap-3 text-xs">
             <div className="flex-1 min-w-[200px]">
               <div className="font-bold text-slate-800">{p.title}</div>
               <div className="text-slate-500">{p.kind} • {p.author} • {p.date}</div>
@@ -115,13 +115,13 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
             <button
               onClick={() => { updateMediaPost(p.id, { featured: !p.featured }); notify('success', p.featured ? 'Unfeatured.' : 'Set as featured story.'); }}
               title="Toggle featured"
-              className={`p-2 rounded cursor-pointer ${p.featured ? 'text-[#b56a00] bg-[#f4a024]/10' : 'text-slate-500 hover:text-[#b56a00]'}`}
+              className={`p-2 rounded-xl cursor-pointer ${p.featured ? 'text-[#b56a00] bg-[#f4a024]/10' : 'text-slate-500 hover:text-[#b56a00]'}`}
             >
               <Star className="w-4 h-4" fill={p.featured ? 'currentColor' : 'none'} />
             </button>
             <button
               onClick={() => { if (window.confirm(`Delete "${p.title}"?`)) { deleteMediaPost(p.id); notify('success', 'Story deleted.'); } }}
-              className="p-2 rounded text-[#dd0000] hover:bg-[#fde2e2] cursor-pointer"
+              className="p-2 rounded-xl text-[#dd0000] hover:bg-[#fde2e2] cursor-pointer"
             >
               <Trash2 className="w-4 h-4" />
             </button>
@@ -130,17 +130,17 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
       </div>
 
       {/* Newsletter subscribers */}
-      <div className="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3">
+      <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
         <div className="flex items-center justify-between">
           <h4 className="text-xs font-bold uppercase tracking-wider text-[#b56a00] flex items-center gap-2">
             <Mail className="w-4 h-4" />
             <span>Bulletin subscribers ({subscribers.length})</span>
           </h4>
           <div className="flex gap-2">
-            <button onClick={() => { refreshSubscribers(); notify('success', 'Subscriber list refreshed.'); }} className="px-3 py-1.5 rounded bg-slate-200 hover:bg-slate-300 text-xs font-bold cursor-pointer">
+            <button onClick={() => { refreshSubscribers(); notify('success', 'Subscriber list refreshed.'); }} className="px-3 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-xs font-bold cursor-pointer">
               Refresh
             </button>
-            <button onClick={downloadSubs} className="px-3 py-1.5 rounded bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
+            <button onClick={downloadSubs} className="px-3 py-1.5 rounded-xl bg-[#f4a024] hover:bg-[#f7b955] text-slate-950 text-xs font-bold flex items-center gap-1.5 cursor-pointer">
               <Download className="w-3.5 h-3.5" />
               <span>Export CSV</span>
             </button>
@@ -151,7 +151,7 @@ export const MediaManager: React.FC<{ notify: (t: 'success' | 'error', m: string
         ) : (
           <div className="max-h-48 overflow-y-auto space-y-1.5">
             {subscribers.map(s => (
-              <div key={s.id} className="flex items-center justify-between text-xs bg-slate-100 rounded px-3 py-1.5">
+              <div key={s.id} className="flex items-center justify-between text-xs bg-slate-100 rounded-xl px-3 py-1.5">
                 <span className="text-slate-700">{s.email}{s.name ? ` • ${s.name}` : ''}</span>
                 <span className="flex items-center gap-2">
                   <span className={`text-[10px] font-bold uppercase ${s.synced ? 'text-emerald-400' : 'text-[#f4a024]'}`}>

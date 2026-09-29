@@ -40,7 +40,7 @@ export const FaqContactSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
             <HelpCircle className="w-3.5 h-3.5 text-[#8a5200]" />
             <span>Support & Delegate Inquiries</span>
           </div>
@@ -59,7 +59,7 @@ export const FaqContactSection: React.FC = () => {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 activeCategory === cat
                   ? 'bg-[#00387d] text-white shadow-xs'
                   : 'bg-slate-100 text-slate-600 hover:text-[#00387d] border border-slate-200'
@@ -80,7 +80,7 @@ export const FaqContactSection: React.FC = () => {
               return (
                 <div
                   key={faq.id}
-                  className="bg-slate-50 rounded border border-slate-200 overflow-hidden transition-colors"
+                  className="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden transition-colors"
                 >
                   <button
                     onClick={() => setOpenFaqId(isOpen ? null : faq.id)}
@@ -101,7 +101,7 @@ export const FaqContactSection: React.FC = () => {
           </div>
 
           {/* Contact Secretariat Form Column */}
-          <div className="lg:col-span-5 bg-white p-6 rounded border border-slate-200 space-y-4 shadow-xs">
+          <div className="lg:col-span-5 bg-white p-6 rounded-xl border border-slate-200 space-y-4 shadow-xs">
             <div className="flex items-center gap-2 text-[#00387d] font-bold text-sm">
               <MessageSquare className="w-5 h-5 text-[#b56a00]" />
               <span>Contact Secretariat Directly</span>
@@ -117,7 +117,7 @@ export const FaqContactSection: React.FC = () => {
                     placeholder="Full name"
                     value={contactData.name}
                     onChange={(e) => setContactData({ ...contactData, name: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   />
                 </div>
 
@@ -129,7 +129,7 @@ export const FaqContactSection: React.FC = () => {
                     placeholder="delegate@school.edu"
                     value={contactData.email}
                     onChange={(e) => setContactData({ ...contactData, email: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   />
                 </div>
 
@@ -138,7 +138,7 @@ export const FaqContactSection: React.FC = () => {
                   <select
                     value={contactData.subject}
                     onChange={(e) => setContactData({ ...contactData, subject: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   >
                     <option value="General Inquiry">General Inquiry</option>
                     <option value="Institutional Partnership">Institutional Partnership & Sponsorship</option>
@@ -157,13 +157,13 @@ export const FaqContactSection: React.FC = () => {
                     placeholder="Write your question for the Secretariat..."
                     value={contactData.message}
                     onChange={(e) => setContactData({ ...contactData, message: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-800 focus:outline-none focus:border-[#00387d]"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-2.5 rounded text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                  className="w-full py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest text-white bg-[#00387d] hover:bg-[#294a70] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
                 >
                   <Send className="w-3.5 h-3.5 text-[#f4a024]" />
                   <span>Send Inquiry to Secretariat</span>

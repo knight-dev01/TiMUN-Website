@@ -6,7 +6,7 @@ interface RevealProps {
   delay?: number;
 }
 
-/** Single soft rise-in when a section enters view. Transform-only, once. */
+/** Soft rise-in every time a section enters view — scrolling down or back up. Transform-only. */
 export const Reveal: React.FC<RevealProps> = ({ children, delay = 0 }) => {
   const reduceMotion = useReducedMotion();
   if (reduceMotion) return <>{children}</>;
@@ -14,7 +14,7 @@ export const Reveal: React.FC<RevealProps> = ({ children, delay = 0 }) => {
     <motion.div
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: false, amount: 0.15, margin: '-40px' }}
       transition={{ duration: 0.5, delay, ease: 'easeOut' }}
     >
       {children}

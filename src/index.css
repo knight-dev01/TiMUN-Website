@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;1,6..12,400;1,6..12,600&display=swap');
 @import "tailwindcss";
 
 /* ---- TiMUN × TU Yaba × Duo design tokens ----
-   General system fonts only: zero downloads, native on every device. */
+   One soft family everywhere: Nunito Sans (round, warm, never formal). */
 @theme {
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --font-display: Georgia, 'Times New Roman', serif;
+  --font-sans: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --color-tu-navy: #00387d;
   --color-tu-navy-deep: #15305b;
   --color-tu-steel: #294a70;
@@ -26,7 +27,7 @@
   }
 
   body {
-    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Nunito Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
     background-color: #FDFCF9;
     color: #4b4b4b;
     font-size: 17px;
@@ -46,9 +47,10 @@
   }
 
   h1, h2, h3, .font-serif {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: 'Nunito Sans', system-ui, sans-serif;
+    font-weight: 800;
     color: #00387d;
-    letter-spacing: 0;
+    letter-spacing: -0.01em;
   }
 
   img {
@@ -58,13 +60,15 @@
 
 /* ---- Duo display + hand-note (storybook voice) ---- */
 .vx-display {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Nunito Sans', system-ui, sans-serif;
+  font-weight: 800;
   letter-spacing: -0.01em;
 }
 
 .vx-hand-note {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Nunito Sans', system-ui, sans-serif;
   font-style: italic;
+  font-weight: 600;
 }
 
 .vx-paper {
@@ -176,8 +180,8 @@
 }
 
 .duo-section-title {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 700;
+  font-family: 'Nunito Sans', system-ui, sans-serif;
+  font-weight: 800;
   color: #00387d;
 }
 
@@ -190,12 +194,91 @@
   animation: fadeIn 0.3s ease-out forwards;
 }
 
+/* ---- Nations cylinder: continuous 3D rotation, one GPU transform ---- */
+.cyl-stage {
+  --cyl-r: 190px;
+  perspective: 1100px;
+  height: 300px;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .cyl-stage {
+    --cyl-r: 320px;
+    height: 320px;
+  }
+}
+
+.cyl-rotor {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: cyl-spin 40s linear infinite;
+}
+
+.cyl-stage:hover .cyl-rotor {
+  animation-play-state: paused;
+}
+
+@keyframes cyl-spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.cyl-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 168px;
+  margin-left: -84px;
+  margin-top: -90px;
+  padding: 1rem;
+  text-align: center;
+  backface-visibility: hidden;
+  background: #fff;
+}
+
+@media (min-width: 640px) {
+  .cyl-card {
+    width: 200px;
+    margin-left: -100px;
+  }
+}
+
+/* ---- News ticker: continuous stream, one GPU transform ---- */
+.hall-ticker-track {
+  animation: hall-ticker 32s linear infinite;
+}
+
+.hall-ticker:hover .hall-ticker-track {
+  animation-play-state: paused;
+}
+
+@keyframes hall-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ---- Twinkling sparkles (hero accents, transform/opacity only) ---- */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8) rotate(0deg); }
+  50% { opacity: 0.9; transform: scale(1.15) rotate(20deg); }
+}
+
+.twinkle {
+  animation: twinkle 3.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .animate-fadeIn {
+  .animate-fadeIn,
+  .cyl-rotor,
+  .twinkle,
+  .hall-ticker-track {
     animation: none;
   }
 

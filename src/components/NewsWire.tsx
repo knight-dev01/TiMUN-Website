@@ -1,78 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import React from 'react';
 import { useConferenceData } from '../context/ConferenceContext';
 
 /**
- * TIMUN WIRE — breaking-news headline bar fed by published stories.
- * Rotates every 5s, pauses on hover, dots for manual control.
- * Clicking a headline jumps to the Stories section.
+ * TiMUN Wire — classic breaking-news ticker pinned to the top of the page.
+ * Headlines stream continuously (marquee), pause on hover, click jumps
+ * to Stories. Fed by published posts, so it updates itself.
  */
 export const NewsWire: React.FC = () => {
   const { mediaPosts } = useConferenceData();
-  const reduceMotion = useReducedMotion();
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-
-  const headlines = mediaPosts.slice(0, 5);
-
-  useEffect(() => {
-    if (reduceMotion || paused || headlines.length < 2) return;
-    const t = setInterval(() => setIndex(i => (i + 1) % headlines.length), 5000);
-    return () => clearInterval(t);
-  }, [reduceMotion, paused, headlines.length]);
-
+  const headlines = mediaPosts.slice(0, 6);
   if (headlines.length === 0) return null;
-  const current = headlines[index % headlines.length];
+  const loop = [...headlines, ...headlines];
 
   const goStories = () => {
-    document.getElementById('media')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+    document.getElementById('media')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div
-      className="bg-white border-b-2 border-slate-100"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-3">
-        <span className="shrink-0 inline-flex items-center gap-1.5 bg-[#dd0000] text-white text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-md">
+    <div className="bg-white border-b-2 border-slate-100 overflow-hidden">
+      <div className="flex items-stretch">
+        <span className="shrink-0 z-10 inline-flex items-center gap-1.5 bg-[#dd0000] text-white text-[11px] font-bold uppercase tracking-widest px-3 py-2">
           <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
           TiMUN Wire
         </span>
-
-        <button
-          onClick={goStories}
-          className="flex-1 min-w-0 text-left cursor-pointer group"
-          aria-label="Read this story"
-        >
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={current.id}
-              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduceMotion ? undefined : { opacity: 0, y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="block truncate text-[14px] font-medium text-[#00387d] group-hover:text-[#dd0000] transition-colors"
-            >
-              {current.title}
-            </motion.span>
-          </AnimatePresence>
-        </button>
-
-        {headlines.length > 1 && (
-          <span className="shrink-0 hidden sm:flex items-center gap-1.5">
-            {headlines.map((h, i) => (
+        <div className="hall-ticker relative flex-1 overflow-hidden">
+          <div className="hall-ticker-track flex w-max items-center h-full">
+            {loop.map((post, i) => (
               <button
-                key={h.id}
-                onClick={() => setIndex(i)}
-                aria-label={`Headline ${i + 1}`}
-                className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                  i === index % headlines.length ? 'w-5 bg-[#dd0000]' : 'w-1.5 bg-slate-300 hover:bg-slate-400'
-                }`}
-              />
+                key={`${post.id}-${i}`}
+                onClick={goStories}
+                className="flex items-center gap-2 px-6 py-2 text-[14px] font-semibold text-[#00387d] hover:text-[#dd0000] transition-colors cursor-pointer whitespace-nowrap"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#f4a024] shrink-0" aria-hidden="true" />
+                <span className="truncate max-w-[70vw] sm:max-w-md">{post.title}</span>
+              </button>
             ))}
-          </span>
-        )}
+          </div>
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white to-transparent" />
+        </div>
       </div>
     </div>
   );

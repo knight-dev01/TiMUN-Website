@@ -22,7 +22,29 @@ export const Hero: React.FC<HeroProps> = ({
 
   return (
     <section id="hero" className="relative bg-white overflow-hidden">
-      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 pt-[104px] sm:pt-[130px] pb-10 sm:pb-14">
+      {/* Twinkling accents */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        {[
+          { left: '8%', top: '18%', size: 14, delay: '0s' },
+          { left: '92%', top: '12%', size: 18, delay: '-1.2s' },
+          { left: '85%', top: '68%', size: 12, delay: '-2.1s' },
+          { left: '4%', top: '72%', size: 16, delay: '-0.6s' },
+          { left: '50%', top: '8%', size: 11, delay: '-2.8s' },
+        ].map((s, i) => (
+          <svg
+            key={i}
+            viewBox="0 0 20 20"
+            className="twinkle absolute text-[#f4a024]"
+            style={{ left: s.left, top: s.top, width: s.size, height: s.size, animationDelay: s.delay }}
+          >
+            <path
+              d="M10 0 C 11 6, 12 8, 20 10 C 12 12, 11 14, 10 20 C 9 14, 8 12, 0 10 C 8 8, 9 6, 10 0 Z"
+              fill="currentColor"
+            />
+          </svg>
+        ))}
+      </div>
+      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 pt-8 sm:pt-10 pb-10 sm:pb-14">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
           {/* Left — wordmark first, the logo IS the hero */}

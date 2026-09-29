@@ -117,13 +117,13 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
         {/* Header */}
         <div className="p-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded bg-[#fdeecd] border border-[#f7b955] flex items-center justify-center text-[#5f3a00] font-bold shadow-xs">
+            <div className="w-10 h-10 rounded-xl bg-[#fdeecd] border border-[#f7b955] flex items-center justify-center text-[#5f3a00] font-bold shadow-xs">
               <ScrollText className="w-5 h-5 text-[#8a5200]" />
             </div>
             <div>
               <h3 className="font-serif font-bold text-lg text-[#00387d] flex items-center gap-2">
                 <span>Interactive UN Resolution Drafter</span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] font-mono font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded-xl bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] font-mono font-bold">
                   UN Format Standard
                 </span>
               </h3>
@@ -142,7 +142,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded text-slate-500 hover:text-[#00387d] bg-white border border-slate-200 cursor-pointer"
+              className="p-2 rounded-xl text-slate-500 hover:text-[#00387d] bg-white border border-slate-200 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -156,7 +156,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
             <div className="space-y-6 animate-fadeIn">
               
               {/* Basic Details */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded border border-slate-200">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
                     Committee
@@ -202,7 +202,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
 
                 <div className="space-y-2">
                   {draft.preambularClauses.map((clause) => (
-                    <div key={clause.id} className="flex gap-2 items-center bg-slate-50 p-3 rounded border border-slate-200">
+                    <div key={clause.id} className="flex gap-2 items-center bg-slate-50 p-3 rounded-xl border border-slate-200">
                       <select
                         value={clause.starter}
                         onChange={(e) => {
@@ -212,7 +212,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                             preambularClauses: prev.preambularClauses.map(p => p.id === clause.id ? { ...p, starter: val } : p)
                           }));
                         }}
-                        className="bg-white border border-slate-300 rounded px-2.5 py-1 text-xs font-bold italic text-[#8a5200] shrink-0"
+                        className="bg-white border border-slate-300 rounded-xl px-2.5 py-1 text-xs font-bold italic text-[#8a5200] shrink-0"
                       >
                         {PREAMBULAR_STARTERS.map(st => (
                           <option key={st} value={st}>{st}</option>
@@ -229,7 +229,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                             preambularClauses: prev.preambularClauses.map(p => p.id === clause.id ? { ...p, text: val } : p)
                           }));
                         }}
-                        className="flex-1 bg-white border border-slate-300 rounded px-3 py-1 text-xs text-slate-800"
+                        className="flex-1 bg-white border border-slate-300 rounded-xl px-3 py-1 text-xs text-slate-800"
                       />
 
                       <button
@@ -260,7 +260,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
 
                 <div className="space-y-3">
                   {draft.operativeClauses.map((clause) => (
-                    <div key={clause.id} className="bg-slate-50 p-3.5 rounded border border-slate-200 space-y-2">
+                    <div key={clause.id} className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 space-y-2">
                       <div className="flex gap-2 items-center">
                         <span className="font-bold text-[#00387d] text-xs w-6">{clause.number}.</span>
 
@@ -273,7 +273,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                               operativeClauses: prev.operativeClauses.map(o => o.id === clause.id ? { ...o, starter: val } : o)
                             }));
                           }}
-                          className="bg-white border border-slate-300 rounded px-2 py-1 text-xs font-bold text-[#8a5200] shrink-0"
+                          className="bg-white border border-slate-300 rounded-xl px-2 py-1 text-xs font-bold text-[#8a5200] shrink-0"
                         >
                           {OPERATIVE_STARTERS.map(st => (
                             <option key={st} value={st}>{st}</option>
@@ -290,7 +290,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                               operativeClauses: prev.operativeClauses.map(o => o.id === clause.id ? { ...o, text: val } : o)
                             }));
                           }}
-                          className="flex-1 bg-white border border-slate-300 rounded px-3 py-1 text-xs text-slate-800"
+                          className="flex-1 bg-white border border-slate-300 rounded-xl px-3 py-1 text-xs text-slate-800"
                         />
 
                         <button
@@ -308,7 +308,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
             </div>
           ) : (
             /* UN Paper Format Preview */
-            <div className="bg-[#fef6e7]/30 p-8 rounded border border-[#fbdda1]/80 font-serif text-slate-900 space-y-6 animate-fadeIn shadow-xs">
+            <div className="bg-[#fef6e7]/30 p-8 rounded-xl border border-[#fbdda1]/80 font-serif text-slate-900 space-y-6 animate-fadeIn shadow-xs">
               <div className="text-center space-y-1 border-b border-[#fbdda1]/80 pb-4">
                 <div className="text-xs font-sans tracking-widest text-[#00387d] uppercase font-bold">
                   TRINITY UNIVERSITY MODEL UNITED NATIONS
@@ -318,7 +318,7 @@ export const ResolutionBuilderModal: React.FC<ResolutionBuilderModalProps> = ({ 
                 </h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-xs font-sans bg-white p-4 rounded border border-slate-200">
+              <div className="grid grid-cols-2 gap-2 text-xs font-sans bg-white p-4 rounded-xl border border-slate-200">
                 <div><strong className="text-[#00387d]">COMMITTEE:</strong> {draft.committeeName}</div>
                 <div><strong className="text-[#00387d]">TOPIC:</strong> {draft.topicTitle}</div>
                 <div className="col-span-2"><strong className="text-[#00387d]">SPONSORS:</strong> {draft.sponsors.join(', ')}</div>

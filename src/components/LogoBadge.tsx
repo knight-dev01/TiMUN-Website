@@ -43,7 +43,7 @@ export const LogoBadge: React.FC<LogoBadgeProps> = ({
       </span>
       {withWordmark && (
         <span className="leading-tight text-left">
-          <span className="block font-bold text-[#00387d]" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
+          <span className="block font-bold text-[#00387d]" style={{ fontFamily: "'Nunito Sans', system-ui, sans-serif" }}>
             {wordmark}
           </span>
           <span className="block text-[11px] font-medium text-[#777777]">{subline}</span>

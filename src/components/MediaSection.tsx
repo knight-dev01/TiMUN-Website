@@ -95,7 +95,7 @@ export const MediaSection: React.FC = () => {
         </div>
 
         {filtered.length === 0 && (
-          <p className="text-sm text-slate-400 bg-slate-50 border border-slate-100 rounded-lg p-8 text-center">
+          <p className="text-sm text-slate-400 bg-slate-50 border border-slate-100 rounded-xl p-8 text-center">
             No stories here yet. Executives can publish from the Secretariat portal.
           </p>
         )}

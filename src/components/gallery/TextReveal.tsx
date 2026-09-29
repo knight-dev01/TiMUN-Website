@@ -26,7 +26,7 @@ export const TextReveal: React.FC<TextRevealProps> = ({ text, className = '', as
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: false, amount: 0.4, margin: '-40px' }}
       transition={{ staggerChildren: 0.045 }}
       aria-label={text}
     >

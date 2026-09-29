@@ -19,7 +19,7 @@ export const SecretariatSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-[#fdeecd] border border-[#f7b955] text-[#5f3a00] text-[11px] font-bold uppercase tracking-widest mb-3">
             <Award className="w-3.5 h-3.5 text-[#8a5200]" />
             <span>Executive Board & Leadership</span>
           </div>
@@ -38,7 +38,7 @@ export const SecretariatSection: React.FC = () => {
             <button
               key={dept}
               onClick={() => setSelectedDept(dept)}
-              className={`px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 selectedDept === dept
                   ? 'bg-[#00387d] text-white shadow-xs'
                   : 'bg-slate-100 text-slate-600 hover:text-[#00387d] border border-slate-200'
@@ -54,9 +54,9 @@ export const SecretariatSection: React.FC = () => {
           {filteredMembers.map((member) => (
             <div
               key={member.id}
-              className="bg-slate-50 rounded border border-slate-200 p-6 hover:border-[#00387d] transition-all duration-300 flex flex-col items-center text-center shadow-xs group"
+              className="bg-slate-50 rounded-xl border border-slate-200 p-6 hover:border-[#00387d] transition-all duration-300 flex flex-col items-center text-center shadow-xs group"
             >
-              <div className="w-28 h-28 rounded overflow-hidden border-2 border-[#f4a024] mb-4 shadow-xs group-hover:scale-105 transition-transform">
+              <div className="w-28 h-28 rounded-xl overflow-hidden border-2 border-[#f4a024] mb-4 shadow-xs group-hover:scale-105 transition-transform">
                 <img
                   src={member.image}
                   alt={member.name}
@@ -65,7 +65,7 @@ export const SecretariatSection: React.FC = () => {
                 />
               </div>
 
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] mb-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xl bg-[#fdeecd] text-[#5f3a00] border border-[#f7b955] mb-2">
                 {member.department}
               </span>
 

@@ -41,7 +41,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResolutionBuilder, onOpenC
             <div className="flex items-center gap-3">
               <LogoBadge size="md" />
               <div>
-                <div className="font-bold text-base text-[#00387d] tracking-wide uppercase" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
+                <div className="font-bold text-base text-[#00387d] tracking-wide uppercase" style={{ fontFamily: "'Nunito Sans', system-ui, sans-serif" }}>
                   {conferenceInfo.title || 'Trinity International MUN'}
                 </div>
                 <div className="text-[10px] text-[#b56a00] font-bold uppercase tracking-widest">
@@ -68,7 +68,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResolutionBuilder, onOpenC
 
           {/* Navigation Links */}
           <div className="space-y-3">
-            <h4 className="font-bold text-[#00387d] text-sm uppercase tracking-wider" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
+            <h4 className="font-bold text-[#00387d] text-sm uppercase tracking-wider" style={{ fontFamily: "'Nunito Sans', system-ui, sans-serif" }}>
               Quick Links
             </h4>
             <ul className="space-y-2 text-[#4b4b4b]">
@@ -82,7 +82,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResolutionBuilder, onOpenC
 
           {/* Delegate Resources */}
           <div className="space-y-3">
-            <h4 className="font-bold text-[#00387d] text-sm uppercase tracking-wider" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
+            <h4 className="font-bold text-[#00387d] text-sm uppercase tracking-wider" style={{ fontFamily: "'Nunito Sans', system-ui, sans-serif" }}>
               Delegate Portal
             </h4>
             <ul className="space-y-2 text-[#4b4b4b]">
@@ -109,7 +109,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenResolutionBuilder, onOpenC
 
           {/* Newsletter Signup */}
           <div className="space-y-3">
-            <h4 className="font-bold text-[#00387d] text-sm uppercase tracking-wider" style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}>
+            <h4 className="font-bold text-[#00387d] text-sm uppercase tracking-wider" style={{ fontFamily: "'Nunito Sans', system-ui, sans-serif" }}>
               Conference Bulletin
             </h4>
             <p className="text-[13px] text-[#777777] leading-relaxed">
