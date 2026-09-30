@@ -210,16 +210,16 @@
 
 /* ---- Nations cylinder: continuous 3D rotation, one GPU transform ---- */
 .cyl-stage {
-  --cyl-r: 360px;
-  perspective: 1400px;
-  height: 300px;
+  --cyl-r: 270px;
+  perspective: 1200px;
+  height: 280px;
   position: relative;
 }
 
 @media (min-width: 640px) {
   .cyl-stage {
-    --cyl-r: 520px;
-    height: 340px;
+    --cyl-r: 400px;
+    height: 320px;
   }
 }
 
@@ -243,10 +243,10 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 118px;
-  margin-left: -59px;
-  margin-top: -80px;
-  padding: 0.7rem 0.5rem;
+  width: 92px;
+  margin-left: -46px;
+  margin-top: -72px;
+  padding: 0.6rem 0.4rem;
   text-align: center;
   backface-visibility: hidden;
   background: #fff;
@@ -254,10 +254,10 @@
 
 @media (min-width: 640px) {
   .cyl-card {
-    width: 180px;
-    margin-left: -90px;
-    margin-top: -92px;
-    padding: 0.9rem 0.6rem;
+    width: 140px;
+    margin-left: -70px;
+    margin-top: -84px;
+    padding: 0.8rem 0.6rem;
   }
 }
 

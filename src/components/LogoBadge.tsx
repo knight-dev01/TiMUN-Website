@@ -7,6 +7,8 @@ interface LogoBadgeProps {
   subline?: string;
   /** Set on dark backgrounds: a soft halo keeps the blue mark readable. */
   onDark?: boolean;
+  /** 'icon' = emblem only (small spots); 'lockup' = full wordmark art. Defaults: sm → icon. */
+  variant?: 'auto' | 'icon' | 'lockup';
 }
 
 /**
@@ -19,8 +21,10 @@ export const LogoBadge: React.FC<LogoBadgeProps> = ({
   wordmark = 'TiMUN 2027',
   subline = 'Youth Diplomacy & Leadership',
   onDark = false,
+  variant = 'auto',
 }) => {
-  const heights = { sm: 'h-8', md: 'h-10', lg: 'h-16', xl: 'h-28' };
+  const heights = { sm: 'h-9', md: 'h-10', lg: 'h-16', xl: 'h-28' };
+  const src = variant === 'icon' || (variant === 'auto' && size === 'sm') ? '/logo-icon.png' : '/logo.png';
   return (
     <span className="inline-flex items-center gap-3">
       <span
@@ -32,7 +36,7 @@ export const LogoBadge: React.FC<LogoBadgeProps> = ({
         }
       >
         <img
-          src="/logo.png"
+          src={src}
           alt="TiMUN Official Logo"
           className={`${heights[size]} w-auto object-contain relative`}
           loading="eager"
